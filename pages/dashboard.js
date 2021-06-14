@@ -4,9 +4,17 @@ import { supabase } from "../utils/supabaseClient";
 import Auth from "../components/Auth";
 import Account from "../components/Account";
 import Layout from "components/Layout";
+import { useRouter } from "next/router";
 
-export default function Home() {
+export default function Dashboard({ user }) {
   const [session, setSession] = useState(null);
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, [user]);
 
   useEffect(() => {
     setSession(supabase.auth.session());
@@ -15,6 +23,7 @@ export default function Home() {
       setSession(session);
     });
   }, []);
+
   return (
     <div>
       <Head>
@@ -31,11 +40,25 @@ export default function Home() {
                 <Auth />
               </div>
             ) : (
-              <Account key={session.user.id} session={session} />
+              <Account key={user.id} session={session} />
             )}
           </div>
         </div>
       </Layout>
     </div>
   );
+}
+export async function getServerSideProps({ req }) {
+  const { user } = await supabase.auth.api.getUserByCookie(req);
+
+  if (user) {
+    return { props: { user } };
+  }
+
+  if (!user) {
+    // If no user, redirect to index.
+    return { props: {}, redirect: { destination: "/", permanent: false } };
+  }
+
+  // If there is a user, return it.
 }

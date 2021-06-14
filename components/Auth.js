@@ -1,7 +1,5 @@
-import { Auth, Typography, Button } from "@supabase/ui";
+import { Auth } from "@supabase/ui";
 import { supabase } from "utils/supabaseClient";
-
-const { Text } = Typography;
 
 // Create a single supabase client for interacting with your database
 
@@ -23,7 +21,7 @@ export default function AuthComponent() {
   return (
     <Auth.UserContextProvider supabaseClient={supabase}>
       <Container supabaseClient={supabase}>
-        <Auth providers={["facebook", "github"]} supabaseClient={supabase} />
+        <Auth supabaseClient={supabase} />
       </Container>
     </Auth.UserContextProvider>
   );
