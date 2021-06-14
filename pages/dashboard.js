@@ -18,13 +18,23 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Dashboard</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
+
       <Layout>
-        <h1 className='text-6xl font-bold'>
-          Supanextail <span className='text-blue-600'>Boilerplate</span>
-        </h1>
+        <div>
+          <h1 className='text-6xl font-bold'>Dashboard</h1>
+          <div className='container'>
+            {!session ? (
+              <div className='max-w-md'>
+                <Auth />
+              </div>
+            ) : (
+              <Account key={session.user.id} session={session} />
+            )}
+          </div>
+        </div>
       </Layout>
     </div>
   );
