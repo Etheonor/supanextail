@@ -9,12 +9,11 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>SupaNextTail</title>
-        <link rel='icon' href='/favicon.ico' />
+        <title>{process.env.NEXT_PUBLIC_TITLE}</title>
       </Head>
       <Layout>
         <h1 className='text-5xl md:text-6xl font-bold'>
-          SupaNextTail <span className='text-blue-600'>Boilerplate</span>
+          SupaNexTail <span className='text-blue-600'>Boilerplate</span>
         </h1>
       </Layout>
     </div>

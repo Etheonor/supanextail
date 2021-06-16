@@ -1,6 +1,6 @@
 import Head from "next/head";
 import AuthComponent from "../components/Auth";
-import Account from "../components/Account";
+import Account from "../components/Dashboard";
 import Layout from "components/Layout";
 import { Auth } from "@supabase/ui";
 import { useRouter } from "next/router";
@@ -15,17 +15,15 @@ export default function AuthPage() {
       router.push("/");
     }
   }, [user]);
-  
   return (
     <div>
       <Head>
-        <title>Auth</title>
-        <link rel='icon' href='/favicon.ico' />
+        <title>{process.env.NEXT_PUBLIC_TITLE} | Auth</title>
       </Head>
 
       <Layout>
         <div>
-          <h1 className='text-6xl font-bold'>Auth</h1>
+          <h1 className='text-4xl font-bold md:text-5xl'>Auth</h1>
           <div className='container'>
             {!session && (
               <div className='max-w-md'>
