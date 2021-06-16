@@ -25,6 +25,8 @@ const Nav = (props) => {
       authListener.unsubscribe();
     };
   }, []);
+
+  //Modify you menu directly here
   const NavMenu = (
     <>
       {props.user && (
@@ -32,21 +34,24 @@ const Nav = (props) => {
           <a className='btn btn-ghost btn-sm'>Dashboard</a>
         </Link>
       )}
+
       <Link href='/'>
         <a className='btn btn-ghost btn-sm'>About</a>
       </Link>
+
       <Link href='/contact'>
         <a className='btn btn-ghost btn-sm'>Contact</a>
       </Link>
+
       {props.user ? (
         <button
-          className='btn btn-ghost btn-sm ml-auto'
+          className='btn btn-ghost btn-sm'
           onClick={() => supabase.auth.signOut()}>
-          Log out
+          Logout
         </button>
       ) : (
         <Link href='/auth'>
-          <a className='btn btn-primary btn-sm ml-auto'>Login</a>
+          <a className='btn btn-primary btn-sm'>Login</a>
         </Link>
       )}
     </>
@@ -60,14 +65,14 @@ const Nav = (props) => {
         </a>
       </Link>
       <div className='flex-1 px-2 mx-2'>
-        <div className='items-stretch hidden lg:flex w-full'>{NavMenu}</div>
+        <div className='hidden lg:flex text-center ml-auto'>{NavMenu}</div>
       </div>
       <div className='flex-none'>
         <div className='dropdown dropdown-end'>
-          <div tabIndex='0' className='m-1 block cursor-pointer lg:hidden'>
+          <div tabIndex='0' className='m-1 cursor-pointer lg:hidden'>
             <Menu />
           </div>
-          <div className='menu dropdown-content text-black w-52 mt-3 btn-group'>
+          <div className='menu dropdown-content text-black mt-3 text-center flex-1'>
             {NavMenu}
           </div>
         </div>
