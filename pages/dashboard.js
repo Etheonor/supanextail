@@ -33,7 +33,7 @@ export default function DashboardPage({ user }) {
       <Layout>
         <div>
           <h1 className='text-4xl font-bold md:text-5xl'>Dashboard</h1>
-          <div className='container'>
+          <>
             {!session ? (
               <div className='max-w-md'>
                 <Auth />
@@ -41,7 +41,7 @@ export default function DashboardPage({ user }) {
             ) : (
               <Dashboard key={user.id} session={session} />
             )}
-          </div>
+          </>
         </div>
       </Layout>
     </div>

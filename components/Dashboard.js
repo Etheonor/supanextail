@@ -66,25 +66,25 @@ export default function Account({ session }) {
   }
 
   return (
-    <div className='form-widget mt-10'>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input className="input-ghost input-sm ml-2" id='email' type='text' value={session.user.email} disabled />
+    <div className='form-widget mt-10 flex flex-col text-left'>
+      <div className="mb-5 flex">
+        <label htmlFor='email' className="my-auto">Email</label>
+        <input className="input input-primary input-bordered input-sm ml-2 flex-1" id='email' type='text' value={session.user.email} disabled />
       </div>
-      <div>
-        <label htmlFor='username'>Name</label>
+      <div className="mb-5 flex">
+        <label htmlFor='username' className="my-auto">Name</label>
         <input
-          className='input input-sm m-2'
+          className='input input-primary input-bordered input-sm flex-1 ml-2'
           id='username'
           type='text'
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor='website'>Website</label>
+      <div className="mb-5 flex">
+        <label htmlFor='website' className="my-auto">Website</label>
         <input
-          className='input input-sm m-2'
+          className='input input-primary input-bordered input-sm flex-1 ml-2'
           id='website'
           type='website'
           value={website || ""}
@@ -92,20 +92,12 @@ export default function Account({ session }) {
         />
       </div>
 
-      <div>
+      <div className="m-auto">
         <button
-          className='button block primary'
+          className='btn btn-primary btn-sm'
           onClick={() => updateProfile({ username, website, avatar_url })}
           disabled={loading}>
-          {loading ? "Loading ..." : "Update"}
-        </button>
-      </div>
-
-      <div>
-        <button
-          className='button block'
-          onClick={() => supabase.auth.signOut()}>
-          Sign Out
+          {loading ? "Loading ..." : "Update My Profile"}
         </button>
       </div>
     </div>
