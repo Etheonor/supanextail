@@ -1,3 +1,7 @@
+/*
+This is your Nav component. It contain a responsive navbar 
+*/
+
 import { Menu } from "react-feather";
 import Link from "next/link";
 import { supabase } from "utils/supabaseClient";

@@ -1,4 +1,4 @@
-const Nav = () => {
+const Footer = () => {
   return (
     <footer className='flex items-center justify-center w-full mb-1 mt-5'>
       SupaNexTail
@@ -6,4 +6,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default Footer;

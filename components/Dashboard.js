@@ -1,3 +1,9 @@
+/*
+This is the Dashboard component. If a user is logged in, he/she can update his/her name and website.
+You can add as many elements as you want. Don't forget to update your getProfile() and updateProfile()
+function with your new elements.
+*/
+
 import { useState, useEffect } from "react";
 import { supabase } from "../utils/supabaseClient";
 

@@ -1,15 +1,19 @@
+/*
+This is the Auth component. It will allow your user to login. 
+By default, it is available with the auth.js page, but you can use it everywhere you want!
+*/
 import { Auth } from "@supabase/ui";
 import { supabase } from "utils/supabaseClient";
-
-// Create a single supabase client for interacting with your database
 
 const Container = (props) => {
   const { user } = Auth.useUser();
   if (user)
     return (
       <>
-      <p>Hello {user.email}! 👋 You are already logged in</p>
-        <button className="btn btn-primary" onClick={() => props.supabaseClient.auth.signOut()}>
+        <p>Hello {user.email}! 👋 You are already logged in</p>
+        <button
+          className='btn btn-primary'
+          onClick={() => props.supabaseClient.auth.signOut()}>
           Sign out
         </button>
       </>
@@ -17,7 +21,7 @@ const Container = (props) => {
   return props.children;
 };
 
-export default function AuthComponent() {
+const AuthComponent = () => {
   return (
     <Auth.UserContextProvider supabaseClient={supabase}>
       <Container supabaseClient={supabase}>
@@ -25,4 +29,6 @@ export default function AuthComponent() {
       </Container>
     </Auth.UserContextProvider>
   );
-}
+};
+
+export default AuthComponent;

@@ -1,21 +1,19 @@
-import Head from "next/head";
-import { useState, useEffect } from "react";
-import { supabase } from "../utils/supabaseClient";
-import Auth from "../components/Auth";
-
 import Layout from "components/Layout";
+import { NextSeo } from "next-seo";
 
-export default function Home() {
+const Home = () => {
   return (
-    <div>
-      <Head>
-        <title>{process.env.NEXT_PUBLIC_TITLE}</title>
-      </Head>
+    <>
+      <NextSeo
+        title={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+        description={`SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS`}
+      />
       <Layout>
-        <h1 className='text-5xl md:text-6xl font-bold'>
+        <h2 className='text-5xl md:text-6xl font-bold'>
           SupaNexTail <span className='text-blue-600'>Boilerplate</span>
-        </h1>
+        </h2>
       </Layout>
-    </div>
+    </>
   );
-}
+};
+export default Home;

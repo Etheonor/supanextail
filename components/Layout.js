@@ -1,10 +1,34 @@
+/* This is your Layout. It will wrap your content on every page of the website.
+You'll have:
+* The NavBar
+* The Content, generally a component
+* The Footer
+
+You can change it as you want with new components. 
+
+You also have the head component containing all the favicon for different platforms. 
+The images are in the public folder.
+*/
+
 import Nav from "./Nav";
 import Footer from "./Footer";
 import { Auth } from "@supabase/ui";
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Layout = (props) => {
   const { user } = Auth.useUser();
+
+  const toastStyle = {
+    //Style your toast elements here
+    success: "bg-secondary",
+    error: "bg-red-600",
+    info: "bg-gray-600",
+    warning: "bg-orange-400",
+    default: "bg-primary",
+    dark: "bg-white-600 font-gray-300",
+  };
   return (
     <div className='flex flex-col items-center justify-center min-h-screen max-w-6xl m-auto'>
       <Head>
@@ -34,6 +58,13 @@ const Layout = (props) => {
       <main className='flex flex-col items-center justify-center w-full flex-1 p-2 text-center'>
         {props.children}
       </main>
+      <ToastContainer
+        position='bottom-center'
+        toastClassName={({ type }) =>
+          toastStyle[type || "default"] +
+          " flex p-5 my-5 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer "
+        }
+      />
       <Footer />
     </div>
   );

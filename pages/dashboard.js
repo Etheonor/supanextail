@@ -6,11 +6,12 @@ import Dashboard from "../components/Dashboard";
 import Layout from "components/Layout";
 import { useRouter } from "next/router";
 
-export default function DashboardPage({ user }) {
+const DashboardPage = ({ user }) => {
   const [session, setSession] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
+    // If a user is not logged in, return to the homepage
     if (!user) {
       router.push("/");
     }
@@ -39,14 +40,16 @@ export default function DashboardPage({ user }) {
                 <Auth />
               </div>
             ) : (
-              <Dashboard key={user.id} session={session} />
+              <>
+                <Dashboard key={user.id} session={session} />
+              </>
             )}
           </>
         </div>
       </Layout>
     </div>
   );
-}
+};
 export async function getServerSideProps({ req }) {
   const { user } = await supabase.auth.api.getUserByCookie(req);
 
@@ -61,3 +64,4 @@ export async function getServerSideProps({ req }) {
 
   // If there is a user, return it.
 }
+export default DashboardPage;

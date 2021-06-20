@@ -1,4 +1,13 @@
+/*
+This is the contact component. It will allow your user to send you an email. 
+We use Sendgrid by default and you'll need to check /api/sendgrid.js and don't forget to add 
+the environment variables. 
+If you want to change the email provider, don't hesitate to create a new api route and change 
+the axios.post here, line 18.
+*/
+
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const sendEmail = () => {
@@ -11,7 +20,7 @@ const Contact = () => {
         .post("/api/sendgrid", { email, name, message })
         .then((result) => {
           if (result.data.success === true) {
-            //toast.success(result.data.message);
+            toast.success(result.data.message);
             document.getElementById("name").value = "";
             document.getElementById("email").value = "";
             document.getElementById("message").value = "";
@@ -21,7 +30,7 @@ const Contact = () => {
           console.log(err);
         });
     } else {
-      /*toast.info("Please enter at least one URL", {
+      toast.info("Please enter at least one URL", {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: true,
@@ -29,7 +38,7 @@ const Contact = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      });*/
+      });
     }
   };
   return (

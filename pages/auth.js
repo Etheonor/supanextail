@@ -1,25 +1,26 @@
-import Head from "next/head";
 import AuthComponent from "../components/Auth";
-import Account from "../components/Dashboard";
 import Layout from "components/Layout";
 import { Auth } from "@supabase/ui";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { NextSeo } from "next-seo";
 
-export default function AuthPage() {
+const AuthPage = () => {
   const { user, session } = Auth.useUser();
   const router = useRouter();
 
   useEffect(() => {
+    // If a user is already logged in, return to the homepage
     if (user) {
       router.push("/");
     }
   }, [user]);
   return (
-    <div>
-      <Head>
-        <title>{process.env.NEXT_PUBLIC_TITLE} | Auth</title>
-      </Head>
+    <>
+      <NextSeo
+        title={`${process.env.NEXT_PUBLIC_TITLE} | Auth`}
+        description={`This is the auth page for ${process.env.NEXT_PUBLIC_TITLE}`}
+      />
 
       <Layout>
         <div>
@@ -33,6 +34,8 @@ export default function AuthPage() {
           </div>
         </div>
       </Layout>
-    </div>
+    </>
   );
-}
+};
+
+export default AuthPage;
