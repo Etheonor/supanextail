@@ -10,12 +10,13 @@ You also have the head component containing all the favicon for different platfo
 The images are in the public folder.
 */
 
-import Nav from "./Nav";
-import Footer from "./Footer";
-import { Auth } from "@supabase/ui";
-import Head from "next/head";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { Auth } from "@supabase/ui";
+import Footer from "./Footer";
+import Head from "next/head";
+import Nav from "./Nav";
+import { ToastContainer } from "react-toastify";
 
 const Layout = (props) => {
   const { user } = Auth.useUser();

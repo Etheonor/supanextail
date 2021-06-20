@@ -1,9 +1,9 @@
+import { Auth } from "@supabase/ui";
 import AuthComponent from "../components/Auth";
 import Layout from "components/Layout";
-import { Auth } from "@supabase/ui";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { NextSeo } from "next-seo";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const AuthPage = () => {
   const { user, session } = Auth.useUser();

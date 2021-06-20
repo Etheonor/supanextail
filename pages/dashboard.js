@@ -1,9 +1,10 @@
-import Head from "next/head";
-import { useState, useEffect } from "react";
-import { supabase } from "../utils/supabaseClient";
+import { useEffect, useState } from "react";
+
 import Auth from "../components/Auth";
 import Dashboard from "../components/Dashboard";
+import Head from "next/head";
 import Layout from "components/Layout";
+import { supabase } from "../utils/supabaseClient";
 import { useRouter } from "next/router";
 
 const DashboardPage = ({ user }) => {

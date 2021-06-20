@@ -4,7 +4,8 @@ You can add as many elements as you want. Don't forget to update your getProfile
 function with your new elements.
 */
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import { supabase } from "../utils/supabaseClient";
 
 export default function Account({ session }) {

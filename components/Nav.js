@@ -2,12 +2,12 @@
 This is your Nav component. It contain a responsive navbar 
 */
 
-import { Menu } from "react-feather";
+import Image from "next/image";
 import Link from "next/link";
+import Logo from "public/logo.svg";
+import { Menu } from "react-feather";
 import { supabase } from "utils/supabaseClient";
 import { useEffect } from "react";
-import Image from "next/image";
-import Logo from "public/logo.svg";
 
 const Nav = (props) => {
   useEffect(() => {

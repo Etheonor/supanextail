@@ -1,4 +1,5 @@
 import "tailwindcss/tailwind.css";
+
 import { Auth } from "@supabase/ui";
 import { DefaultSeo } from "next-seo";
 import { supabase } from "utils/supabaseClient";

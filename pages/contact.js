@@ -1,5 +1,5 @@
-import Layout from "components/Layout";
 import Contact from "components/Contact";
+import Layout from "components/Layout";
 import { NextSeo } from "next-seo";
 
 const ContactPage = () => {
