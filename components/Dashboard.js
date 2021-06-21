@@ -84,36 +84,36 @@ export default function Account({ session }) {
           updateProfile({ username, website, avatar_url: url });
         }}
       />
-      <div className='mb-5 flex'>
-        <label htmlFor='email' className='my-auto'>
+      <div className='mb-5 flex flex-col'>
+        <label htmlFor='email' className='my-auto text-sm mb-2'>
           Email
         </label>
         <input
-          className='input input-primary input-bordered input-sm ml-2 flex-1'
+          className='input input-primary input-bordered input-sm flex-1'
           id='email'
           type='text'
           value={session.user.email}
           disabled
         />
       </div>
-      <div className='mb-5 flex'>
-        <label htmlFor='username' className='my-auto'>
+      <div className='mb-5 flex flex-col'>
+        <label htmlFor='username' className='my-auto text-sm mb-2'>
           Name
         </label>
         <input
-          className='input input-primary input-bordered input-sm flex-1 ml-2'
+          className='input input-primary input-bordered input-sm flex-1'
           id='username'
           type='text'
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div className='mb-5 flex'>
-        <label htmlFor='website' className='my-auto'>
+      <div className='mb-5 flex flex-col'>
+        <label htmlFor='website' className='my-auto text-sm mb-2'>
           Website
         </label>
         <input
-          className='input input-primary input-bordered input-sm flex-1 ml-2'
+          className='input input-primary input-bordered input-sm flex-1'
           id='website'
           type='website'
           value={website || ""}
