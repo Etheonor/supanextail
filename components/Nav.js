@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "public/logo.svg";
 import { Menu } from "react-feather";
+import ThemeToggle from "./UI/ThemeToggle";
 import { supabase } from "utils/supabaseClient";
 import { useEffect } from "react";
 
@@ -29,6 +30,10 @@ const Nav = (props) => {
       authListener.unsubscribe();
     };
   }, []);
+
+  const switchTheme = () => {
+    state.setTheme();
+  };
 
   //Modify you menu directly here
   const NavMenu = (
@@ -62,6 +67,7 @@ const Nav = (props) => {
           <a className='btn btn-primary btn-sm'>Login</a>
         </Link>
       )}
+      <ThemeToggle />
     </>
   );
 
@@ -80,7 +86,7 @@ const Nav = (props) => {
           <div tabIndex='0' className='m-1 cursor-pointer lg:hidden'>
             <Menu />
           </div>
-          <div className='menu dropdown-content text-black mt-3 text-center flex-1'>
+          <div className='menu dropdown-content mt-3 text-center flex-1'>
             {NavMenu}
           </div>
         </div>

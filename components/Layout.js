@@ -31,7 +31,7 @@ const Layout = (props) => {
     dark: "bg-white-600 font-gray-300",
   };
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen max-w-6xl m-auto'>
+    <div className='flex flex-col items-center justify-center min-h-screen w-full bg-base-100 text-base-content'>
       <Head>
         <link
           rel='apple-touch-icon'

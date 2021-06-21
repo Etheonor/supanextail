@@ -34,7 +34,9 @@ const DashboardPage = ({ user }) => {
 
       <Layout>
         <div>
-          <h1 className='text-4xl font-bold md:text-5xl font-title'>Dashboard</h1>
+          <h1 className='text-4xl font-bold md:text-5xl font-title'>
+            Dashboard
+          </h1>
           <>
             {!session ? (
               <div className='max-w-md'>
