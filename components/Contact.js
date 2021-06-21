@@ -46,7 +46,7 @@ const Contact = () => {
       <div className='font-main container'>
         <div className=' m-auto max-w-lg'>
           <div className='flex justify-center'>
-            <h2 className='text-3xl sm:text-5xl text-center mb-5 mt-0 font-bold'>
+            <h2 className='text-3xl sm:text-5xl text-center mb-5 mt-0 font-bold font-title'>
               Contact
             </h2>
           </div>

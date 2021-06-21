@@ -6,6 +6,8 @@ function with your new elements.
 
 import { useEffect, useState } from "react";
 
+import Avatar from "./Avatar";
+import MyModal from "./MyModal";
 import { supabase } from "../utils/supabaseClient";
 
 export default function Account({ session }) {
@@ -74,12 +76,30 @@ export default function Account({ session }) {
 
   return (
     <div className='form-widget mt-10 flex flex-col text-left'>
-      <div className="mb-5 flex">
-        <label htmlFor='email' className="my-auto">Email</label>
-        <input className="input input-primary input-bordered input-sm ml-2 flex-1" id='email' type='text' value={session.user.email} disabled />
+      <Avatar
+        url={avatar_url}
+        size={150}
+        onUpload={(url) => {
+          setAvatarUrl(url);
+          updateProfile({ username, website, avatar_url: url });
+        }}
+      />
+      <div className='mb-5 flex'>
+        <label htmlFor='email' className='my-auto'>
+          Email
+        </label>
+        <input
+          className='input input-primary input-bordered input-sm ml-2 flex-1'
+          id='email'
+          type='text'
+          value={session.user.email}
+          disabled
+        />
       </div>
-      <div className="mb-5 flex">
-        <label htmlFor='username' className="my-auto">Name</label>
+      <div className='mb-5 flex'>
+        <label htmlFor='username' className='my-auto'>
+          Name
+        </label>
         <input
           className='input input-primary input-bordered input-sm flex-1 ml-2'
           id='username'
@@ -88,8 +108,10 @@ export default function Account({ session }) {
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div className="mb-5 flex">
-        <label htmlFor='website' className="my-auto">Website</label>
+      <div className='mb-5 flex'>
+        <label htmlFor='website' className='my-auto'>
+          Website
+        </label>
         <input
           className='input input-primary input-bordered input-sm flex-1 ml-2'
           id='website'
@@ -99,7 +121,7 @@ export default function Account({ session }) {
         />
       </div>
 
-      <div className="m-auto">
+      <div className='m-auto'>
         <button
           className='btn btn-primary btn-sm'
           onClick={() => updateProfile({ username, website, avatar_url })}

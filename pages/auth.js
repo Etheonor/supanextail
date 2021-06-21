@@ -1,5 +1,6 @@
 import { Auth } from "@supabase/ui";
 import AuthComponent from "../components/Auth";
+import AuthText from "components/AuthText";
 import Layout from "components/Layout";
 import { NextSeo } from "next-seo";
 import { useEffect } from "react";
@@ -23,15 +24,9 @@ const AuthPage = () => {
       />
 
       <Layout>
-        <div>
-          <h1 className='text-4xl font-bold md:text-5xl'>Auth</h1>
-          <div className='container'>
-            {!session && (
-              <div className='max-w-md'>
-                <AuthComponent />
-              </div>
-            )}
-          </div>
+        <div className='flex flex-wrap justify-evenly w-full'>
+          <AuthText />
+          <div>{!session && <AuthComponent />}</div>
         </div>
       </Layout>
     </>

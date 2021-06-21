@@ -56,7 +56,7 @@ const Layout = (props) => {
         <meta name='theme-color' content='#ffffff' />
       </Head>
       <Nav user={user} />
-      <main className='flex flex-col items-center justify-center w-full flex-1 p-2 text-center'>
+      <main className='flex flex-col items-center justify-center w-full flex-1 p-2 text-center font-body'>
         {props.children}
       </main>
       <ToastContainer

@@ -39,6 +39,10 @@ const Nav = (props) => {
         </Link>
       )}
 
+      <Link href='/pricing'>
+        <a className='btn btn-ghost btn-sm'>Pricing</a>
+      </Link>
+
       <Link href='/'>
         <a className='btn btn-ghost btn-sm'>About</a>
       </Link>
@@ -62,7 +66,7 @@ const Nav = (props) => {
   );
 
   return (
-    <nav className='navbar mb-2 w-full'>
+    <nav className='navbar mb-2 w-full px-5'>
       <Link href='/'>
         <a>
           <Image src={Logo} />
