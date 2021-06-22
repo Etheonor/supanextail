@@ -27,7 +27,7 @@ const ThemeToggle = () => {
   }, [activeTheme]);
 
   return (
-    <button className='flex' onClick={() => setActiveTheme(inactiveTheme)}>
+    <button className='flex ml-3' onClick={() => setActiveTheme(inactiveTheme)}>
       {activeTheme === theme.secondary ? (
         <HiOutlineSun className='m-auto text-xl hover:text-accent' />
       ) : (

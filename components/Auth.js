@@ -35,7 +35,7 @@ const AuthComponent = () => {
           socialLayout='horizontal'
           socialButtonSize='xlarge'
           socialColors={true}
-          className='p-5'
+          className='p-5 bg-neutral-content rounded-md'
         />
       </Container>
     </Auth.UserContextProvider>

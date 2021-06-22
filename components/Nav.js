@@ -48,10 +48,6 @@ const Nav = (props) => {
         <a className='btn btn-ghost btn-sm'>Pricing</a>
       </Link>
 
-      <Link href='/'>
-        <a className='btn btn-ghost btn-sm'>About</a>
-      </Link>
-
       <Link href='/contact'>
         <a className='btn btn-ghost btn-sm'>Contact</a>
       </Link>
@@ -67,7 +63,7 @@ const Nav = (props) => {
           <a className='btn btn-primary btn-sm'>Login</a>
         </Link>
       )}
-      <ThemeToggle />
+      <ThemeToggle/>
     </>
   );
 
