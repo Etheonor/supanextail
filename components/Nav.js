@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "public/logo.svg";
 import { Menu } from "react-feather";
-import ThemeToggle from "./UI/ThemeToggle";
 import { supabase } from "utils/supabaseClient";
 import { useEffect } from "react";
 
@@ -63,7 +62,6 @@ const Nav = (props) => {
           <a className='btn btn-primary btn-sm'>Login</a>
         </Link>
       )}
-      <ThemeToggle/>
     </>
   );
 

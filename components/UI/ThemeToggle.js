@@ -12,14 +12,8 @@ const theme = {
 };
 
 const ThemeToggle = () => {
-  const [activeTheme, setActiveTheme] = useState(theme.primary);
-  const inactiveTheme =
-    activeTheme === theme.primary ? theme.secondary : theme.primary;
-
-  useEffect(() => {
-    const savedTheme = window.localStorage.getItem("theme");
-    savedTheme && setActiveTheme(savedTheme);
-  }, []);
+  const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
+  const inactiveTheme = activeTheme === "light" ? "dark" : "light";
 
   useEffect(() => {
     document.body.dataset.theme = activeTheme;

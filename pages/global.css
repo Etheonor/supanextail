@@ -1,2 +1,24 @@
 @import "tailwindcss/tailwind.css";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+You can setup basic rules for your headers/text here
+*/
+
+@layer base {
+  h1 {
+    @apply text-5xl mb-5 font-bold font-title;
+  }
+  h2 {
+    @apply text-2xl mt-2 mb-3 font-title;
+  }
+  p {
+    @apply text-left mb-5 font-body;
+  }
+  ul {
+      @apply list-disc ml-10 mb-3;
+  }
+}
