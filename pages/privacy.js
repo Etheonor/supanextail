@@ -2,7 +2,7 @@ import Layout from "components/Layout";
 import { NextSeo } from "next-seo";
 import PrivacyPolicy from "components/PrivacyPolicy";
 
-const Privacy = () => {
+const PrivacyPage = () => {
   return (
     <>
       <NextSeo
@@ -15,4 +15,4 @@ const Privacy = () => {
     </>
   );
 };
-export default Privacy;
+export default PrivacyPage;

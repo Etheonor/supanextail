@@ -1,48 +1,52 @@
 const PrivacyPolicy = () => {
   return (
-    <div className="max-w-xl text-left">
-      <h1 className='text-center'>Privacy Policy for {process.env.NEXT_PUBLIC_TITLE}</h1>
+    <div className='max-w-xl text-left'>
+      <h1 className='text-center'>
+        Privacy Policy for {process.env.NEXT_PUBLIC_TITLE}
+      </h1>
 
       <p>
-        At {process.env.NEXT_PUBLIC_TITLE}, accessible from https://www.supanextail.dev, one of our
-        main priorities is the privacy of our visitors. This Privacy Policy
-        document contains types of information that is collected and recorded by
+        At {process.env.NEXT_PUBLIC_TITLE}, accessible from
+        https://www.supanextail.dev, one of our main priorities is the privacy
+        of our visitors. This Privacy Policy document contains types of
+        information that is collected and recorded by
         {process.env.NEXT_PUBLIC_TITLE} and how we use it.
       </p>
 
       <p>
         If you have additional questions or require more information about our
-        Privacy Policy, do not hesitate to contact us. Our Privacy Policy was
-        generated with the help of{" "}
-        <a href='https://www.gdprprivacynotice.com/'>
-          GDPR Privacy Policy Generator from GDPRPrivacyNotice.com
-        </a>
+        Privacy Policy, do not hesitate to contact us.
       </p>
 
       <h2>General Data Protection Regulation (GDPR)</h2>
       <p>We are a Data Controller of your information.</p>
 
       <p>
-        {process.env.NEXT_PUBLIC_TITLE} legal basis for collecting and using the personal
-        information described in this Privacy Policy depends on the Personal
-        Information we collect and the specific context in which we collect the
-        information:
+        {process.env.NEXT_PUBLIC_TITLE} legal basis for collecting and using the
+        personal information described in this Privacy Policy depends on the
+        Personal Information we collect and the specific context in which we
+        collect the information:
       </p>
       <ul>
-        <li>{process.env.NEXT_PUBLIC_TITLE} needs to perform a contract with you</li>
-        <li>You have given {process.env.NEXT_PUBLIC_TITLE} permission to do so</li>
         <li>
-          Processing your personal information is in {process.env.NEXT_PUBLIC_TITLE} legitimate
-          interests
+          {process.env.NEXT_PUBLIC_TITLE} needs to perform a contract with you
+        </li>
+        <li>
+          You have given {process.env.NEXT_PUBLIC_TITLE} permission to do so
+        </li>
+        <li>
+          Processing your personal information is in{" "}
+          {process.env.NEXT_PUBLIC_TITLE} legitimate interests
         </li>
         <li>{process.env.NEXT_PUBLIC_TITLE} needs to comply with the law</li>
       </ul>
 
       <p>
-        {process.env.NEXT_PUBLIC_TITLE} will retain your personal information only for as long as is
-        necessary for the purposes set out in this Privacy Policy. We will
-        retain and use your information to the extent necessary to comply with
-        our legal obligations, resolve disputes, and enforce our policies.
+        {process.env.NEXT_PUBLIC_TITLE} will retain your personal information
+        only for as long as is necessary for the purposes set out in this
+        Privacy Policy. We will retain and use your information to the extent
+        necessary to comply with our legal obligations, resolve disputes, and
+        enforce our policies.
       </p>
 
       <p>
@@ -69,15 +73,16 @@ const PrivacyPolicy = () => {
       <h2>Log Files</h2>
 
       <p>
-        {process.env.NEXT_PUBLIC_TITLE} follows a standard procedure of using log files. These files
-        log visitors when they visit websites. All hosting companies do this and
-        a part of hosting services' analytics. The information collected by log
-        files include internet protocol (IP) addresses, browser type, Internet
-        Service Provider (ISP), date and time stamp, referring/exit pages, and
-        possibly the number of clicks. These are not linked to any information
-        that is personally identifiable. The purpose of the information is for
-        analyzing trends, administering the site, tracking users' movement on
-        the website, and gathering demographic information.
+        {process.env.NEXT_PUBLIC_TITLE} follows a standard procedure of using
+        log files. These files log visitors when they visit websites. All
+        hosting companies do this and a part of hosting services' analytics. The
+        information collected by log files include internet protocol (IP)
+        addresses, browser type, Internet Service Provider (ISP), date and time
+        stamp, referring/exit pages, and possibly the number of clicks. These
+        are not linked to any information that is personally identifiable. The
+        purpose of the information is for analyzing trends, administering the
+        site, tracking users' movement on the website, and gathering demographic
+        information.
       </p>
 
       <h2>Privacy Policies</h2>
@@ -90,26 +95,26 @@ const PrivacyPolicy = () => {
       <p>
         Third-party ad servers or ad networks uses technologies like cookies,
         JavaScript, or Web Beacons that are used in their respective
-        advertisements and links that appear on {process.env.NEXT_PUBLIC_TITLE}, which are sent
-        directly to users' browser. They automatically receive your IP address
-        when this occurs. These technologies are used to measure the
-        effectiveness of their advertising campaigns and/or to personalize the
-        advertising content that you see on websites that you visit.
+        advertisements and links that appear on {process.env.NEXT_PUBLIC_TITLE},
+        which are sent directly to users' browser. They automatically receive
+        your IP address when this occurs. These technologies are used to measure
+        the effectiveness of their advertising campaigns and/or to personalize
+        the advertising content that you see on websites that you visit.
       </p>
 
       <p>
-        Note that {process.env.NEXT_PUBLIC_TITLE} has no access to or control over these cookies
-        that are used by third-party advertisers.
+        Note that {process.env.NEXT_PUBLIC_TITLE} has no access to or control
+        over these cookies that are used by third-party advertisers.
       </p>
 
       <h2>Third Party Privacy Policies</h2>
 
       <p>
-        {process.env.NEXT_PUBLIC_TITLE}'s Privacy Policy does not apply to other advertisers or
-        websites. Thus, we are advising you to consult the respective Privacy
-        Policies of these third-party ad servers for more detailed information.
-        It may include their practices and instructions about how to opt-out of
-        certain options.{" "}
+        {process.env.NEXT_PUBLIC_TITLE}'s Privacy Policy does not apply to other
+        advertisers or websites. Thus, we are advising you to consult the
+        respective Privacy Policies of these third-party ad servers for more
+        detailed information. It may include their practices and instructions
+        about how to opt-out of certain options.{" "}
       </p>
 
       <p>
@@ -128,11 +133,11 @@ const PrivacyPolicy = () => {
       </p>
 
       <p>
-        {process.env.NEXT_PUBLIC_TITLE} does not knowingly collect any Personal Identifiable
-        Information from children under the age of 13. If you think that your
-        child provided this kind of information on our website, we strongly
-        encourage you to contact us immediately and we will do our best efforts
-        to promptly remove such information from our records.
+        {process.env.NEXT_PUBLIC_TITLE} does not knowingly collect any Personal
+        Identifiable Information from children under the age of 13. If you think
+        that your child provided this kind of information on our website, we
+        strongly encourage you to contact us immediately and we will do our best
+        efforts to promptly remove such information from our records.
       </p>
 
       <h2>Online Privacy Policy Only</h2>
@@ -140,9 +145,9 @@ const PrivacyPolicy = () => {
       <p>
         Our Privacy Policy applies only to our online activities and is valid
         for visitors to our website with regards to the information that they
-        shared and/or collect in {process.env.NEXT_PUBLIC_TITLE}. This policy is not applicable to
-        any information collected offline or via channels other than this
-        website.
+        shared and/or collect in {process.env.NEXT_PUBLIC_TITLE}. This policy is
+        not applicable to any information collected offline or via channels
+        other than this website.
       </p>
 
       <h2>Consent</h2>

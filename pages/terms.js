@@ -1,18 +1,18 @@
-import Landing from "components/Landing";
 import Layout from "components/Layout";
 import { NextSeo } from "next-seo";
+import Terms from "components/Terms";
 
-const Home = () => {
+const TermsPage = () => {
   return (
     <>
       <NextSeo
-        title={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+        title={`${process.env.NEXT_PUBLIC_TITLE} | Terms and conditions`}
         description={`SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS`}
       />
       <Layout>
-        <Landing />
+        <Terms />
       </Layout>
     </>
   );
 };
-export default Home;
+export default TermsPage;

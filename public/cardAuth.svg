@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" viewBox="0 0 81 81">
+  <g id="cardAuth" transform="translate(-9.5 -9.5)">
+    <path id="Tracé_596" data-name="Tracé 596" d="M10,50A40,40,0,1,0,50,10,40,40,0,0,0,10,50Z" fill="#e8f4fa" stroke="#daedf7" stroke-width="1"/>
+    <path id="Tracé_597" data-name="Tracé 597" d="M47.023,36.011A15.862,15.862,0,0,1,28,51.54" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_598" data-name="Tracé 598" d="M28,43.62V36.011A19.018,19.018,0,0,1,47.023,16.993h0A19.017,19.017,0,0,1,66.041,36.012a34.7,34.7,0,0,1-4.119,15.819" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_599" data-name="Tracé 599" d="M54.8,49.65a15.911,15.911,0,0,0,11.253,1.891" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_600" data-name="Tracé 600" d="M52.688,52.822a19.562,19.562,0,0,0,10.184,2.841,19.853,19.853,0,0,0,2.829-.2" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_601" data-name="Tracé 601" d="M50.1,55.69a23.344,23.344,0,0,0,12.768,3.777q.811,0,1.611-.055" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_602" data-name="Tracé 602" d="M47.023,62.625A31.894,31.894,0,0,1,34.6,66.264" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_603" data-name="Tracé 603" d="M47.023,62.625a31.894,31.894,0,0,0,12.419,3.639" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_604" data-name="Tracé 604" d="M54.565,69.324a31,31,0,0,1-7.542-2.265,31,31,0,0,1-7.541,2.265" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_605" data-name="Tracé 605" d="M44.487,70.877h5.072" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_606" data-name="Tracé 606" d="M31.809,44.039V36.011A15.213,15.213,0,0,1,47.02,20.8h0A15.215,15.215,0,0,1,62.238,36.011a30.91,30.91,0,0,1-4.261,15.078" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_607" data-name="Tracé 607" d="M35.612,42.957V36.011A11.411,11.411,0,0,1,47.023,24.6h0A11.411,11.411,0,0,1,58.434,36.011C58.1,50.59,47.915,62.341,31.786,63.241" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_608" data-name="Tracé 608" d="M47.012,58.219a29.167,29.167,0,0,0,15.226,5.022" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_609" data-name="Tracé 609" d="M28,43.62a8.245,8.245,0,0,0,11.411-7.609A7.607,7.607,0,0,1,47.023,28.4h0a7.607,7.607,0,0,1,7.607,7.607,23.457,23.457,0,0,1-23.459,23.46c-.538,0-1.075-.018-1.607-.055" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_610" data-name="Tracé 610" d="M28.057,47.648A12.053,12.053,0,0,0,43.219,36.011a3.8,3.8,0,0,1,3.8-3.8h0a3.8,3.8,0,0,1,3.8,3.8,19.669,19.669,0,0,1-22.481,19.45" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_611" data-name="Tracé 611" d="M34.559,81.02c0,.948,6.148,1.716,13.731,1.716s13.731-.768,13.731-1.716S55.873,79.3,48.29,79.3s-13.731.768-13.731,1.716Z" fill="#45413c"/>
+    <path id="Tracé_612" data-name="Tracé 612" d="M82.839,53.761V66.44H78.4V53.761a6.34,6.34,0,1,0-12.68,0V66.44H61.285V53.761a10.777,10.777,0,1,1,21.554,0Z" fill="#daedf7"/>
+    <path id="Tracé_613" data-name="Tracé 613" d="M72.062,42.984A10.785,10.785,0,0,0,61.285,53.761V56.3a10.777,10.777,0,1,1,21.554,0V53.761A10.785,10.785,0,0,0,72.062,42.984Z" fill="#e8f4fa"/>
+    <path id="Tracé_614" data-name="Tracé 614" d="M82.839,53.761V66.44H78.4V53.761a6.34,6.34,0,1,0-12.68,0V66.44H61.285V53.761a10.777,10.777,0,1,1,21.554,0Z" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_615" data-name="Tracé 615" d="M58.75,58.2H85.375V76.583H58.75Z" fill="#ffe500"/>
+    <path id="Tracé_616" data-name="Tracé 616" d="M74.6,65.806a2.536,2.536,0,1,0-3.8,2.184v2.887a1.268,1.268,0,1,0,2.536,0V67.99A2.524,2.524,0,0,0,74.6,65.806Z" fill="#656769" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Tracé_617" data-name="Tracé 617" d="M82.839,58.2H61.285a2.535,2.535,0,0,0-2.535,2.535v3.8A2.536,2.536,0,0,1,61.285,62H82.839a2.536,2.536,0,0,1,2.536,2.536v-3.8A2.535,2.535,0,0,0,82.839,58.2Z" fill="#fff48c"/>
+    <path id="Tracé_618" data-name="Tracé 618" d="M58.75,58.2H85.375V76.583H58.75Z" fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+  </g>
+</svg>

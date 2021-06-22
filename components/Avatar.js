@@ -38,6 +38,13 @@ const Avatar = ({ url, size, onUpload }) => {
       const fileName = `${Math.random()}.${fileExt}`;
       const filePath = `${fileName}`;
 
+      if (event.target.files[0].size > 150000) {
+        alert("File is too big!");
+        event.target.value = "";
+        setUploading(false)
+        return;
+      }
+
       let { error: uploadError } = await supabase.storage
         .from("avatars")
         .upload(filePath, file);
