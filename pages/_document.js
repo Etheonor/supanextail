@@ -7,6 +7,7 @@ class MyDocument extends Document {
   }
 
   render() {
+    // This will set the initial theme, saved in localstorage
     const setInitialTheme = `
     function getUserPreference() {
       if(window.localStorage.getItem('theme')) {
