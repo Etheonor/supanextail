@@ -7,8 +7,8 @@ function with your new elements.
 import { useEffect, useState } from "react";
 
 import Avatar from "./Avatar";
-import MyModal from "./MyModal";
 import { supabase } from "../utils/supabaseClient";
+import { toast } from "react-toastify";
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true);
@@ -71,6 +71,7 @@ export default function Account({ session }) {
       alert(error.message);
     } finally {
       setLoading(false);
+      toast.success("Your profile has been updated")
     }
   }
 

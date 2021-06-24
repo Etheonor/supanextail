@@ -23,7 +23,7 @@ const Layout = (props) => {
 
   const toastStyle = {
     //Style your toast elements here
-    success: "bg-secondary",
+    success: "bg-accent",
     error: "bg-red-600",
     info: "bg-gray-600",
     warning: "bg-orange-400",

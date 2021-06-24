@@ -3,12 +3,50 @@ This is the pricing component.
 You can switch between flat payment or subscription by setting the flat variable.
 */
 
+import { useEffect, useState } from "react";
+
+import { Auth } from "@supabase/ui";
 import { Switch } from "@headlessui/react";
-import { useState } from "react";
+import axios from "axios";
+import getStripe from "utils/stripe";
+import { supabase } from "utils/supabaseClient";
 
 const Pricing = () => {
   const [enabled, setEnabled] = useState(false);
-  const flat = false;
+  const [loading, setLoading] = useState(false);
+  const { user, session } = Auth.useUser();
+  const [customerId, setCustomerId] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      supabase
+        .from("profiles")
+        .select(`customerId`)
+        .eq("id", user.id)
+        .single()
+        .then(
+          (result) =>
+            // Even if null, it returns something so we check if the customerId is > 1 to be sure it exist
+            result.data.customerId.length > 1 &&
+            setCustomerId(result.data.customerId)
+        );
+    }
+  }, [user]);
+  const prices = {
+    personal: {
+      monthly: "price_1J5q2yDMjD0UnVmMXzEWYDnl",
+      anually: "price_1J5q45DMjD0UnVmMQxXHKGAv",
+    },
+    team: {
+      monthly: "price_1J5q3GDMjD0UnVmMlHc5Eedq",
+      anually: "price_1J5q8zDMjD0UnVmMqsngM91X",
+    },
+    pro: {
+      monthly: "price_1J5q3TDMjD0UnVmMJKX3nkDq",
+      anually: "price_1J5q9VDMjD0UnVmMIQtVDSZ9",
+    },
+  };
+  const flat = false; // Switch between subscription system or flat prices
   const pricing = {
     monthly: {
       personal: "$5/mo",
@@ -25,6 +63,40 @@ const Pricing = () => {
       team: "€99",
       pro: "€149",
     },
+  };
+
+  const handleSubmit = async (e, priceId) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Create a Checkout Session. This will redirect the user to the Stripe website for the payment.
+
+    axios
+      .post("/api/stripe/create-checkout-session", {
+        priceId: priceId,
+        email: user.email,
+        customerId: customerId,
+        userId: user.id,
+        tokenId: session.access_token,
+      })
+      .then((result) => {
+        stripe
+          .redirectToCheckout({
+            sessionId: result.data.sessionId,
+          })
+          .then((result) => {
+            console.log(result);
+          });
+      });
+
+    // Redirect to Checkout.
+    const stripe = await getStripe();
+
+    // If `redirectToCheckout` fails due to a browser or network
+    // error, display the localized error message to your customer
+    // using `error.message`.
+
+    setLoading(false);
   };
   return (
     <div className='w-full mx-auto px-5 py-10 mb-10'>
@@ -88,7 +160,16 @@ const Pricing = () => {
             </ul>
           </div>
           <div className='w-full'>
-            <button className='btn btn-primary w-full'>Buy Now</button>
+            <button
+              className='btn btn-primary w-full'
+              onClick={(e) =>
+                handleSubmit(
+                  e,
+                  enabled ? prices.personal.anually : prices.personal.monthly
+                )
+              }>
+              Buy Now
+            </button>
           </div>
         </div>
         <div className='w-full md:w-1/3 md:max-w-none bg-base-200 px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
@@ -120,7 +201,16 @@ const Pricing = () => {
             </ul>
           </div>
           <div className='w-full'>
-            <button className='btn btn-primary w-full'>Buy Now</button>
+            <button
+              className='btn btn-primary w-full'
+              onClick={(e) =>
+                handleSubmit(
+                  e,
+                  enabled ? prices.team.anually : prices.team.monthly
+                )
+              }>
+              Buy Now
+            </button>
           </div>
         </div>
         <div className='w-full md:w-1/3 md:max-w-none bg-base-200 px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
@@ -152,7 +242,16 @@ const Pricing = () => {
             </ul>
           </div>
           <div className='w-full'>
-            <button className='btn btn-primary w-full'>Buy Now</button>
+            <button
+              className='btn btn-primary w-full'
+              onClick={(e) =>
+                handleSubmit(
+                  e,
+                  enabled ? prices.pro.anually : prices.pro.monthly
+                )
+              }>
+              Buy Now
+            </button>
           </div>
         </div>
       </div>
