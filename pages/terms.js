@@ -1,3 +1,5 @@
+// To modify the terms & conditions, check the Terms.js component
+
 import Layout from "components/Layout";
 import { NextSeo } from "next-seo";
 import Terms from "components/Terms";

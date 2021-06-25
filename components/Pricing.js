@@ -1,8 +1,12 @@
 /*
 This is the pricing component. 
 You can switch between flat payment or subscription by setting the flat variable.
+----------
+Dont forget to create your customer portal on Stripe 
+https://dashboard.stripe.com/test/settings/billing/portal 
 */
 
+import { getSub, supabase } from "utils/supabaseClient";
 import { useEffect, useState } from "react";
 
 import { Auth } from "@supabase/ui";
@@ -10,27 +14,33 @@ import { Prices } from "utils/priceList";
 import { Switch } from "@headlessui/react";
 import axios from "axios";
 import getStripe from "utils/stripe";
-import { supabase } from "utils/supabaseClient";
+import router from "next/router";
 
 const Pricing = () => {
   const [enabled, setEnabled] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { user, session } = Auth.useUser();
   const [customerId, setCustomerId] = useState(null);
+  const [sub, setSub] = useState(false);
+
+  const portal = () => {
+    axios
+      .post("/api/stripe/customer-portal", {
+        customerId: customerId,
+      })
+      .then((result) => {
+        router.push(result.data.url);
+      });
+  };
 
   useEffect(() => {
     if (user) {
+      getSub().then((result) => setSub(result));
       supabase
         .from("profiles")
         .select(`customerId`)
         .eq("id", user.id)
         .single()
-        .then(
-          (result) =>
-            // Even if null, it returns something so we check if the customerId is > 1 to be sure it exist
-            result.data.customerId.length > 1 &&
-            setCustomerId(result.data.customerId)
-        );
+        .then((result) => setCustomerId(result.data?.customerId));
     }
   }, [user]);
 
@@ -55,7 +65,6 @@ const Pricing = () => {
 
   const handleSubmit = async (e, priceId) => {
     e.preventDefault();
-    setLoading(true);
 
     // Create a Checkout Session. This will redirect the user to the Stripe website for the payment.
 
@@ -79,12 +88,6 @@ const Pricing = () => {
 
     // Redirect to Checkout.
     const stripe = await getStripe();
-
-    // If `redirectToCheckout` fails due to a browser or network
-    // error, display the localized error message to your customer
-    // using `error.message`.
-
-    setLoading(false);
   };
   return (
     <div className='w-full mx-auto px-5 py-10 mb-10'>
@@ -150,15 +153,20 @@ const Pricing = () => {
           <div className='w-full'>
             <button
               className='btn btn-primary w-full'
-              onClick={(e) =>
-                handleSubmit(
-                  e,
-                  enabled
-                    ? Prices.personal.anually.id
-                    : Prices.personal.monthly.id
-                )
+              onClick={
+                sub
+                  ? () => {
+                      portal();
+                    }
+                  : (e) =>
+                      handleSubmit(
+                        e,
+                        enabled
+                          ? Prices.personal.anually.id
+                          : Prices.personal.monthly.id
+                      )
               }>
-              Buy Now
+              {sub ? "Upgrade" : "Buy Now"}
             </button>
           </div>
         </div>
@@ -193,15 +201,20 @@ const Pricing = () => {
           <div className='w-full'>
             <button
               className='btn btn-primary w-full'
-              onClick={(e) =>
-                handleSubmit(
-                  e,
-                  enabled
-                    ? Prices.team.anually.id
-                    : Prices.team.monthly.id
-                )
+              onClick={
+                sub
+                  ? () => {
+                      portal();
+                    }
+                  : (e) =>
+                      handleSubmit(
+                        e,
+                        enabled
+                          ? Prices.team.anually.id
+                          : Prices.team.monthly.id
+                      )
               }>
-              Buy Now
+              {sub ? "Upgrade" : "Buy Now"}
             </button>
           </div>
         </div>
@@ -236,15 +249,18 @@ const Pricing = () => {
           <div className='w-full'>
             <button
               className='btn btn-primary w-full'
-              onClick={(e) =>
-                handleSubmit(
-                  e,
-                  enabled
-                    ? Prices.pro.anually.id
-                    : Prices.pro.monthly.id
-                )
+              onClick={
+                sub
+                  ? () => {
+                      portal();
+                    }
+                  : (e) =>
+                      handleSubmit(
+                        e,
+                        enabled ? Prices.pro.anually.id : Prices.pro.monthly.id
+                      )
               }>
-              Buy Now
+              {sub ? "Upgrade" : "Buy Now"}
             </button>
           </div>
         </div>

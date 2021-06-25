@@ -5,6 +5,8 @@ function with your new elements.
 */
 
 import Avatar from "./Avatar";
+import Image from "next/image";
+import Plan from "public/plan.svg";
 import { PriceIds } from "utils/priceList";
 import { supabase } from "../utils/supabaseClient";
 import { toast } from "react-toastify";
@@ -102,9 +104,12 @@ export default function Account(props) {
         </div>
       </div>
 
-      <div className='max-w-xl flex flex-col justify-center m-auto w-full p-5 bordered border-2 border-primary shadow-lg my-5'>
-        <h2>Your current plan</h2>
-        <p>{props.plan.plan ? PriceIds[props.plan.plan] : "Free tier"}</p>
+      <div className='max-w-xl flex flex-row flex-wrap m-auto w-full p-5 bordered border-2 border-primary shadow-lg my-5'>
+        <Image src={Plan} />
+        <div className="flex flex-col m-auto">
+          <h2>Your current plan</h2>
+          <p className="font-bold">{props.plan ? PriceIds[props.plan] : "Free tier"}</p>
+        </div>
       </div>
     </div>
   );

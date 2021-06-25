@@ -1,4 +1,3 @@
-import { getSub, supabase } from "../utils/supabaseClient";
 import { useEffect, useState } from "react";
 
 import Auth from "../components/Auth";
@@ -6,6 +5,7 @@ import Dashboard from "../components/Dashboard";
 import Head from "next/head";
 import Layout from "components/Layout";
 import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../utils/supabaseClient";
 import { useRouter } from "next/router";
 
 const DashboardPage = ({ user, plan, profile }) => {
@@ -65,22 +65,34 @@ export async function getServerSideProps({ req }) {
     process.env.SUPABASE_ADMIN_KEY
   );
   const { user } = await supabaseAdmin.auth.api.getUserByCookie(req);
+  const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
   // If the user exist, you will retrieve the user profile and if he/she's a paid user
   if (user) {
     let { data: plan, error } = await supabaseAdmin
       .from("subscriptions")
-      .select("paid_user, plan")
+      .select("subscription")
       .eq("id", user.id)
       .single();
 
-    let { data: profile, errorprofile } = await supabaseAdmin
+    // Check the subscription plan. If it doesnt exist, return null
+    const subscription = plan?.subscription
+      ? await stripe.subscriptions.retrieve(plan.subscription)
+      : null;
+
+    let { data: profile, errorProfile } = await supabaseAdmin
       .from("profiles")
       .select(`username, website, avatar_url`)
       .eq("id", user.id)
       .single();
 
-    return { props: { user, plan, profile } };
+    return {
+      props: {
+        user,
+        plan: subscription?.plan?.id ? subscription.plan.id : null,
+        profile,
+      },
+    };
   }
 
   if (!user) {

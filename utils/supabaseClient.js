@@ -9,7 +9,8 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export const getSub = async () => {
   let { data: subscriptions, error } = await supabase
     .from("subscriptions")
-    .select("paid_user, plan");
+    .select("paid_user, plan")
+    .single();
   if (subscriptions) {
     return subscriptions;
   }

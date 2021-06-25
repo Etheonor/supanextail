@@ -1,3 +1,9 @@
+/*
+This is the login/register page. 
+You have 2 components, the "AuthComponent" that handle the logic, 
+and the "AuthText" that will show the description on the left of the screen
+*/
+
 import { Auth } from "@supabase/ui";
 import AuthComponent from "../components/Auth";
 import AuthText from "components/AuthText";
