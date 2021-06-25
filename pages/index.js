@@ -1,8 +1,8 @@
 /*Don't forget to modify the Head component with your website informations */
 
+import Head from "next/head";
 import Landing from "components/Landing";
 import Layout from "components/Layout";
-import { NextSeo } from "next-seo";
 
 const Home = () => {
   return (
