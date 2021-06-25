@@ -6,6 +6,7 @@ You can switch between flat payment or subscription by setting the flat variable
 import { useEffect, useState } from "react";
 
 import { Auth } from "@supabase/ui";
+import { Prices } from "utils/priceList";
 import { Switch } from "@headlessui/react";
 import axios from "axios";
 import getStripe from "utils/stripe";
@@ -32,20 +33,7 @@ const Pricing = () => {
         );
     }
   }, [user]);
-  const prices = {
-    personal: {
-      monthly: "price_1J5q2yDMjD0UnVmMXzEWYDnl",
-      anually: "price_1J5q45DMjD0UnVmMQxXHKGAv",
-    },
-    team: {
-      monthly: "price_1J5q3GDMjD0UnVmMlHc5Eedq",
-      anually: "price_1J5q8zDMjD0UnVmMqsngM91X",
-    },
-    pro: {
-      monthly: "price_1J5q3TDMjD0UnVmMJKX3nkDq",
-      anually: "price_1J5q9VDMjD0UnVmMIQtVDSZ9",
-    },
-  };
+
   const flat = false; // Switch between subscription system or flat prices
   const pricing = {
     monthly: {
@@ -165,7 +153,9 @@ const Pricing = () => {
               onClick={(e) =>
                 handleSubmit(
                   e,
-                  enabled ? prices.personal.anually : prices.personal.monthly
+                  enabled
+                    ? Prices.personal.anually.id
+                    : Prices.personal.monthly.id
                 )
               }>
               Buy Now
@@ -206,7 +196,9 @@ const Pricing = () => {
               onClick={(e) =>
                 handleSubmit(
                   e,
-                  enabled ? prices.team.anually : prices.team.monthly
+                  enabled
+                    ? Prices.team.anually.id
+                    : Prices.team.monthly.id
                 )
               }>
               Buy Now
@@ -247,7 +239,9 @@ const Pricing = () => {
               onClick={(e) =>
                 handleSubmit(
                   e,
-                  enabled ? prices.pro.anually : prices.pro.monthly
+                  enabled
+                    ? Prices.pro.anually.id
+                    : Prices.pro.monthly.id
                 )
               }>
               Buy Now

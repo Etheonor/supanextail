@@ -4,48 +4,17 @@ You can add as many elements as you want. Don't forget to update your getProfile
 function with your new elements.
 */
 
-import { useEffect, useState } from "react";
-
 import Avatar from "./Avatar";
+import { PriceIds } from "utils/priceList";
 import { supabase } from "../utils/supabaseClient";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
-export default function Account({ session }) {
-  const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState(null);
-  const [website, setWebsite] = useState(null);
+export default function Account(props) {
+  const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState(props.profile.username);
+  const [website, setWebsite] = useState(props.profile.website);
   const [avatar_url, setAvatarUrl] = useState(null);
-
-  useEffect(() => {
-    getProfile();
-  }, [session]);
-
-  async function getProfile() {
-    try {
-      setLoading(true);
-      const user = supabase.auth.user();
-
-      let { data, error, status } = await supabase
-        .from("profiles")
-        .select(`username, website, avatar_url`)
-        .eq("id", user.id)
-        .single();
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        setUsername(data.username);
-        setWebsite(data.website);
-        setAvatarUrl(data.avatar_url);
-      }
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   async function updateProfile({ username, website, avatar_url }) {
     try {
@@ -71,64 +40,71 @@ export default function Account({ session }) {
       alert(error.message);
     } finally {
       setLoading(false);
-      toast.success("Your profile has been updated")
+      toast.success("Your profile has been updated");
     }
   }
 
   return (
-    <div className='form-widget mt-10 flex flex-col text-left'>
-      <Avatar
-        url={avatar_url}
-        size={150}
-        onUpload={(url) => {
-          setAvatarUrl(url);
-          updateProfile({ username, website, avatar_url: url });
-        }}
-      />
-      <div className='mb-5 flex flex-col'>
-        <label htmlFor='email' className='my-auto text-sm mb-2'>
-          Email
-        </label>
-        <input
-          className='input input-primary input-bordered input-sm flex-1'
-          id='email'
-          type='text'
-          value={session.user.email}
-          disabled
+    <div className='flex flex-col text-left w-full'>
+      <div className='max-w-sm flex flex-col justify-center m-auto w-full p-5'>
+        <Avatar
+          url={avatar_url}
+          size={150}
+          onUpload={(url) => {
+            setAvatarUrl(url);
+            updateProfile({ username, website, avatar_url: url });
+          }}
         />
-      </div>
-      <div className='mb-5 flex flex-col'>
-        <label htmlFor='username' className='my-auto text-sm mb-2'>
-          Name
-        </label>
-        <input
-          className='input input-primary input-bordered input-sm flex-1'
-          id='username'
-          type='text'
-          value={username || ""}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div className='mb-5 flex flex-col'>
-        <label htmlFor='website' className='my-auto text-sm mb-2'>
-          Website
-        </label>
-        <input
-          className='input input-primary input-bordered input-sm flex-1'
-          id='website'
-          type='website'
-          value={website || ""}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
+        <div className='mb-5 flex flex-col'>
+          <label htmlFor='email' className='my-auto text-sm mb-2'>
+            Email
+          </label>
+          <input
+            className='input input-primary input-bordered input-sm flex-1'
+            id='email'
+            type='text'
+            value={props.session.user.email}
+            disabled
+          />
+        </div>
+        <div className='mb-5 flex flex-col'>
+          <label htmlFor='username' className='my-auto text-sm mb-2'>
+            Name
+          </label>
+          <input
+            className='input input-primary input-bordered input-sm flex-1'
+            id='username'
+            type='text'
+            value={username || ""}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className='mb-5 flex flex-col'>
+          <label htmlFor='website' className='my-auto text-sm mb-2'>
+            Website
+          </label>
+          <input
+            className='input input-primary input-bordered input-sm flex-1'
+            id='website'
+            type='website'
+            value={website || ""}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </div>
+
+        <div className='m-auto'>
+          <button
+            className='btn btn-primary btn-sm'
+            onClick={() => updateProfile({ username, website, avatar_url })}
+            disabled={loading}>
+            {loading ? "Loading ..." : "Update My Profile"}
+          </button>
+        </div>
       </div>
 
-      <div className='m-auto'>
-        <button
-          className='btn btn-primary btn-sm'
-          onClick={() => updateProfile({ username, website, avatar_url })}
-          disabled={loading}>
-          {loading ? "Loading ..." : "Update My Profile"}
-        </button>
+      <div className='max-w-xl flex flex-col justify-center m-auto w-full p-5 bordered border-2 border-primary shadow-lg my-5'>
+        <h2>Your current plan</h2>
+        <p>{props.plan.plan ? PriceIds[props.plan.plan] : "Free tier"}</p>
       </div>
     </div>
   );
