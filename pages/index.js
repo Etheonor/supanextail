@@ -9,13 +9,13 @@ const Home = () => {
     <>
       <NextSeo
         title={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
-        description={`SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS`}
+        description={`SupaNexTail is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS`}
         openGraph={{
           type: "website",
           url: "https://www.supanextail.dev/",
           title: `Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`,
           description:
-            "SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS",
+            "SupaNexTail is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS",
           images: [
             {
               url: "https://www.supanextail.dev/ogimage.png",
