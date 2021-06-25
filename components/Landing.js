@@ -9,7 +9,7 @@ const Landing = () => {
         </h2>
         <hr className='my-5' />
         <p className='text-xl max-w-lg text-center m-auto'>
-          Don’t waste your time and reinvent the wheel, setup your website in
+          Don’t waste your time and reinvent the wheel, setup your SaaS in
           <span className='text-accent text-2xl font-bold'> minutes</span>, not
           days.
         </p>

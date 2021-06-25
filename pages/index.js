@@ -1,4 +1,4 @@
-/*Don't forget to modify the NextSeo component with your website informations */
+/*Don't forget to modify the Head component with your website informations */
 
 import Landing from "components/Landing";
 import Layout from "components/Layout";
@@ -7,31 +7,49 @@ import { NextSeo } from "next-seo";
 const Home = () => {
   return (
     <>
-      <NextSeo
-        title={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
-        description={`SupaNexTail is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS`}
-        openGraph={{
-          type: "website",
-          url: "https://www.supanextail.dev/",
-          title: `Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`,
-          description:
-            "SupaNexTail is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS",
-          images: [
-            {
-              url: "https://www.supanextail.dev/ogimage.png",
-              width: 1200,
-              height: 630,
-              alt: "SupaNexTail",
-            },
-            {
-              url: "https://www.supanextail.dev/ogimage.png",
-              width: 1200,
-              height: 630,
-              alt: "SupaNexTail",
-            },
-          ],
-        }}
-      />
+      <Head>
+        <title>{`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}</title>
+        <meta
+          name='description'
+          content='SupaNexTail is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS'
+        />
+
+        <meta property='og:url' content='https://supanextail.dev/' />
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:title'
+          content={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+        />
+        <meta
+          property='og:description'
+          content='SupaNexTail is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS'
+        />
+        <meta
+          property='og:image'
+          content='https://supanextail.dev/ogimage.png'
+        />
+
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta property='twitter:domain' content='supanextail.dev' />
+        <meta
+          property='twitter:url'
+          content='https://supanextail.dev/ogimage.png'
+        />
+        <meta
+          name='twitter:title'
+          content={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+        />
+        <meta
+          name='twitter:description'
+          content='SupaNexTail is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS'
+        />
+        <meta
+          name='twitter:image'
+          content='https://supanextail.dev/ogimage.png'
+        />
+        <meta charSet='UTF-8' />
+      </Head>
+
       <Layout>
         <Landing />
       </Layout>
