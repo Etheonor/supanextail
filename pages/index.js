@@ -1,4 +1,7 @@
-/*Don't forget to modify the Head component with your website informations */
+/*
+Don't forget to modify the Head component with your website informations
+You can also update the content on the Landing.js component
+*/
 
 import Head from "next/head";
 import Landing from "components/Landing";

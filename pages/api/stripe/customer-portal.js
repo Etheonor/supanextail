@@ -1,3 +1,6 @@
+/* Dont forget to create your customer portal on Stripe 
+https://dashboard.stripe.com/test/settings/billing/portal */
+
 import Cors from "cors";
 import initMiddleware from "utils/init-middleware";
 const rateLimit = require("express-rate-limit");
@@ -25,7 +28,7 @@ export default async function handler(req, res) {
     const returnUrl = `${req.headers.origin}/dashboard`;
 
     const portalsession = await stripe.billingPortal.sessions.create({
-      customer: req.query.customerId,
+      customer: req.body.customerId,
       return_url: returnUrl,
     });
     res.status(200).send({ url: portalsession.url });

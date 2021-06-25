@@ -73,6 +73,7 @@ export default async function handler(req, res) {
           .from("subscriptions")
           .select("*")
           .eq("id", dataObject.client_reference_id);
+          console.log(dataObject)
 
         if (subscriptions.length == 0) {
           const { data, error } = await supabase
@@ -89,6 +90,7 @@ export default async function handler(req, res) {
                 customer_id: dataObject.customer,
                 paid_user: true,
                 plan: dataObject.metadata.priceId,
+                subscription: dataObject.subscription
               },
             ])
             .then()
@@ -100,6 +102,7 @@ export default async function handler(req, res) {
               customer_id: dataObject.customer,
               paid_user: true,
               plan: dataObject.metadata.priceId,
+              subscription: dataObject.subscription
             })
             .eq("id", dataObject.client_reference_id)
             .then()
