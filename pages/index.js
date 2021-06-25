@@ -12,19 +12,19 @@ const Home = () => {
         description={`SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS`}
         openGraph={{
           type: "website",
-          url: "https://www.supanextail.com/",
+          url: "https://www.supanextail.dev/",
           title: `Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`,
           description:
             "SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS",
           images: [
             {
-              url: "https://www.supanextail.com/ogimage.png",
+              url: "https://www.supanextail.dev/ogimage.png",
               width: 1200,
               height: 630,
               alt: "SupaNexTail",
             },
             {
-              url: "https://www.supanextail.com/ogimage.png",
+              url: "https://www.supanextail.dev/ogimage.png",
               width: 1200,
               height: 630,
               alt: "SupaNexTail",
