@@ -36,11 +36,13 @@ const Pricing = () => {
     if (user) {
       getSub().then((result) => setSub(result));
       supabase
-        .from("profiles")
-        .select(`customerId`)
+        .from("subscriptions")
+        .select(`customer_id`)
         .eq("id", user.id)
         .single()
-        .then((result) => setCustomerId(result.data?.customerId));
+        .then((result) => {
+          setCustomerId(result.data?.customer_id);
+        });
     }
   }, [user]);
 
