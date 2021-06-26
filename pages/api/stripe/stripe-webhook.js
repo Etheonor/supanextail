@@ -1,6 +1,9 @@
 /*
 SupaNexTail use only 2 webhooks. Stripe have a lot more, 
 you can check it here https://stripe.com/docs/webhooks
+BE SURE TO SETUP YOUR WEBHOOKS IN YOUR DASHBOARD!
+If you want to test it locally, you'll need the stripe CLI and use this command line:
+stripe listen --forward-to localhost:3000/api/stripe/stripe-webhook
 */
 
 import Cors from "cors";
