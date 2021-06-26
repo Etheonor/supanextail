@@ -2,21 +2,33 @@
 This is the Dashboard component. If a user is logged in, he/she can update his/her name and website.
 You can add as many elements as you want. Don't forget to update your getProfile() and updateProfile()
 function with your new elements.
+It also show you the current subscription plan
 */
+
+import { useEffect, useState } from "react";
 
 import Avatar from "./Avatar";
 import Image from "next/image";
+import PaymentModal from "./PaymentModal";
 import Plan from "public/plan.svg";
 import { PriceIds } from "utils/priceList";
 import { supabase } from "../utils/supabaseClient";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Account(props) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState(props.profile.username);
   const [website, setWebsite] = useState(props.profile.website);
   const [avatar_url, setAvatarUrl] = useState(null);
+  const [payment, setPayment] = useState(false);
+
+  useEffect(() => {
+    if (router.query.session_id && router.query.session_id !== "canceled") {
+      setPayment(true);
+    }
+  }, []);
 
   async function updateProfile({ username, website, avatar_url }) {
     try {
@@ -106,11 +118,14 @@ export default function Account(props) {
 
       <div className='max-w-xl flex flex-row flex-wrap m-auto w-full p-5 bordered border-2 border-primary shadow-lg my-5'>
         <Image src={Plan} />
-        <div className="flex flex-col m-auto">
+        <div className='flex flex-col m-auto'>
           <h2>Your current plan</h2>
-          <p className="font-bold">{props.plan ? PriceIds[props.plan] : "Free tier"}</p>
+          <p className='font-bold'>
+            {props.plan ? PriceIds[props.plan] : "Free tier"}
+          </p>
         </div>
       </div>
+      <PaymentModal open={payment} setPayment={setPayment} />
     </div>
   );
 }

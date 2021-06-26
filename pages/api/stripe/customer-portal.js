@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   await cors(req, res);
   await limiter(req, res);
   if (req.method === "POST") {
-    const returnUrl = `${req.headers.origin}/dashboard`;
+    const returnUrl = `${req.headers.origin}/dashboard`; // Stripe will return to the dashboard, you can change it
 
     const portalsession = await stripe.billingPortal.sessions.create({
       customer: req.body.customerId,

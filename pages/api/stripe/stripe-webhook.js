@@ -1,3 +1,8 @@
+/*
+SupaNexTail use only 2 webhooks. Stripe have a lot more, 
+you can check it here https://stripe.com/docs/webhooks
+*/
+
 import Cors from "cors";
 import { buffer } from "micro";
 import { createClient } from "@supabase/supabase-js";
@@ -73,7 +78,7 @@ export default async function handler(req, res) {
           .from("subscriptions")
           .select("*")
           .eq("id", dataObject.client_reference_id);
-          console.log(dataObject)
+        console.log(dataObject);
 
         if (subscriptions.length == 0) {
           const { data, error } = await supabase
@@ -90,7 +95,7 @@ export default async function handler(req, res) {
                 customer_id: dataObject.customer,
                 paid_user: true,
                 plan: dataObject.metadata.priceId,
-                subscription: dataObject.subscription
+                subscription: dataObject.subscription,
               },
             ])
             .then()
@@ -102,7 +107,7 @@ export default async function handler(req, res) {
               customer_id: dataObject.customer,
               paid_user: true,
               plan: dataObject.metadata.priceId,
-              subscription: dataObject.subscription
+              subscription: dataObject.subscription,
             })
             .eq("id", dataObject.client_reference_id)
             .then()

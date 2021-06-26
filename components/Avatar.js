@@ -1,3 +1,9 @@
+/*
+As a user, you can upload an avatar in your dashboard. This component will handle 
+the upload.
+You can tweak the max size, line 47
+*/
+
 import { useEffect, useState } from "react";
 
 import { supabase } from "utils/supabaseClient";

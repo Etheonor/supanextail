@@ -1,3 +1,7 @@
+/* 
+This card is used on the landing page
+*/
+
 import Image from "next/image";
 
 const CardLanding = (props) => {

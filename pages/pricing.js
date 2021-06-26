@@ -8,7 +8,7 @@ const PricingPage = () => {
   return (
     <>
       <NextSeo
-        title={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+        title={`${process.env.NEXT_PUBLIC_TITLE} | Pricing`}
         description={`SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS`}
       />
       <Layout>

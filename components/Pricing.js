@@ -45,11 +45,12 @@ const Pricing = () => {
   }, [user]);
 
   const flat = false; // Switch between subscription system or flat prices
+
   const pricing = {
     monthly: {
       personal: "$5/mo",
-      team: "15/mo",
-      pro: "35/mo",
+      team: "$15/mo",
+      pro: "$35/mo",
     },
     yearly: {
       personal: "$50/yr",
@@ -77,13 +78,9 @@ const Pricing = () => {
         tokenId: session.access_token,
       })
       .then((result) => {
-        stripe
-          .redirectToCheckout({
-            sessionId: result.data.sessionId,
-          })
-          .then((result) => {
-            console.log(result);
-          });
+        stripe.redirectToCheckout({
+          sessionId: result.data.sessionId,
+        });
       });
 
     // Redirect to Checkout.
@@ -125,7 +122,7 @@ const Pricing = () => {
           </div>
           <div>
             <p className={`${!enabled ? "text-gray-500" : null}`}>
-              Billed annually
+              Billed anually
             </p>
           </div>
         </div>

@@ -1,5 +1,4 @@
 import CardLanding from "components/UI/CardLanding";
-import Image from "next/image";
 import cardAuth from "public/cardAuth.svg";
 import cardFee from "public/cardFee.svg";
 import cardPage from "public/cardPage.svg";
