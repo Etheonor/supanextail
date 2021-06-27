@@ -124,7 +124,7 @@ const Pricing = () => {
           </div>
           <div>
             <p className={`${!enabled ? "text-gray-500" : null}`}>
-              Billed anually
+              Billed annually
             </p>
           </div>
         </div>
@@ -161,7 +161,7 @@ const Pricing = () => {
                       handleSubmit(
                         e,
                         enabled
-                          ? Prices.personal.anually.id
+                          ? Prices.personal.annually.id
                           : Prices.personal.monthly.id
                       )
               }>
@@ -209,7 +209,7 @@ const Pricing = () => {
                       handleSubmit(
                         e,
                         enabled
-                          ? Prices.team.anually.id
+                          ? Prices.team.annually.id
                           : Prices.team.monthly.id
                       )
               }>
@@ -256,7 +256,7 @@ const Pricing = () => {
                   : (e) =>
                       handleSubmit(
                         e,
-                        enabled ? Prices.pro.anually.id : Prices.pro.monthly.id
+                        enabled ? Prices.pro.annually.id : Prices.pro.monthly.id
                       )
               }>
               {sub ? "Upgrade" : "Buy Now"}
