@@ -95,8 +95,8 @@ const Pricing = () => {
           Pricing
         </h1>
         <h3 className='text-lg font-light leading-8 p-3 mb-5'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit repellat
-          dignissimos laboriosam odit accusamus porro
+          This is an example of a pricing page. You can choose a payment method,
+          monthly or yearly.
         </h3>
       </div>
       {!flat && (
@@ -140,12 +140,12 @@ const Pricing = () => {
                 ? pricing.yearly.personal
                 : pricing.monthly.personal}
             </h3>
-            <ul className='text-sm px-5 mb-8'>
+            <ul className='text-sm px-5 mb-8 text-left'>
               <li className='leading-tight'>
-                <i className='mdi mdi-check-bold text-lg'></i> Lorem ipsum
+                <i className='mdi mdi-check-bold text-lg'></i> A cool feature
               </li>
               <li className='leading-tight'>
-                <i className='mdi mdi-check-bold text-lg'></i> Dolor sit amet
+                <i className='mdi mdi-check-bold text-lg'></i> Another feature
               </li>
             </ul>
           </div>
@@ -179,9 +179,9 @@ const Pricing = () => {
                 ? pricing.yearly.team
                 : pricing.monthly.team}
             </h3>
-            <ul className='text-sm px-5 mb-8'>
+            <ul className='text-sm px-5 mb-8 text-left'>
               <li className='leading-tight'>
-                <i className='mdi mdi-check-bold text-lg'></i> Lorem ipsum
+                <i className='mdi mdi-check-bold text-lg'></i> All basic features
               </li>
               <li className='leading-tight'>
                 <i className='mdi mdi-check-bold text-lg'></i> Dolor sit amet
@@ -227,7 +227,7 @@ const Pricing = () => {
                 ? pricing.yearly.pro
                 : pricing.monthly.pro}
             </h3>
-            <ul className='text-sm px-5 mb-8'>
+            <ul className='text-sm px-5 mb-8 text-left'>
               <li className='leading-tight'>
                 <i className='mdi mdi-check-bold text-lg'></i> Lorem ipsum
               </li>

@@ -14,8 +14,10 @@ const AuthText = () => {
       <h2 className='text-4xl font-title font-semibold'>
         Join SupaNexTail for <span className='text-accent'>free</span>!
       </h2>
-      <p className='mb-5 mt-8'>
-        Create your website in a few minutes with our boilerplate.
+      <p className='mb-5 mt-8 leading-9'>
+        Create your website in a few minutes with our boilerplate. You can use
+        the login system, this will allow you to discover the sample dashboard
+        page.
       </p>
     </div>
   );
