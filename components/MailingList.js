@@ -25,6 +25,7 @@ const MailingList = () => {
   };
   return (
     <div className='my-10'>
+      <hr className='my-5' />
       <h2 className='text-3xl md:text-3xl font-semibold font-title'>
         Stay Tuned!
       </h2>
@@ -50,6 +51,7 @@ const MailingList = () => {
           I'm in!
         </button>
       </div>
+      <hr className='my-5' />
     </div>
   );
 };
