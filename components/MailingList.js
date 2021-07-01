@@ -5,6 +5,23 @@ import { useState } from "react";
 const MailingList = () => {
   const [mail, setMail] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [valid, setValid] = useState(true);
+
+  const validateEmail = () => {
+    // Regex patern for email validation
+    let regex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (regex.test(mail)) {
+      // this is a valid email address
+      subscribe();
+      setValid(true);
+    } else {
+      // invalid email.
+      toast.error("Your email is invalid");
+      setValid(false);
+    }
+  };
 
   const subscribe = () => {
     setLoading(true);
@@ -40,11 +57,13 @@ const MailingList = () => {
           onChange={(e) => {
             setMail(e.target.value);
           }}
-          type='text'
+          type='email'
           placeholder='Your email'
-          className='input input-primary input-bordered'></input>
+          className={`input input-primary input-bordered ${
+            valid ? null : "input-error"
+          }`}></input>
         <button
-          onClick={subscribe}
+          onClick={validateEmail}
           className={`btn ml-3 ${
             loading ? "btn-disabled loading" : "btn-primary"
           }`}>
