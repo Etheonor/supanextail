@@ -53,6 +53,10 @@ Sendgrid is optional but you’ll need to configure it if you want to use the co
 
 ![](https://lh4.googleusercontent.com/9EZ6EcWyc2EEILZJBs2xIEt_eesh2yTMz4WZsm2y8qYgQt-QdiODJfMriwkiBILM3S0iLAGNoN9JETgNp6DOpTIfKgChuY5yaoTBCEzIQwhSflYYJS6EGQrR5s9jRXMHOidTFXf8)
 
+If you want to use the mailing list system, you’ll need to do a little bit more configuration. I wrote an article about it [here](https://dev.to/michael_webdev/create-a-mailing-list-with-sendgrid-and-next-js-41f7)
+
+The backend is ready to use. You just have to add your SENDGRID_MAILING_ID env variables (more explanation about it in the article).
+
 #### Misc.
 
 - Supabase variables are mandatory, you can skip sendgrid as it’s just for the contact form. Stripe variables are needed if you want the subscription system.
