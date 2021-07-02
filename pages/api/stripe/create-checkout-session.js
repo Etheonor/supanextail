@@ -65,7 +65,7 @@ export default async function handler(req, res) {
             // the actual Session ID is returned in the query parameter when your customer
             // is redirected to the success page.
             success_url: `${req.headers.origin}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.origin}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${req.headers.origin}/dashboard?session_id=canceled`,
           });
 
       res.send({
