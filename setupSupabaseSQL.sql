@@ -72,3 +72,13 @@ ON public.subscriptions
 FOR SELECT USING (
   auth.uid() = id
 );
+
+  -- Create a table for admin
+create table admin_list (
+  id uuid not null,
+  isadmin boolean,
+
+  primary key (id)
+);
+
+alter table admin_list enable row level security;
