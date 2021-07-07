@@ -67,10 +67,7 @@ export default async function handler(req, res) {
             success_url: `${req.headers.origin}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.origin}/dashboard?session_id=canceled`,
           });
-
-      res.send({
-        sessionId: session.id,
-      });
+      res.status(200).send({ url: session.url });
     } catch (e) {
       res.status(400);
       return res.send({

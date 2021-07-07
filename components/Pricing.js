@@ -13,7 +13,6 @@ import { Auth } from "@supabase/ui";
 import { Prices } from "utils/priceList";
 import { Switch } from "@headlessui/react";
 import axios from "axios";
-import getStripe from "utils/stripe";
 import router from "next/router";
 
 const Pricing = () => {
@@ -68,9 +67,7 @@ const Pricing = () => {
 
   const handleSubmit = async (e, priceId) => {
     e.preventDefault();
-
     // Create a Checkout Session. This will redirect the user to the Stripe website for the payment.
-
     axios
       .post("/api/stripe/create-checkout-session", {
         priceId: priceId,
@@ -79,14 +76,7 @@ const Pricing = () => {
         userId: user.id,
         tokenId: session.access_token,
       })
-      .then((result) => {
-        stripe.redirectToCheckout({
-          sessionId: result.data.sessionId,
-        });
-      });
-
-    // Redirect to Checkout.
-    const stripe = await getStripe();
+      .then((result) => router.push(result.data.url));
   };
   return (
     <div className='w-full mx-auto px-5 py-10 mb-10'>
