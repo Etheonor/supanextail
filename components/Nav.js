@@ -30,13 +30,9 @@ const Nav = (props) => {
     };
   }, []);
 
-  const switchTheme = () => {
-    state.setTheme();
-  };
-
   //Modify you menu directly here
   const NavMenu = (
-    <>
+    <div className='flex space-x-2 flex-col lg:flex-row lg:space-y-0 space-y-2'>
       {props.user && (
         <Link href='/dashboard'>
           <a className='btn btn-ghost btn-sm'>Dashboard</a>
@@ -62,7 +58,7 @@ const Nav = (props) => {
           <a className='btn btn-primary btn-sm'>Login</a>
         </Link>
       )}
-    </>
+    </div>
   );
 
   return (
