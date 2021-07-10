@@ -12,7 +12,7 @@ const PaymentModal = (props) => {
       <Transition appear show={props.open} as={Fragment}>
         <Dialog
           as='div'
-          className='fixed inset-0 z-10 overflow-y-auto'
+          className='fixed inset-0 z-10 overflow-y-auto bg-gray-500 bg-opacity-50'
           onClose={closeModal}>
           <div className='min-h-screen px-4 text-center'>
             <Transition.Child
@@ -40,14 +40,14 @@ const PaymentModal = (props) => {
               leave='ease-in duration-200'
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'>
-              <div className='inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl'>
+              <div className='inline-block w-full max-w-lg p-8 my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-2xl bg-base-100 text-base-content border-2 border-accent-focus'>
                 <Dialog.Title
                   as='h3'
-                  className='text-lg font-medium leading-6 text-gray-900'>
-                  Payment successful
+                  className='text-2xl font-bold leading-6 mb-5 text-center'>
+                  Payment successful 🎉
                 </Dialog.Title>
                 <div className='mt-2'>
-                  <p className='text-sm text-gray-500'>
+                  <p>
                     Your payment has been successfully submitted. Thank you for
                     your support!
                   </p>
@@ -56,7 +56,7 @@ const PaymentModal = (props) => {
                 <div className='mt-4'>
                   <button
                     type='button'
-                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
+                    className='btn btn-accent flex m-auto'
                     onClick={closeModal}>
                     Got it, thanks!
                   </button>

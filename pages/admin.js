@@ -20,6 +20,13 @@ const AdminPage = ({ adminKey }) => {
           </h1>
           <p>Hello admin !</p>
         </>
+        <SupabaseGrid
+          table='countries'
+          clientProps={{
+            supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+            supabaseKey: adminKey,
+          }}
+        />
       </Layout>
     </div>
   );
@@ -31,7 +38,7 @@ export async function getServerSideProps({ req }) {
   );
   const { user } = await supabaseAdmin.auth.api.getUserByCookie(req);
 
-  // If the user exist, you will retrieve the user profile and if he/she's a paid user
+  // If the user exist, you will retrieve the user profile and if he/she's an admin
   if (user) {
     let { data: admincheck, error } = await supabaseAdmin
       .from("admin_list")
@@ -39,18 +46,17 @@ export async function getServerSideProps({ req }) {
       .eq("id", user.id)
       .single();
 
-    if (!admincheck.isadmin) {
-      // If no user, redirect to index.
-      return { props: {}, redirect: { destination: "/", permanent: false } };
-    } else
+    if (admincheck.isadmin) {
       return {
         props: {
           admincheck: admincheck.isadmin,
           adminKey: process.env.SUPABASE_ADMIN_KEY,
         },
       };
+    } else
+      return { props: {}, redirect: { destination: "/", permanent: false } };
   }
-
+  // If no user, redirect to index.
   if (!user) {
     return { props: {}, redirect: { destination: "/", permanent: false } };
   }
