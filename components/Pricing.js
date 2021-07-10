@@ -20,6 +20,7 @@ const Pricing = () => {
   const { user, session } = Auth.useUser();
   const [customerId, setCustomerId] = useState(null);
   const [sub, setSub] = useState(false);
+  const flat = false; // Switch between subscription system or flat prices
 
   const portal = () => {
     axios
@@ -44,8 +45,6 @@ const Pricing = () => {
         });
     }
   }, [user]);
-
-  const flat = false; // Switch between subscription system or flat prices
 
   const pricing = {
     monthly: {
@@ -75,6 +74,7 @@ const Pricing = () => {
         customerId: customerId,
         userId: user.id,
         tokenId: session.access_token,
+        pay_mode: flat ? "payment" : "subscription",
       })
       .then((result) => router.push(result.data.url));
   };
@@ -171,7 +171,8 @@ const Pricing = () => {
             </h3>
             <ul className='text-sm px-5 mb-8 text-left'>
               <li className='leading-tight'>
-                <i className='mdi mdi-check-bold text-lg'></i> All basic features
+                <i className='mdi mdi-check-bold text-lg'></i> All basic
+                features
               </li>
               <li className='leading-tight'>
                 <i className='mdi mdi-check-bold text-lg'></i> Dolor sit amet

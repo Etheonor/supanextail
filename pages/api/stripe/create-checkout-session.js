@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     try {
       const session = req.body.customerId
         ? await stripe.checkout.sessions.create({
-            mode: "subscription",
+            mode: req.body.pay_mode,
             payment_method_types: ["card"],
             client_reference_id: req.body.userId,
             metadata: { token: req.body.tokenId, priceId: req.body.priceId },
