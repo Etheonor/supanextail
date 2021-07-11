@@ -1,3 +1,8 @@
+/*
+This is the form component to register an email adress to your mailing list. 
+This is just the frontend, and the email will be send to our backend API (/api/mailingList)
+*/
+
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
