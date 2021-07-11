@@ -12,6 +12,12 @@ Simply follow the installation process. You need to have some knowledge with Rea
 
 ### Installation
 
+#### SupaNexTail project
+
+You'll need to fork this repository. I suggest to keep your repository sync with SupaNexTail, in order to get all future updates. 
+
+To do that, you'll have extended information on this page: https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/syncing-a-fork
+
 #### Supabase
 
 You need to create a Supabase project and make a SQL Query with the « SetupSupabaseSQL.sql » (You can copy the content and create a query in the Supabase dashboard)
