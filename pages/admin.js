@@ -3,9 +3,13 @@ import Layout from "components/Layout";
 import { createClient } from "@supabase/supabase-js";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
+import { useState } from "react";
 
 const AdminPage = ({ adminKey }) => {
-  const SupabaseGrid = dynamic(() => import("@supabase/grid"));
+  const [currentTable, setCurrentTable] = useState("admin_list");
+  const SupabaseGrid = dynamic(() =>
+    import("@supabase/grid").then((mod) => mod.SupabaseGrid)
+  );
 
   return (
     <div>
@@ -18,15 +22,39 @@ const AdminPage = ({ adminKey }) => {
           <h1 className='text-4xl font-bold md:text-5xl font-title'>
             Admin Dashboard
           </h1>
-          <p>Hello admin !</p>
+          <p>Hello admin ! Select your table to display the content</p>
+          <div className='flex space-x-3'>
+            <button
+              className='btn btn-primary btn-sm'
+              onClick={() => {
+                setCurrentTable("profiles");
+              }}>
+              User profiles
+            </button><button
+              className='btn btn-primary btn-sm'
+              onClick={() => {
+                setCurrentTable("admin_list");
+              }}>
+              Admin List
+            </button><button
+              className='btn btn-primary btn-sm'
+              onClick={() => {
+                setCurrentTable("subscriptions");
+              }}>
+              Subscriptions
+            </button>
+          </div>
         </>
-        <SupabaseGrid
-          table='countries'
-          clientProps={{
-            supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-            supabaseKey: adminKey,
-          }}
-        />
+        <div className='shadow-sm max-w-4xl w-full'>
+          <SupabaseGrid
+            className='w-full'
+            table={`${currentTable}`}
+            clientProps={{
+              supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+              supabaseKey: adminKey,
+            }}
+          />
+        </div>
       </Layout>
     </div>
   );
