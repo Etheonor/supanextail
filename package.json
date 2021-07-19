@@ -15,7 +15,7 @@
     "@supabase/ui": "^0.29.1",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
-    "daisyui": "^1.3.4",
+    "daisyui": "^1.10.0",
     "express-rate-limit": "^5.2.6",
     "micro": "^9.3.4",
     "next-seo": "^4.24.0",
