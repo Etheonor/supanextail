@@ -11,7 +11,7 @@
     "@headlessui/react": "^1.2.0",
     "@sendgrid/mail": "^7.4.4",
     "@stripe/stripe-js": "^1.15.1",
-    "@supabase/supabase-js": "^1.18.1",
+    "@supabase/supabase-js": "^1.19.0",
     "@supabase/ui": "^0.29.1",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
