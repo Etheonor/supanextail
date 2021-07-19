@@ -30,7 +30,7 @@
     "stripe": "^8.163.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.0.4",
+    "autoprefixer": "^10.3.1",
     "postcss": "^8.1.10",
     "tailwindcss": "^2.2.2"
   }
