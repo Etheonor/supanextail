@@ -16,12 +16,12 @@ import { supabase } from "../utils/supabaseClient";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
-export default function Account(props) {
+export default function Dashboard(props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState(props.profile.username);
   const [website, setWebsite] = useState(props.profile.website);
-  const [avatar_url, setAvatarUrl] = useState(null);
+  const [avatar_url, setAvatarUrl] = useState(props.profile.avatar_url);
   const [payment, setPayment] = useState(false);
 
   useEffect(() => {
