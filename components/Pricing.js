@@ -81,7 +81,7 @@ const Pricing = () => {
   return (
     <div className='w-full mx-auto px-5 py-10 mb-10'>
       <div className='text-center max-w-xl mx-auto'>
-        <h1 className='text-3xl sm:text-4xl font-bold font-title mb-5'>
+        <h1 className='text-3xl sm:text-5xl font-bold font-title mb-5'>
           Pricing
         </h1>
         <h3 className='text-lg font-light leading-8 p-3 mb-5'>
@@ -120,9 +120,7 @@ const Pricing = () => {
         </div>
       )}
       <div className='max-w-4xl mx-auto md:flex space-x-4 text-base-100'>
-        <div
-          className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 md:py-10 mb-3 
-        mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
+        <div className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
           <div className='w-full flex-grow'>
             <h2 className='text-center font-bold uppercase mb-4'>Personal</h2>
             <h3 className='text-center font-bold text-4xl mb-5'>
@@ -161,9 +159,7 @@ const Pricing = () => {
             </button>
           </div>
         </div>
-        <div
-          className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 md:py-10 
-        mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
+        <div className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
           <div className='w-full flex-grow'>
             <h2 className='text-center font-bold uppercase mb-4'>Team</h2>
             <h3 className='text-center font-bold text-4xl mb-5'>
@@ -212,9 +208,7 @@ const Pricing = () => {
             </button>
           </div>
         </div>
-        <div
-          className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 
-        md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
+        <div className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
           <div className='w-full flex-grow'>
             <h2 className='text-center font-bold uppercase mb-4'>Pro</h2>
             <h3 className='text-center font-bold text-4xl mb-5'>
