@@ -7,7 +7,7 @@ const Footer = () => {
   });
   return (
     <footer className='w-full flex'>
-      <nav className='navbar mb-2 px-5 mr-auto'>
+      <nav className=' mr-auto'>
         <div className='flex flex-col sm:flex-row justify-evenly w-full sm:space-x-10'>
           <div className=''>© {process.env.NEXT_PUBLIC_TITLE}</div>
           <Link href='/privacy'>

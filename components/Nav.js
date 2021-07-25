@@ -32,19 +32,19 @@ const Nav = (props) => {
 
   //Modify you menu directly here
   const NavMenu = (
-    <div className='flex space-x-2 flex-col lg:flex-row lg:space-y-0 space-y-2'>
+    <div className='flex flex-col lg:flex-row lg:space-x-10 lg:m-auto font-body text-sm'>
       {props.user && (
         <Link href='/dashboard'>
-          <a className='btn btn-ghost btn-sm'>Dashboard</a>
+          <a className='nav-btn'>Dashboard</a>
         </Link>
       )}
 
       <Link href='/pricing'>
-        <a className='btn btn-ghost btn-sm'>Pricing</a>
+        <a className='nav-btn'>Pricing</a>
       </Link>
 
       <Link href='/contact'>
-        <a className='btn btn-ghost btn-sm'>Contact</a>
+        <a className='nav-btn'>Contact Us</a>
       </Link>
 
       {props.user ? (
@@ -55,14 +55,14 @@ const Nav = (props) => {
         </button>
       ) : (
         <Link href='/auth'>
-          <a className='btn btn-primary btn-sm'>Login</a>
+          <a className='btn btn-primary btn-sm rounded-3xl font-body normal-case font-normal'>Login</a>
         </Link>
       )}
     </div>
   );
 
   return (
-    <nav className='navbar mb-2 w-full px-5'>
+    <nav className='navbar mb-2 w-full'>
       <Link href='/'>
         <a>
           <Image src={Logo} />

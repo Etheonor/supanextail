@@ -3,6 +3,8 @@ This is the form component to register an email adress to your mailing list.
 This is just the frontend, and the email will be send to our backend API (/api/mailingList)
 */
 
+import Image from "next/image";
+import Mailing from "public/landing/mailing.svg";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -46,18 +48,18 @@ const MailingList = () => {
       });
   };
   return (
-    <div className='my-10'>
-      <hr className='my-5' />
-      <h2 className='text-3xl md:text-3xl font-semibold font-title'>
-        Stay Tuned!
+    <div className='my-10 mt-24 m-auto flex flex-col'>
+      <h2 className='text-3xl md:text-4xl font-bold font-title uppercase text-center'>
+        Stay Tuned
       </h2>
+      <Image src={Mailing}/>
       <label className='label'>
-        <p className='text-lg max-w-xl text-center m-auto leading-9'>
+        <p className='text-center max-w-md m-auto'>
           Want to be the first to know when SupaNexTail launches and get an
           exclusive discount? Sign up for the newsletter!
         </p>
       </label>
-      <div className='mt-5'>
+      <div className='mt-5 m-auto'>
         <input
           onChange={(e) => {
             setMail(e.target.value);
@@ -75,7 +77,6 @@ const MailingList = () => {
           I'm in!
         </button>
       </div>
-      <hr className='my-5' />
     </div>
   );
 };

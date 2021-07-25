@@ -1,5 +1,5 @@
 @import "tailwindcss/tailwind.css";
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,9 +16,32 @@ You can setup basic rules for your headers/text here
     @apply text-2xl mt-2 mb-3 font-title;
   }
   p {
-    @apply text-left mb-5 font-body;
+    @apply text-left mb-5 font-body text-sm text-base-200 leading-loose;
   }
   ul {
-      @apply list-disc ml-10 mb-3;
+    @apply list-disc ml-10 mb-3;
   }
+}
+
+.nav-btn {
+  position: relative;
+  text-decoration: none;
+  @apply text-base-200 my-auto;
+}
+
+.nav-btn::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  @apply bg-primary;
+}
+
+.nav-btn:hover::before {
+  transform: scaleX(1);
 }

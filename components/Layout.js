@@ -31,7 +31,7 @@ const Layout = (props) => {
     dark: "bg-white-600 font-gray-300",
   };
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen w-full bg-base-100 text-base-content'>
+    <div className='min-h-screen w-full bg-base-100 text-base-content m-auto p-5'>
       <Head>
         <link
           rel='apple-touch-icon'
@@ -55,18 +55,18 @@ const Layout = (props) => {
         <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#ffffff' />
       </Head>
-      <Nav user={user} />
-      <main className='flex flex-col items-center justify-center w-full flex-1 p-2 text-center font-body'>
-        {props.children}
-      </main>
-      <ToastContainer
-        position='bottom-center'
-        toastClassName={({ type }) =>
-          toastStyle[type || "default"] +
-          " flex p-5 my-5 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer "
-        }
-      />
-      <Footer />
+      <div className=' max-w-7xl m-auto'>
+        <Nav user={user} />
+        <main className=''>{props.children}</main>
+        <ToastContainer
+          position='bottom-center'
+          toastClassName={({ type }) =>
+            toastStyle[type || "default"] +
+            " flex p-5 my-5 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer "
+          }
+        />
+        <Footer />
+      </div>
     </div>
   );
 };

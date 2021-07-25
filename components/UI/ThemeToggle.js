@@ -7,13 +7,13 @@ import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import { useEffect, useState } from "react";
 
 const theme = {
-  primary: "light",
+  primary: "supaTheme",
   secondary: "dark",
 };
 
 const ThemeToggle = () => {
   const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
-  const inactiveTheme = activeTheme === "light" ? "dark" : "light";
+  const inactiveTheme = activeTheme === "supaTheme" ? "dark" : "supaTheme";
 
   useEffect(() => {
     document.body.dataset.theme = activeTheme;

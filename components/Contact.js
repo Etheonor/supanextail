@@ -42,19 +42,19 @@ const Contact = () => {
     }
   };
   return (
-    <div className='font-main container'>
-      <div className=' m-auto max-w-lg'>
+    <div className='max-w-xl m-auto px-5 py-10'>
+      <div>
         <div className='flex justify-center'>
-          <h2 className='text-3xl sm:text-5xl text-center mb-5 mt-0 font-bold font-title'>
+          <h2 className='text-3xl sm:text-4xl text-center mb-5 mt-0 font-bold font-title'>
             Contact
           </h2>
         </div>
-        <p className='text-lg font-light leading-8 p-3'>
+        <p className='m-auto text-center'>
           Do you have a question about SupaNexTail? A cool feature you'd like us
           to integrate? A bug to report? Don't hesitate!
         </p>
       </div>
-      <form className='max-w-4xl m-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 p-5'>
+      <form className='m-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 p-5'>
         <div className='flex flex-col max-w-xs'>
           <label className='font-light mb-4 text-left'>Your Name</label>
           <input

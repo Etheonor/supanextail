@@ -15,7 +15,7 @@ class MyDocument extends Document {
       }
       return window.matchMedia('(prefers-color-scheme: dark)').matches
                 ? 'dark'
-                : 'light'
+                : 'supaTheme'
     }
     document.body.dataset.theme = getUserPreference();
   `;

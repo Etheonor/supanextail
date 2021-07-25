@@ -1,67 +1,65 @@
 import CardsLanding from "components/CardsLanding";
 import Image from "next/image";
-import KeyFeature from "components/UI/KeyFeature";
 import MailingList from "./MailingList";
-import login from "public/login.png";
-import supabaseImage from "public/supabase.jpg";
+import landTop from "public/landing/land-top.svg";
+import start from "public/landing/start.svg";
+import supabaseImage from "public/landing/supabase.svg";
 
 const Landing = () => {
   return (
-    <div className='mt-36 mb-20 text-base-content max-w-5xl'>
-      <div className='max-w-2xl m-auto'>
-        <h2 className='text-5xl md:text-5xl font-bold font-title'>
-          SupaNexTail <span className='text-accent'>Boilerplate</span>
-        </h2>
-        <hr className='my-5' />
-        <p className='text-xl max-w-lg text-center m-auto'>
-          Don’t waste your time and reinvent the wheel, setup your SaaS in
-          <span className='text-accent text-2xl font-bold'> minutes</span>, not
-          days.
-        </p>
-      </div>
-      <CardsLanding />
-      <MailingList />
-      <div className='mt-24 lg:mt-12 flex justify-evenly'>
-        <div>
-          <h2 className='text-left text-3xl'>
-            All you need to start{" "}
-            <span className='font-bold text-accent'>now</span>
+    <div className='mt-10 mb-20 text-base-content w-full'>
+      <div className='flex max-w-6xl m-auto justify-around'>
+        <div className='max-w-sm mr-16 my-auto'>
+          <h2 className='text-4xl font-bold font-title text-left leading-normal'>
+            Build your <span className='text-primary'>SaaS</span> in the blink
+            of an eye!
           </h2>
-          <p className='max-w-lg mt-3 text-lg leading-9'>
-            Creating a SaaS is not easy, especially if you are alone!
-            SupaNexTail allows you to focus on the service you want to sell by
-            taking care of the essential but time consuming features.
+          <p>
+            SupaNexTail got your back, and takes care of the initial setup,
+            sometimes time consuming, but essential to your success.
           </p>
-          <KeyFeature>
-            Authentication, payment system, mailing list, we got your back!
-          </KeyFeature>
-        </div>{" "}
-        <div className='max-w-sm'>
-          <Image src={login} />
+        </div>
+        <div className='max-w-xl'>
+          <Image src={landTop} height={417} width={583} />
         </div>
       </div>
-      <div className='mt-24 lg:mt-12 flex justify-evenly'>
-        <div className='max-w-md mr-10 m-auto'>
-          <Image src={supabaseImage} />
-        </div>
-        <div>
-          <h2 className='text-left text-3xl'>
-            Leverage the power of
-            <span className='font-bold text-accent'> Supabase</span>
+
+      <CardsLanding />
+      <div className='flex max-w-6xl m-auto justify-around mt-14 flex-wrap'>
+        <div className='max-w-sm mr-16 my-auto'>
+          <h2 className='text-4xl font-bold font-title text-left leading-normal'>
+            All you need to start <span className='text-primary'>now</span>
           </h2>
-          <p className='max-w-lg mt-3 text-lg leading-9'>
-            Supabase is an open source Firebase alternative. You'll have a
+          <p>
+            SupaNexTail got your back, and takes care of the initial setup,
+            sometimes time consuming, but essential to your success.
+          </p>
+        </div>
+        <div className='max-w-xl'>
+          <Image src={start} />
+        </div>
+      </div>
+      <div className='flex max-w-6xl m-auto justify-around mt-24 flex-wrap'>
+        <div className='max-w-md my-auto order-1 lg:order-2'>
+          <h2 className='text-4xl font-bold font-title text-left leading-normal'>
+            Leverage the power of <span className='text-primary'>Supabase</span>
+          </h2>
+          <p>
+            Supabase is an open source Firebase alternative. You’ll have a
             database, an auth system, a storage system, and much more in one
             product.
           </p>
-          <p className='max-w-lg mt-3 text-lg leading-9'>
+          <p>
             SupaNexTail uses Supabase at its core, and preconfigures all the
             useful elements for your site. User registration, synchronization
-            with Stripe, we've got you covered!
+            with Stripe, we’ve got you covered!
           </p>
-          <KeyFeature>Managing a database has never been easier!</KeyFeature>
-        </div>{" "}
+        </div>
+        <div className='max-w-md order-2 lg:order-1 flex'>
+          <Image src={supabaseImage} />
+        </div>
       </div>
+      <MailingList />
     </div>
   );
 };
