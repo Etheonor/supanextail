@@ -59,8 +59,11 @@ export default function Dashboard(props) {
   }
 
   return (
-    <div className='flex flex-col text-left w-full'>
+    <div className='flex flex-col text-left w-full max-w-xl m-auto px-5 py-10'>
       <div className='max-w-sm flex flex-col justify-center m-auto w-full p-5'>
+        <h1 className='text-4xl font-bold md:text-5xl font-title text-center mb-10'>
+          Dashboard
+        </h1>
         <Avatar
           url={avatar_url}
           size={150}

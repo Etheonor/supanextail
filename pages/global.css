@@ -19,7 +19,7 @@ You can setup basic rules for your headers/text here
     @apply text-left mb-5 font-body text-sm text-base-200 leading-loose;
   }
   ul {
-    @apply list-disc ml-10 mb-3;
+    @apply list-disc ml-10 mb-3 font-body text-sm text-base-200 leading-loose;
   }
 }
 

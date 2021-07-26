@@ -1,6 +1,6 @@
 const Terms = () => {
   return (
-    <div className='max-w-xl text-left'>
+    <div className='max-w-xl text-left m-auto py-10'>
       <h1>Terms and Conditions</h1>
 
       <p>

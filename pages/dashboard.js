@@ -34,27 +34,20 @@ const DashboardPage = ({ user, plan, profile }) => {
       </Head>
 
       <Layout>
-        <>
-          <h1 className='text-4xl font-bold md:text-5xl font-title'>
-            Dashboard
-          </h1>
+        {!session ? (
+          <div className='max-w-md'>
+            <Auth />
+          </div>
+        ) : (
           <>
-            {!session ? (
-              <div className='max-w-md'>
-                <Auth />
-              </div>
-            ) : (
-              <>
-                <Dashboard
-                  key={user.id}
-                  session={session}
-                  plan={plan}
-                  profile={profile}
-                />
-              </>
-            )}
+            <Dashboard
+              key={user.id}
+              session={session}
+              plan={plan}
+              profile={profile}
+            />
           </>
-        </>
+        )}
       </Layout>
     </div>
   );

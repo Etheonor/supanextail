@@ -31,7 +31,7 @@ const Layout = (props) => {
     dark: "bg-white-600 font-gray-300",
   };
   return (
-    <div className='min-h-screen w-full bg-base-100 text-base-content m-auto p-5'>
+    <div className='min-h-screen w-full bg-base-100 text-base-content m-auto'>
       <Head>
         <link
           rel='apple-touch-icon'
@@ -55,9 +55,9 @@ const Layout = (props) => {
         <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#ffffff' />
       </Head>
-      <div className=' max-w-7xl m-auto'>
+      <div className='max-w-7xl flex flex-col min-h-screen mx-auto p-5'>
         <Nav user={user} />
-        <main className=''>{props.children}</main>
+        <main className='flex-1'>{props.children}</main>
         <ToastContainer
           position='bottom-center'
           toastClassName={({ type }) =>
