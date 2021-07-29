@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@headlessui/react": "^1.2.0",
+    "@headlessui/react": "^1.4.0",
     "@sendgrid/mail": "^7.4.4",
     "@stripe/stripe-js": "^1.15.1",
     "@supabase/supabase-js": "^1.21.0",
