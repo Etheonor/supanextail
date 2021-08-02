@@ -40,15 +40,11 @@ const Nav = (props) => {
       )}
 
       <Link href='/pricing'>
-        <a className='nav-btn' id='pricingLink'>
-          Pricing
-        </a>
+        <a className='nav-btn'>Pricing</a>
       </Link>
 
       <Link href='/contact'>
-        <a className='nav-btn' id='contactLink'>
-          Contact Us
-        </a>
+        <a className='nav-btn'>Contact Us</a>
       </Link>
 
       {props.user ? (
@@ -78,7 +74,7 @@ const Nav = (props) => {
         <div className='hidden lg:flex text-center ml-auto'>{NavMenu}</div>
       </div>
       <div className='flex-none'>
-        <div className='dropdown dropdown-end' data-cy="dropdown">
+        <div className='dropdown dropdown-end' data-cy='dropdown'>
           <div tabIndex='0' className='m-1 cursor-pointer lg:hidden'>
             <Menu />
           </div>
