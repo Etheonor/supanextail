@@ -119,8 +119,8 @@ const Pricing = () => {
           </div>
         </div>
       )}
-      <div className='max-w-4xl mx-auto md:flex space-x-4 text-base-100'>
-        <div className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
+      <div className='max-w-4xl mx-auto md:flex space-x-4'>
+        <div className='w-full md:w-1/3 md:max-w-none px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
           <div className='w-full flex-grow'>
             <h2 className='text-center font-bold uppercase mb-4'>Personal</h2>
             <h3 className='text-center font-bold text-4xl mb-5'>
@@ -159,7 +159,7 @@ const Pricing = () => {
             </button>
           </div>
         </div>
-        <div className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
+        <div className='w-full md:w-1/3 md:max-w-none px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
           <div className='w-full flex-grow'>
             <h2 className='text-center font-bold uppercase mb-4'>Team</h2>
             <h3 className='text-center font-bold text-4xl mb-5'>
@@ -208,7 +208,7 @@ const Pricing = () => {
             </button>
           </div>
         </div>
-        <div className='w-full md:w-1/3 md:max-w-none bg-base-content px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
+        <div className='w-full md:w-1/3 md:max-w-none px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col'>
           <div className='w-full flex-grow'>
             <h2 className='text-center font-bold uppercase mb-4'>Pro</h2>
             <h3 className='text-center font-bold text-4xl mb-5'>
