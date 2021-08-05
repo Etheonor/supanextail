@@ -29,7 +29,7 @@
     "react-feather": "^2.0.9",
     "react-icons": "^4.2.0",
     "react-toastify": "^7.0.4",
-    "stripe": "^8.167.0"
+    "stripe": "^8.168.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.1",
