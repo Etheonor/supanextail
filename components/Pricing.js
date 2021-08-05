@@ -13,7 +13,7 @@ import { Prices } from "utils/priceList";
 import { Switch } from "@headlessui/react";
 import axios from "axios";
 import router from "next/router";
-import { useAuth } from "utils/Authcontext";
+import { useAuth } from "utils/AuthContext";
 
 const Pricing = () => {
   const [enabled, setEnabled] = useState(false);

@@ -9,7 +9,7 @@ check the providers available here: https://supabase.io/docs/guides/auth
 
 import Login from "./UI/Login";
 import { supabase } from "utils/supabaseClient";
-import { useAuth } from "utils/Authcontext";
+import { useAuth } from "utils/AuthContext";
 
 const Container = (props) => {
   const { user, signOut } = useAuth();

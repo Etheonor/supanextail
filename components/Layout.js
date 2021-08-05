@@ -17,7 +17,7 @@ import Head from "next/head";
 import Nav from "./Nav";
 import { ToastContainer } from "react-toastify";
 import { supabase } from "utils/supabaseClient";
-import { useAuth } from "utils/Authcontext";
+import { useAuth } from "utils/AuthContext";
 import { useEffect } from "react";
 
 const Layout = (props) => {
