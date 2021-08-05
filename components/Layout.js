@@ -16,32 +16,10 @@ import Footer from "./Footer";
 import Head from "next/head";
 import Nav from "./Nav";
 import { ToastContainer } from "react-toastify";
-import { supabase } from "utils/supabaseClient";
 import { useAuth } from "utils/AuthContext";
-import { useEffect } from "react";
 
 const Layout = (props) => {
   const { user, signOut } = useAuth();
-
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if ((event === "SIGNED_OUT") | (event === "SIGNED_IN")) {
-          fetch("/api/auth", {
-            method: "POST",
-            headers: new Headers({ "Content-Type": "application/json" }),
-            credentials: "same-origin",
-            body: JSON.stringify({ event, session }),
-          }).then((res) => res.json());
-        }
-        if (event === "USER_UPDATED") {
-        }
-      }
-    );
-    return () => {
-      authListener.unsubscribe();
-    };
-  }, []);
 
   const toastStyle = {
     //Style your toast elements here
