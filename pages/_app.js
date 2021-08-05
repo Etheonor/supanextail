@@ -1,6 +1,6 @@
 import "./global.css";
 
-import { AuthProvider } from "utils/Authcontext";
+import { AuthProvider } from "utils/AuthContext";
 import { DefaultSeo } from "next-seo";
 
 /* 
