@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.3.1",
-    "cypress": "^8.1.0",
+    "cypress": "^8.2.0",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.7"
   }
