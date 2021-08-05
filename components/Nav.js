@@ -6,30 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "public/logo.svg";
 import { Menu } from "react-feather";
-import { supabase } from "utils/supabaseClient";
-import { useEffect } from "react";
 
 const Nav = (props) => {
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if ((event === "SIGNED_OUT") | (event === "SIGNED_IN")) {
-          fetch("/api/auth", {
-            method: "POST",
-            headers: new Headers({ "Content-Type": "application/json" }),
-            credentials: "same-origin",
-            body: JSON.stringify({ event, session }),
-          }).then((res) => res.json());
-        }
-        if (event === "USER_UPDATED") {
-        }
-      }
-    );
-    return () => {
-      authListener.unsubscribe();
-    };
-  }, []);
-
   //Modify you menu directly here
   const NavMenu = (
     <div className='flex flex-col lg:flex-row lg:space-x-10 lg:m-auto font-body text-sm'>
@@ -50,7 +28,7 @@ const Nav = (props) => {
       {props.user ? (
         <button
           className='btn btn-ghost btn-sm'
-          onClick={() => supabase.auth.signOut()}>
+          onClick={() => props.signOut()}>
           Logout
         </button>
       ) : (

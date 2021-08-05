@@ -1,8 +1,7 @@
 import "./global.css";
 
-import { Auth } from "@supabase/ui";
+import { AuthProvider } from "utils/Authcontext";
 import { DefaultSeo } from "next-seo";
-import { supabase } from "utils/supabaseClient";
 
 /* 
 Next-seo is integrated by default, if you want more information and how to
@@ -12,7 +11,7 @@ setup more elements, visit their Github page https://github.com/garmeeh/next-seo
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Auth.UserContextProvider supabaseClient={supabase}>
+      <AuthProvider>
         <DefaultSeo
           openGraph={{
             type: "website",
@@ -26,7 +25,7 @@ function MyApp({ Component, pageProps }) {
           }}
         />
         <Component {...pageProps} />
-      </Auth.UserContextProvider>
+      </AuthProvider>
     </>
   );
 }

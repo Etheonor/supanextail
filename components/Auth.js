@@ -6,18 +6,18 @@ CONFIGURE THE AUTH COMPONENT LINE 30
 You can select your auth providers, or just keep the email/password. You can
 check the providers available here: https://supabase.io/docs/guides/auth
 */
-import { Auth } from "@supabase/ui";
+
+import Login from "./UI/Login";
 import { supabase } from "utils/supabaseClient";
+import { useAuth } from "utils/Authcontext";
 
 const Container = (props) => {
-  const { user } = Auth.useUser();
+  const { user, signOut } = useAuth();
   if (user)
     return (
       <div className='w-80 md:w-96 order-first lg:order-last'>
         <p>Hello {user.email}! 👋 You are already logged in</p>
-        <button
-          className='btn btn-primary'
-          onClick={() => props.supabaseClient.auth.signOut()}>
+        <button className='btn btn-primary' onClick={() => signOut()}>
           Sign out
         </button>
       </div>
@@ -26,19 +26,16 @@ const Container = (props) => {
 };
 
 const AuthComponent = () => {
+  const { signUp, signIn, signOut, resetPassword } = useAuth();
   return (
-    <Auth.UserContextProvider supabaseClient={supabase}>
-      <Container supabaseClient={supabase}>
-        <Auth
-          supabaseClient={supabase}
-          providers={["google"]}
-          socialLayout='horizontal'
-          socialButtonSize='xlarge'
-          socialColors={true}
-          className='p-5 bg-neutral-content rounded-md'
-        />
-      </Container>
-    </Auth.UserContextProvider>
+    <Container supabaseClient={supabase}>
+      <Login
+        signUp={signUp}
+        signIn={signIn}
+        signOut={signOut}
+        resetPassword={resetPassword}
+      />
+    </Container>
   );
 };
 

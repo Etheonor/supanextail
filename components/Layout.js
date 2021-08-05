@@ -12,14 +12,36 @@ The images are in the public folder.
 
 import "react-toastify/dist/ReactToastify.css";
 
-import { Auth } from "@supabase/ui";
 import Footer from "./Footer";
 import Head from "next/head";
 import Nav from "./Nav";
 import { ToastContainer } from "react-toastify";
+import { supabase } from "utils/supabaseClient";
+import { useAuth } from "utils/Authcontext";
+import { useEffect } from "react";
 
 const Layout = (props) => {
-  const { user } = Auth.useUser();
+  const { user, signOut } = useAuth();
+
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if ((event === "SIGNED_OUT") | (event === "SIGNED_IN")) {
+          fetch("/api/auth", {
+            method: "POST",
+            headers: new Headers({ "Content-Type": "application/json" }),
+            credentials: "same-origin",
+            body: JSON.stringify({ event, session }),
+          }).then((res) => res.json());
+        }
+        if (event === "USER_UPDATED") {
+        }
+      }
+    );
+    return () => {
+      authListener.unsubscribe();
+    };
+  }, []);
 
   const toastStyle = {
     //Style your toast elements here
@@ -56,7 +78,7 @@ const Layout = (props) => {
         <meta name='theme-color' content='#ffffff' />
       </Head>
       <div className='max-w-7xl flex flex-col min-h-screen mx-auto p-5'>
-        <Nav user={user} />
+        <Nav user={user} signOut={signOut} />
         <main className='flex-1'>{props.children}</main>
         <ToastContainer
           position='bottom-center'
