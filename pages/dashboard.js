@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import Auth from "../components/Auth";
 import Dashboard from "../components/Dashboard";
 import Head from "next/head";
 import Layout from "components/Layout";
@@ -35,9 +34,7 @@ const DashboardPage = ({ user, plan, profile }) => {
 
       <Layout>
         {!session ? (
-          <div className='max-w-md'>
-            <Auth />
-          </div>
+          <div className='text-center'>You are not logged in</div>
         ) : (
           <>
             <Dashboard

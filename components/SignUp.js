@@ -7,7 +7,7 @@ You can select your auth providers, or just keep the email/password. You can
 check the providers available here: https://supabase.io/docs/guides/auth
 */
 
-import Login from "./UI/Login";
+import SignUpPanel from "./UI/SignUpPanel";
 import { supabase } from "utils/supabaseClient";
 import { useAuth } from "utils/AuthContext";
 
@@ -29,7 +29,7 @@ const AuthComponent = () => {
   const { signUp, signIn, signOut, resetPassword } = useAuth();
   return (
     <Container supabaseClient={supabase}>
-      <Login
+      <SignUpPanel
         signUp={signUp}
         signIn={signIn}
         signOut={signOut}

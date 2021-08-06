@@ -4,12 +4,13 @@ You have 2 components, the "AuthComponent" that handle the logic,
 and the "AuthText" that will show the description on the left of the screen
 */
 
-import AuthComponent from "components/Auth";
-import AuthText from "components/AuthText";
 import Layout from "components/Layout";
+import Login from "components/UI/Login";
 import { NextSeo } from "next-seo";
+import { useAuth } from "utils/AuthContext";
 
-const AuthPage = () => {
+const LoginPage = () => {
+  const { signUp, signIn, signOut, resetPassword } = useAuth();
   return (
     <>
       <NextSeo
@@ -19,12 +20,16 @@ const AuthPage = () => {
 
       <Layout>
         <div className='flex flex-wrap justify-evenly w-full mt-20'>
-          <AuthText />
-          <AuthComponent />
+          <Login
+            signUp={signUp}
+            signIn={signIn}
+            signOut={signOut}
+            resetPassword={resetPassword}
+          />
         </div>
       </Layout>
     </>
   );
 };
 
-export default AuthPage;
+export default LoginPage;
