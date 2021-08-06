@@ -31,7 +31,7 @@ const Layout = (props) => {
     dark: "bg-white-600 font-gray-300",
   };
   return (
-    <div className='min-h-screen w-full bg-base-100 text-base-content m-auto'>
+    <div className='min-h-screen w-full bg-base-100 text-base-content m-auto font-body'>
       <Head>
         <link
           rel='apple-touch-icon'

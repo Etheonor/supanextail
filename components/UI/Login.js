@@ -1,4 +1,6 @@
 import { IoLogoGoogle } from "react-icons/io";
+import router from "next/router";
+import { toast } from "react-toastify";
 import { useState } from "react";
 
 const Login = (props) => {
@@ -6,16 +8,43 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [forgot, setForgot] = useState(false);
 
+  const resetPassword = () => {
+    props.resetPassword(email).then((result) => {
+      if (result.error) {
+        toast.error(result.error.message);
+      } else toast.success("Check your email to reset your password!");
+    });
+  };
+
+  const login = (e) => {
+    e.preventDefault();
+
+    //Handle the login. Go to the homepage if success or display an error.
+    props
+      .signIn({
+        email: email,
+        password: password,
+      })
+      .then((result) => {
+        if (result.data) {
+          router.push("/");
+        }
+        if (result.error) {
+          toast.error(result.error.message);
+        }
+      });
+  };
+
   return (
-    <div className='p-10 bg-base-100 md:flex-1 rounded-md text-base-content shadow-md'>
+    <div className='p-10 bg-base-100 md:flex-1 rounded-md text-base-content shadow-md max-w-sm font-body'>
       {!forgot && (
         <>
-          <h3 className='my-4 text-2xl font-semibold'>Account Login</h3>
+          <h3 className='my-4 text-2xl font-semibold font-title'>
+            Account Login
+          </h3>
           <form action='#' className='flex flex-col space-y-5'>
             <div className='flex flex-col space-y-1'>
-              <label
-                htmlFor='email'
-                className='text-sm font-semibold text-gray-500'>
+              <label htmlFor='email' className='text-sm'>
                 Email address
               </label>
               <input
@@ -31,9 +60,7 @@ const Login = (props) => {
             </div>
             <div className='flex flex-col space-y-1'>
               <div className='flex items-center justify-between'>
-                <label
-                  htmlFor='password'
-                  className='text-sm font-semibold text-gray-500'>
+                <label htmlFor='password' className='text-sm'>
                   Password
                 </label>
                 <button
@@ -59,8 +86,7 @@ const Login = (props) => {
               <button
                 className='btn btn-primary w-full'
                 onClick={(event) => {
-                  event.preventDefault();
-                  props.signIn({ email: email, password: password });
+                  login(event);
                 }}>
                 Log in
               </button>
@@ -74,15 +100,15 @@ const Login = (props) => {
               <div className='flex flex-col space-y-4'>
                 <button
                   href='#'
-                  className='flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-gray-800 rounded-md group hover:bg-gray-800 focus:outline-none '
+                  className='flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-base-200 rounded-md group hover:bg-base-300 focus:outline-none '
                   onClick={(event) => {
                     event.preventDefault();
                     props.signIn({ provider: "google" });
                   }}>
-                  <div className='text-base-content group-hover:text-white'>
+                  <div className='text-base-content'>
                     <IoLogoGoogle />
                   </div>
-                  <span className='text-sm font-medium text-gray-800 group-hover:text-white'>
+                  <span className='text-sm font-medium text-base-content'>
                     Gmail
                   </span>
                 </button>
@@ -115,14 +141,22 @@ const Login = (props) => {
 
             <div>
               <button
-                className='btn btn-primary w-full'
+                className='btn btn-primary w-full btn-sm'
                 onClick={(event) => {
                   event.preventDefault();
-                  props.resetPassword(email);
+                  resetPassword();
                 }}>
                 Recover my password
               </button>
             </div>
+            <hr />
+            <button
+              onClick={() => {
+                setForgot(false);
+              }}
+              className='text-sm text-blue-600 hover:underline focus:text-blue-800'>
+              Go back to sign in
+            </button>
           </form>
         </>
       )}

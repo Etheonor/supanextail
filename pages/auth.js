@@ -18,11 +18,9 @@ const AuthPage = () => {
       />
 
       <Layout>
-        <div className='flex flex-wrap justify-evenly w-full'>
+        <div className='flex flex-wrap justify-evenly w-full mt-20'>
           <AuthText />
-          <div>
-            <AuthComponent />
-          </div>
+          <AuthComponent />
         </div>
       </Layout>
     </>
