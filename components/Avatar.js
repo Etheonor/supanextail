@@ -80,7 +80,7 @@ const Avatar = ({ url, size, onUpload }) => {
       )}
       <div style={{ width: size }}>
         <label
-          className='mt-2 btn btn-primary text-center cursor-pointer text-xs'
+          className='mt-2 btn btn-primary text-center cursor-pointer text-xs btn-sm'
           htmlFor='single'>
           {uploading ? "Uploading ..." : "Update my avatar"}
         </label>

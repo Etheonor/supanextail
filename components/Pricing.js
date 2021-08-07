@@ -9,15 +9,15 @@ https://dashboard.stripe.com/test/settings/billing/portal
 import { getSub, supabase } from "utils/supabaseClient";
 import { useEffect, useState } from "react";
 
-import { Auth } from "@supabase/ui";
 import { Prices } from "utils/priceList";
 import { Switch } from "@headlessui/react";
 import axios from "axios";
 import router from "next/router";
+import { useAuth } from "utils/AuthContext";
 
 const Pricing = () => {
   const [enabled, setEnabled] = useState(false);
-  const { user, session } = Auth.useUser();
+  const { user } = useAuth();
   const [customerId, setCustomerId] = useState(null);
   const [sub, setSub] = useState(false);
   const flat = false; // Switch between subscription system or flat prices
@@ -143,19 +143,23 @@ const Pricing = () => {
             <button
               className='btn btn-primary w-full'
               onClick={
-                sub
-                  ? () => {
-                      portal();
+                user
+                  ? sub
+                    ? () => {
+                        portal();
+                      }
+                    : (e) =>
+                        handleSubmit(
+                          e,
+                          enabled
+                            ? Prices.personal.annually.id
+                            : Prices.personal.monthly.id
+                        )
+                  : () => {
+                      router.push("/auth");
                     }
-                  : (e) =>
-                      handleSubmit(
-                        e,
-                        enabled
-                          ? Prices.personal.annually.id
-                          : Prices.personal.monthly.id
-                      )
               }>
-              {sub ? "Upgrade" : "Buy Now"}
+              {user ? (sub ? "Upgrade" : "Buy Now") : "Register"}
             </button>
           </div>
         </div>
@@ -192,19 +196,23 @@ const Pricing = () => {
             <button
               className='btn btn-primary w-full'
               onClick={
-                sub
-                  ? () => {
-                      portal();
+                user
+                  ? sub
+                    ? () => {
+                        portal();
+                      }
+                    : (e) =>
+                        handleSubmit(
+                          e,
+                          enabled
+                            ? Prices.team.annually.id
+                            : Prices.team.monthly.id
+                        )
+                  : () => {
+                      router.push("/auth");
                     }
-                  : (e) =>
-                      handleSubmit(
-                        e,
-                        enabled
-                          ? Prices.team.annually.id
-                          : Prices.team.monthly.id
-                      )
               }>
-              {sub ? "Upgrade" : "Buy Now"}
+              {user ? (sub ? "Upgrade" : "Buy Now") : "Register"}
             </button>
           </div>
         </div>
@@ -240,17 +248,23 @@ const Pricing = () => {
             <button
               className='btn btn-primary w-full'
               onClick={
-                sub
-                  ? () => {
-                      portal();
+                user
+                  ? sub
+                    ? () => {
+                        portal();
+                      }
+                    : (e) =>
+                        handleSubmit(
+                          e,
+                          enabled
+                            ? Prices.pro.annually.id
+                            : Prices.pro.monthly.id
+                        )
+                  : () => {
+                      router.push("/auth");
                     }
-                  : (e) =>
-                      handleSubmit(
-                        e,
-                        enabled ? Prices.pro.annually.id : Prices.pro.monthly.id
-                      )
               }>
-              {sub ? "Upgrade" : "Buy Now"}
+              {user ? (sub ? "Upgrade" : "Buy Now") : "Register"}
             </button>
           </div>
         </div>

@@ -4,24 +4,12 @@ You have 2 components, the "AuthComponent" that handle the logic,
 and the "AuthText" that will show the description on the left of the screen
 */
 
-import { Auth } from "@supabase/ui";
-import AuthComponent from "../components/Auth";
+import AuthComponent from "components/SignUp";
 import AuthText from "components/AuthText";
 import Layout from "components/Layout";
 import { NextSeo } from "next-seo";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
-const AuthPage = () => {
-  const { user, session } = Auth.useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    // If a user is already logged in, return to the homepage
-    if (user) {
-      router.push("/");
-    }
-  }, [user]);
+const SignUpPage = () => {
   return (
     <>
       <NextSeo
@@ -30,13 +18,13 @@ const AuthPage = () => {
       />
 
       <Layout>
-        <div className='flex flex-wrap justify-evenly w-full'>
+        <div className='flex flex-wrap justify-evenly w-full mt-20'>
           <AuthText />
-          <div>{!session && <AuthComponent />}</div>
+          <AuthComponent />
         </div>
       </Layout>
     </>
   );
 };
 
-export default AuthPage;
+export default SignUpPage;

@@ -12,14 +12,14 @@ The images are in the public folder.
 
 import "react-toastify/dist/ReactToastify.css";
 
-import { Auth } from "@supabase/ui";
 import Footer from "./Footer";
 import Head from "next/head";
 import Nav from "./Nav";
 import { ToastContainer } from "react-toastify";
+import { useAuth } from "utils/AuthContext";
 
 const Layout = (props) => {
-  const { user } = Auth.useUser();
+  const { user, signOut } = useAuth();
 
   const toastStyle = {
     //Style your toast elements here
@@ -31,7 +31,7 @@ const Layout = (props) => {
     dark: "bg-white-600 font-gray-300",
   };
   return (
-    <div className='min-h-screen w-full bg-base-100 text-base-content m-auto'>
+    <div className='min-h-screen w-full bg-base-100 text-base-content m-auto font-body'>
       <Head>
         <link
           rel='apple-touch-icon'
@@ -56,7 +56,7 @@ const Layout = (props) => {
         <meta name='theme-color' content='#ffffff' />
       </Head>
       <div className='max-w-7xl flex flex-col min-h-screen mx-auto p-5'>
-        <Nav user={user} />
+        <Nav user={user} signOut={signOut} />
         <main className='flex-1'>{props.children}</main>
         <ToastContainer
           position='bottom-center'

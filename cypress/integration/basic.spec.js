@@ -15,6 +15,12 @@ describe("Basic Test", () => {
 
       cy.get("nav").contains("Contact").click();
       cy.url().should("include", "/contact");
+
+      cy.get("nav").contains("Login").click();
+      cy.url().should("include", "/login");
+
+      cy.get("nav").contains("Sign Up").click();
+      cy.url().should("include", "/signup");
     });
   });
 
@@ -26,6 +32,14 @@ describe("Basic Test", () => {
       cy.get("[data-cy=dropdown]").click();
       cy.get("[data-cy=dropdown]").contains("Pricing").click();
       cy.url().should("include", "/pricing");
+
+      cy.get("[data-cy=dropdown]").click();
+      cy.get("[data-cy=dropdown]").contains("Login").click();
+      cy.url().should("include", "/login");
+
+      cy.get("[data-cy=dropdown]").click();
+      cy.get("[data-cy=dropdown]").contains("Sign Up").click();
+      cy.url().should("include", "/signup");
 
       cy.get("[data-cy=dropdown]").click();
       cy.get("[data-cy=dropdown]").contains("Contact").click();

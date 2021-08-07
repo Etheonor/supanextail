@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import Auth from "../components/Auth";
 import Dashboard from "../components/Dashboard";
 import Head from "next/head";
 import Layout from "components/Layout";
@@ -35,9 +34,7 @@ const DashboardPage = ({ user, plan, profile }) => {
 
       <Layout>
         {!session ? (
-          <div className='max-w-md'>
-            <Auth />
-          </div>
+          <div className='text-center'>You are not logged in</div>
         ) : (
           <>
             <Dashboard
@@ -64,13 +61,13 @@ export async function getServerSideProps({ req }) {
   if (user) {
     let { data: plan, error } = await supabaseAdmin
       .from("subscriptions")
-      .select("subscription")
+      .select("plan")
       .eq("id", user.id)
       .single();
 
     // Check the subscription plan. If it doesnt exist, return null
-    const subscription = plan?.subscription
-      ? await stripe.subscriptions.retrieve(plan.subscription)
+    const subscription = plan?.plan
+      ? await stripe.subscriptions.retrieve(plan.plan)
       : null;
 
     let { data: profile, errorProfile } = await supabaseAdmin

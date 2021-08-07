@@ -45,3 +45,7 @@ You can setup basic rules for your headers/text here
 .nav-btn:hover::before {
   transform: scaleX(1);
 }
+
+.btn {
+  @apply font-normal
+}

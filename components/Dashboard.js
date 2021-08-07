@@ -77,7 +77,7 @@ export default function Dashboard(props) {
             Email
           </label>
           <input
-            className='input input-primary input-bordered input-sm flex-1'
+            className='input input-primary input-bordered input-sm flex-1 text-base-100'
             id='email'
             type='text'
             value={props.session.user.email}
@@ -123,7 +123,7 @@ export default function Dashboard(props) {
         <Image src={Plan} />
         <div className='flex flex-col m-auto'>
           <h2>Your current plan</h2>
-          <p className='font-bold'>
+          <p className=''>
             {props.plan ? PriceIds[props.plan] : "Free tier"}
           </p>
         </div>
