@@ -15,7 +15,6 @@
     "@stripe/stripe-js": "^1.15.1",
     "@supabase/grid": "1.15.0",
     "@supabase/supabase-js": "^1.21.0",
-    "@supabase/ui": "^0.31.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "daisyui": "^1.11.0",
