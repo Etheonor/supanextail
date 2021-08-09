@@ -17,7 +17,7 @@
     "@supabase/supabase-js": "^1.21.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
-    "daisyui": "^1.11.0",
+    "daisyui": "^1.11.1",
     "express-rate-limit": "^5.2.6",
     "micro": "^9.3.4",
     "next": "latest",
