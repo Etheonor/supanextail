@@ -19,7 +19,6 @@
     "@types/node": "^16.4.13",
     "@types/react": "^17.0.16",
     "@types/react-dom": "^17.0.9",
-    "@types/stripe": "^8.0.417",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "daisyui": "^1.11.0",

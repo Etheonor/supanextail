@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import Cors from 'cors';
 import axios from 'axios';
 import initMiddleware from 'utils/init-middleware';
@@ -22,7 +24,7 @@ const limiter = initMiddleware(
 	})
 );
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
 	await cors(req, res);
 	await limiter(req, res);
 	if (req.method === 'PUT') {
@@ -50,6 +52,7 @@ export default async function handler(req: any, res: any) {
 				res.status(500).send({
 					message:
 						'Oups, there was a problem with your subscription, please try again or contact us',
+					error: err,
 				});
 			});
 	}
