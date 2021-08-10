@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import Dashboard from "../components/Dashboard";
-import Head from "next/head";
-import Layout from "components/Layout";
-import { createClient } from "@supabase/supabase-js";
-import { supabase } from "../utils/supabaseClient";
-import { useRouter } from "next/router";
+import Head from 'next/head';
+import Layout from 'components/Layout';
+import { createClient } from '@supabase/supabase-js';
+import { useRouter } from 'next/router';
+import { supabase } from '../utils/supabaseClient';
+import Dashboard from '../components/Dashboard';
 
 const DashboardPage = ({ user, plan, profile }) => {
   const [session, setSession] = useState(null);
@@ -14,7 +14,7 @@ const DashboardPage = ({ user, plan, profile }) => {
   useEffect(() => {
     // If a user is not logged in, return to the homepage
     if (!user) {
-      router.push("/");
+      router.push('/');
     }
   }, [user]);
 
@@ -34,7 +34,7 @@ const DashboardPage = ({ user, plan, profile }) => {
 
       <Layout>
         {!session ? (
-          <div className='text-center'>You are not logged in</div>
+          <div className="text-center">You are not logged in</div>
         ) : (
           <>
             <Dashboard
@@ -55,14 +55,14 @@ export async function getServerSideProps({ req }) {
     process.env.SUPABASE_ADMIN_KEY
   );
   const { user } = await supabaseAdmin.auth.api.getUserByCookie(req);
-  const stripe = require("stripe")(process.env.STRIPE_SECRET);
+  const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
   // If the user exist, you will retrieve the user profile and if he/she's a paid user
   if (user) {
-    let { data: plan, error } = await supabaseAdmin
-      .from("subscriptions")
-      .select("plan")
-      .eq("id", user.id)
+    const { data: plan, error } = await supabaseAdmin
+      .from('subscriptions')
+      .select('plan')
+      .eq('id', user.id)
       .single();
 
     // Check the subscription plan. If it doesnt exist, return null
@@ -70,10 +70,10 @@ export async function getServerSideProps({ req }) {
       ? await stripe.subscriptions.retrieve(plan.plan)
       : null;
 
-    let { data: profile, errorProfile } = await supabaseAdmin
-      .from("profiles")
+    const { data: profile, errorProfile } = await supabaseAdmin
+      .from('profiles')
       .select(`username, website, avatar_url`)
-      .eq("id", user.id)
+      .eq('id', user.id)
       .single();
 
     return {
@@ -87,7 +87,7 @@ export async function getServerSideProps({ req }) {
 
   if (!user) {
     // If no user, redirect to index.
-    return { props: {}, redirect: { destination: "/", permanent: false } };
+    return { props: {}, redirect: { destination: '/', permanent: false } };
   }
 
   // If there is a user, return it.

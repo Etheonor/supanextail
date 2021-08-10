@@ -1,8 +1,8 @@
-import Cors from "cors";
-import axios from "axios";
-import initMiddleware from "utils/init-middleware";
+import Cors from 'cors';
+import axios from 'axios';
+import initMiddleware from 'utils/init-middleware';
 
-const rateLimit = require("express-rate-limit");
+const rateLimit = require('express-rate-limit');
 
 export const config = {
   api: {
@@ -12,7 +12,7 @@ export const config = {
 
 const cors = initMiddleware(
   Cors({
-    methods: ["PUT"],
+    methods: ['PUT'],
   })
 );
 
@@ -26,34 +26,32 @@ const limiter = initMiddleware(
 export default async function handler(req, res) {
   await cors(req, res);
   await limiter(req, res);
-  if (req.method === "PUT") {
+  if (req.method === 'PUT') {
     axios
       .put(
-        "https://api.sendgrid.com/v3/marketing/contacts",
+        'https://api.sendgrid.com/v3/marketing/contacts',
         {
           contacts: [{ email: `${req.body.mail}` }],
           list_ids: [process.env.SENDGRID_MAILING_ID],
         },
         {
           headers: {
-            "content-type": "application/json",
+            'content-type': 'application/json',
             Authorization: `Bearer ${process.env.SENDGRID_SECRET}`,
           },
         }
       )
       .then((result) => {
         console.log(result);
-        res
-          .status(200)
-          .send({
-            message:
-              "Your email has been succesfully added to the mailing list. Welcome 👋",
-          });
+        res.status(200).send({
+          message:
+            'Your email has been succesfully added to the mailing list. Welcome 👋',
+        });
       })
       .catch((err) => {
         res.status(500).send({
           message:
-            "Oups, there was a problem with your subscription, please try again or contact us",
+            'Oups, there was a problem with your subscription, please try again or contact us',
         });
       });
   }

@@ -1,11 +1,11 @@
-import Cors from "cors";
-import initMiddleware from "utils/init-middleware";
+import Cors from 'cors';
+import initMiddleware from 'utils/init-middleware';
 
-const rateLimit = require("express-rate-limit");
+const rateLimit = require('express-rate-limit');
 
 const cors = initMiddleware(
   Cors({
-    methods: ["POST"],
+    methods: ['POST'],
   })
 );
 
@@ -17,13 +17,13 @@ const limiter = initMiddleware(
 );
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 export default async function handler(req, res) {
   await cors(req, res);
   await limiter(req, res);
-  if (req.method === "POST") {
-    const priceId = req.body.priceId;
+  if (req.method === 'POST') {
+    const { priceId } = req.body;
 
     // See https://stripe.com/docs/api/checkout/sessions/create
     // for additional parameters to pass.
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       const session = req.body.customerId
         ? await stripe.checkout.sessions.create({
             mode: req.body.pay_mode,
-            payment_method_types: ["card"],
+            payment_method_types: ['card'],
             client_reference_id: req.body.userId,
             metadata: { token: req.body.tokenId, priceId: req.body.priceId },
             customer: req.body.customerId,
@@ -49,8 +49,8 @@ export default async function handler(req, res) {
             cancel_url: `${req.headers.origin}/pricing`,
           })
         : await stripe.checkout.sessions.create({
-            mode: "subscription",
-            payment_method_types: ["card"],
+            mode: 'subscription',
+            payment_method_types: ['card'],
             customer_email: req.body.email,
             client_reference_id: req.body.userId,
             metadata: { token: req.body.tokenId, priceId: req.body.priceId },

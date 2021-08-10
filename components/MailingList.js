@@ -3,11 +3,11 @@ This is the form component to register an email adress to your mailing list.
 This is just the frontend, and the email will be send to our backend API (/api/mailingList)
 */
 
-import Image from "next/image";
-import Mailing from "public/landing/mailing.svg";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useState } from "react";
+import Image from 'next/image';
+import Mailing from 'public/landing/mailing.svg';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 const MailingList = () => {
   const [mail, setMail] = useState(null);
@@ -16,7 +16,7 @@ const MailingList = () => {
 
   const validateEmail = () => {
     // Regex patern for email validation
-    let regex =
+    const regex =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (regex.test(mail)) {
@@ -25,7 +25,7 @@ const MailingList = () => {
       setValid(true);
     } else {
       // invalid email.
-      toast.error("Your email is invalid");
+      toast.error('Your email is invalid');
       setValid(false);
     }
   };
@@ -33,7 +33,7 @@ const MailingList = () => {
   const subscribe = () => {
     setLoading(true);
     axios
-      .put("api/mailingList", {
+      .put('api/mailingList', {
         mail,
       })
       .then((result) => {
@@ -48,32 +48,34 @@ const MailingList = () => {
       });
   };
   return (
-    <div className='my-10 mt-24 m-auto flex flex-col'>
-      <h2 className='text-3xl md:text-4xl font-bold font-title uppercase text-center'>
+    <div className="my-10 mt-24 m-auto flex flex-col">
+      <h2 className="text-3xl md:text-4xl font-bold font-title uppercase text-center">
         Stay Tuned
       </h2>
-      <Image src={Mailing}/>
-      <label className='label'>
-        <p className='text-center max-w-md m-auto'>
+      <Image src={Mailing} />
+      <label className="label">
+        <p className="text-center max-w-md m-auto">
           Want to be the first to know when SupaNexTail launches and get an
           exclusive discount? Sign up for the newsletter!
         </p>
       </label>
-      <div className='mt-5 m-auto'>
+      <div className="mt-5 m-auto">
         <input
           onChange={(e) => {
             setMail(e.target.value);
           }}
-          type='email'
-          placeholder='Your email'
+          type="email"
+          placeholder="Your email"
           className={`input input-primary input-bordered ${
-            valid ? null : "input-error"
-          }`}></input>
+            valid ? null : 'input-error'
+          }`}
+        />
         <button
           onClick={validateEmail}
           className={`btn ml-3 ${
-            loading ? "btn-disabled loading" : "btn-primary"
-          }`}>
+            loading ? 'btn-disabled loading' : 'btn-primary'
+          }`}
+        >
           I'm in!
         </button>
       </div>

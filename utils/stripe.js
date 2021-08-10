@@ -1,7 +1,7 @@
 /**
  * This is a singleton to ensure we only instantiate Stripe once.
  */
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from '@stripe/stripe-js';
 
 let stripePromise = null;
 const getStripe = () => {

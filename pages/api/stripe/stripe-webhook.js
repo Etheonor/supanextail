@@ -6,11 +6,12 @@ If you want to test it locally, you'll need the stripe CLI and use this command 
 stripe listen --forward-to localhost:3000/api/stripe/stripe-webhook
 */
 
-import Cors from "cors";
-import { buffer } from "micro";
-import { createClient } from "@supabase/supabase-js";
-import initMiddleware from "utils/init-middleware";
-const rateLimit = require("express-rate-limit");
+import Cors from 'cors';
+import { buffer } from 'micro';
+import { createClient } from '@supabase/supabase-js';
+import initMiddleware from 'utils/init-middleware';
+
+const rateLimit = require('express-rate-limit');
 
 export const config = {
   api: {
@@ -21,7 +22,7 @@ export const config = {
 // Initialize the cors middleware -> Allow the browser extension to create lists
 const cors = initMiddleware(
   Cors({
-    methods: ["POST", "HEAD"],
+    methods: ['POST', 'HEAD'],
   })
 );
 
@@ -42,14 +43,14 @@ const limiter = initMiddleware(
 );
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 export default async function handler(req, res) {
   await cors(req, res);
   await limiter(req, res);
   stripe.setMaxNetworkRetries(2);
 
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     // Retrieve the event by verifying the signature using the raw body and secret.
     let event;
     const buf = await buffer(req);
@@ -57,7 +58,7 @@ export default async function handler(req, res) {
     try {
       event = stripe.webhooks.constructEvent(
         buf,
-        req.headers["stripe-signature"],
+        req.headers['stripe-signature'],
         process.env.STRIPE_WEBHOOK
       );
     } catch (err) {
@@ -76,22 +77,22 @@ export default async function handler(req, res) {
     // https://stripe.com/docs/billing/webhooks
     // Remove comment to see the various objects sent for this sample
     switch (event.type) {
-      case "checkout.session.completed":
-        let { data: subscriptions, error } = await supabase
-          .from("subscriptions")
-          .select("*")
-          .eq("id", dataObject.client_reference_id);
+      case 'checkout.session.completed':
+        const { data: subscriptions, error } = await supabase
+          .from('subscriptions')
+          .select('*')
+          .eq('id', dataObject.client_reference_id);
         console.log(dataObject);
 
         if (subscriptions.length == 0) {
           const { data, error } = await supabase
-            .from("profiles")
+            .from('profiles')
             .update({ customerId: dataObject.customer })
-            .eq("id", dataObject.client_reference_id);
+            .eq('id', dataObject.client_reference_id);
           if (error) console.log(error);
 
           await supabase
-            .from("subscriptions")
+            .from('subscriptions')
             .insert([
               {
                 id: dataObject.client_reference_id,
@@ -105,34 +106,34 @@ export default async function handler(req, res) {
             .catch((err) => console.log(err));
         } else if (subscriptions.length > 0) {
           await supabase
-            .from("subscriptions")
+            .from('subscriptions')
             .update({
               customer_id: dataObject.customer,
               paid_user: true,
               plan: dataObject.metadata.priceId,
               subscription: dataObject.subscription,
             })
-            .eq("id", dataObject.client_reference_id)
+            .eq('id', dataObject.client_reference_id)
             .then()
             .catch((err) => console.log(err));
         }
         break;
-      case "customer.subscription.deleted":
+      case 'customer.subscription.deleted':
         await supabase
-          .from("subscriptions")
+          .from('subscriptions')
           .update({ paid_user: false })
-          .eq("customer_id", dataObject.customer)
+          .eq('customer_id', dataObject.customer)
           .then()
           .catch((err) => console.log(err));
         break;
-      case "invoice.payment_failed":
+      case 'invoice.payment_failed':
         // If the payment fails or the customer does not have a valid payment method,
         //  an invoice.payment_failed event is sent, the subscription becomes past_due.
         // Use this webhook to notify your user that their payment has
         // failed and to retrieve new card details.
         break;
 
-      case "invoice.paid":
+      case 'invoice.paid':
         // Used to provision services after the trial has ended.
         // The status of the invoice will show up as paid. Store the status in your
         // database to reference when a user accesses your service to avoid hitting rate limits.

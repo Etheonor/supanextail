@@ -7,17 +7,17 @@ You can select your auth providers, or just keep the email/password. You can
 check the providers available here: https://supabase.io/docs/guides/auth
 */
 
-import SignUpPanel from "./UI/SignUpPanel";
-import { supabase } from "utils/supabaseClient";
-import { useAuth } from "utils/AuthContext";
+import { supabase } from 'utils/supabaseClient';
+import { useAuth } from 'utils/AuthContext';
+import SignUpPanel from './UI/SignUpPanel';
 
 const Container = (props) => {
   const { user, signOut } = useAuth();
   if (user)
     return (
-      <div className='w-80 md:w-96 order-first lg:order-last'>
+      <div className="w-80 md:w-96 order-first lg:order-last">
         <p>Hello {user.email}! 👋 You are already logged in</p>
-        <button className='btn btn-primary' onClick={() => signOut()}>
+        <button className="btn btn-primary" onClick={() => signOut()}>
           Sign out
         </button>
       </div>

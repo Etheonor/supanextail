@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "eslint": "eslint . --fix"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.0",
@@ -30,9 +31,22 @@
     "stripe": "^8.168.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^11.0.1",
     "autoprefixer": "^10.3.1",
     "cypress": "^8.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "postcss": "^8.3.6",
+    "prettier": "^2.3.2",
     "tailwindcss": "^2.2.7"
   }
 }

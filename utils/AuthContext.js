@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { supabase } from "utils/supabaseClient";
+import { supabase } from 'utils/supabaseClient';
 
 // create a context for authentication
 const AuthContext = createContext();
@@ -19,15 +19,15 @@ export const AuthProvider = ({ children }) => {
     // Listen for changes on auth state (logged in, signed out, etc.)
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        if ((event === "SIGNED_OUT") | (event === "SIGNED_IN")) {
-          fetch("/api/auth", {
-            method: "POST",
-            headers: new Headers({ "Content-Type": "application/json" }),
-            credentials: "same-origin",
+        if ((event === 'SIGNED_OUT') | (event === 'SIGNED_IN')) {
+          fetch('/api/auth', {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            credentials: 'same-origin',
             body: JSON.stringify({ event, session }),
           }).then((res) => res.json());
         }
-        if (event === "USER_UPDATED") {
+        if (event === 'USER_UPDATED') {
         }
         setUser(session?.user ?? null);
         setLoading(false);
@@ -56,6 +56,4 @@ export const AuthProvider = ({ children }) => {
 };
 
 // export the useAuth hook
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

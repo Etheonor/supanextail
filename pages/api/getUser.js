@@ -1,8 +1,8 @@
-import { supabase } from "utils/supabaseClient";
+import { supabase } from 'utils/supabaseClient';
 
 // Example of how to verify and get user data server-side.
 const getUser = async (req, res) => {
-  const token = req.headers.token;
+  const { token } = req.headers;
 
   const { data: user, error } = await supabase.auth.api.getUser(token);
 

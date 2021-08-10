@@ -1,13 +1,14 @@
 /* Dont forget to create your customer portal on Stripe 
 https://dashboard.stripe.com/test/settings/billing/portal */
 
-import Cors from "cors";
-import initMiddleware from "utils/init-middleware";
-const rateLimit = require("express-rate-limit");
+import Cors from 'cors';
+import initMiddleware from 'utils/init-middleware';
+
+const rateLimit = require('express-rate-limit');
 
 const cors = initMiddleware(
   Cors({
-    methods: ["POST", "PUT"],
+    methods: ['POST', 'PUT'],
   })
 );
 
@@ -19,12 +20,12 @@ const limiter = initMiddleware(
 );
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 export default async function handler(req, res) {
   await cors(req, res);
   await limiter(req, res);
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     const returnUrl = `${req.headers.origin}/dashboard`; // Stripe will return to the dashboard, you can change it
 
     const portalsession = await stripe.billingPortal.sessions.create({

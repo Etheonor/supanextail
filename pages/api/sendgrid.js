@@ -2,10 +2,10 @@
 This is a simple contact form for SupaNexTail
 Using Sendgrid. 
 */
-const sgMail = require("@sendgrid/mail");
+const sgMail = require('@sendgrid/mail');
 
 export default async function handler(req, res) {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     sgMail.setApiKey(process.env.SENDGRID_SECRET);
     const msg = {
       to: process.env.SENDGRID_MAILTO, // Change to your recipient
@@ -19,13 +19,13 @@ export default async function handler(req, res) {
       .then(() => {
         res
           .status(200)
-          .send({ message: "Your email has been sent", success: true });
+          .send({ message: 'Your email has been sent', success: true });
       })
       .catch((error) => {
         console.error(error);
         res.status(500).send({
-          message: "There was an issue with your email... please retry",
-          err: err,
+          message: 'There was an issue with your email... please retry',
+          err,
         });
       });
   }
