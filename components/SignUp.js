@@ -12,31 +12,31 @@ import { useAuth } from 'utils/AuthContext';
 import SignUpPanel from './UI/SignUpPanel';
 
 const Container = (props) => {
-  const { user, signOut } = useAuth();
-  if (user)
-    return (
-      <div className="w-80 md:w-96 order-first lg:order-last">
-        <p>Hello {user.email}! 👋 You are already logged in</p>
-        <button className="btn btn-primary" onClick={() => signOut()}>
-          Sign out
-        </button>
-      </div>
-    );
-  return props.children;
+	const { user, signOut } = useAuth();
+	if (user)
+		return (
+			<div className="w-80 md:w-96 order-first lg:order-last">
+				<p>Hello {user.email}! 👋 You are already logged in</p>
+				<button className="btn btn-primary" onClick={() => signOut()}>
+					Sign out
+				</button>
+			</div>
+		);
+	return props.children;
 };
 
 const AuthComponent = () => {
-  const { signUp, signIn, signOut, resetPassword } = useAuth();
-  return (
-    <Container supabaseClient={supabase}>
-      <SignUpPanel
-        signUp={signUp}
-        signIn={signIn}
-        signOut={signOut}
-        resetPassword={resetPassword}
-      />
-    </Container>
-  );
+	const { signUp, signIn, signOut, resetPassword } = useAuth();
+	return (
+		<Container supabaseClient={supabase}>
+			<SignUpPanel
+				signUp={signUp}
+				signIn={signIn}
+				signOut={signOut}
+				resetPassword={resetPassword}
+			/>
+		</Container>
+	);
 };
 
 export default AuthComponent;

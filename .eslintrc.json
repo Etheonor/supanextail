@@ -6,8 +6,9 @@
         "cypress/globals": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb",
+        "next",
+        "next/core-web-vitals",
+        "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
     "parserOptions": {
@@ -18,7 +19,7 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react",
+        "@typescript-eslint",
         "cypress",
         "simple-import-sort",
         "prettier"
@@ -26,7 +27,12 @@
     "rules": {
         "no-console": "off",
         "react/no-unescaped-entities": "off",
-        "prettier/prettier": "error",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": [
             2,
