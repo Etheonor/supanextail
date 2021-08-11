@@ -3,36 +3,39 @@ import router from 'next/router';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
-const Login = (props) => {
+type LoginProps = {
+	resetPassword: (email: string) => Promise<{ error: { message: string } }>;
+	signIn: ({}) => Promise<{ data: Record<string, unknown>; error: { message: string } }>;
+};
+
+const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [forgot, setForgot] = useState(false);
 
-	const resetPassword = () => {
-		props.resetPassword(email).then((result) => {
+	const resetPasswordLogin = () => {
+		resetPassword(email).then((result: { error: { message: string } }) => {
 			if (result.error) {
 				toast.error(result.error.message);
 			} else toast.success('Check your email to reset your password!');
 		});
 	};
 
-	const login = (e) => {
+	const login = (e: React.SyntheticEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
 		// Handle the login. Go to the homepage if success or display an error.
-		props
-			.signIn({
-				email,
-				password,
-			})
-			.then((result) => {
-				if (result.data) {
-					router.push('/');
-				}
-				if (result.error) {
-					toast.error(result.error.message);
-				}
-			});
+		signIn({
+			email,
+			password,
+		}).then((result: { data: Record<string, unknown>; error: { message: string } }) => {
+			if (result.data) {
+				router.push('/');
+			}
+			if (result.error) {
+				toast.error(result.error.message);
+			}
+		});
 	};
 
 	return (
@@ -99,11 +102,10 @@ const Login = (props) => {
 							</span>
 							<div className="flex flex-col space-y-4">
 								<button
-									href="#"
 									className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-base-200 rounded-md group hover:bg-base-300 focus:outline-none "
 									onClick={(event) => {
 										event.preventDefault();
-										props.signIn({ provider: 'google' });
+										signIn({ provider: 'google' });
 									}}
 								>
 									<div className="text-base-content">
@@ -141,7 +143,7 @@ const Login = (props) => {
 								className="btn btn-primary w-full btn-sm"
 								onClick={(event) => {
 									event.preventDefault();
-									resetPassword();
+									resetPasswordLogin();
 								}}
 							>
 								Recover my password

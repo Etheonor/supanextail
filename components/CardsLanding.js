@@ -20,7 +20,7 @@ const CardsLanding = () => (
 			<CardLanding
 				image={cardPage}
 				text="7 pages fully designed and easily customizable"
-				title="Templates"
+				title='"Templates"'
 			/>
 			<CardLanding
 				image={cardServer}

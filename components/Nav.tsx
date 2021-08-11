@@ -8,11 +8,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Logo from 'public/logo.svg';
 
-const Nav = (props: any) => {
+type NavProps = {
+	user: Record<string, unknown>;
+	signOut: () => void;
+};
+
+const Nav = ({ user, signOut }: NavProps): JSX.Element => {
 	// Modify you menu directly here
 	const NavMenu = (
 		<>
-			{props.user && (
+			{user && (
 				<Link href="/dashboard">
 					<a className="nav-btn">Dashboard</a>
 				</Link>
@@ -26,8 +31,8 @@ const Nav = (props: any) => {
 				<a className="nav-btn">Contact Us</a>
 			</Link>
 
-			{props.user ? (
-				<button className="btn btn-xs text-xs" onClick={() => props.signOut()}>
+			{user ? (
+				<button className="btn btn-xs text-xs" onClick={() => signOut()}>
 					<LogOut size={12} className="mr-2" />
 					Logout
 				</button>
