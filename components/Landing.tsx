@@ -1,11 +1,11 @@
 import CardsLanding from 'components/CardsLanding';
 import Image from 'next/image';
+import MailingList from './MailingList';
 import landTop from 'public/landing/land-top.svg';
 import start from 'public/landing/start.svg';
 import supabaseImage from 'public/landing/supabase.svg';
-import MailingList from './MailingList';
 
-const Landing = () => (
+const Landing = (): JSX.Element => (
 	<div className="mt-10 mb-20 text-base-content w-full">
 		<div className="flex max-w-6xl m-auto justify-around">
 			<div className="max-w-sm mr-16 my-auto">
@@ -18,7 +18,7 @@ const Landing = () => (
 				</p>
 			</div>
 			<div className="max-w-xl">
-				<Image src={landTop} height={417} width={583} />
+				<Image src={landTop} height={417} width={583} alt="Construction of a website" />
 			</div>
 		</div>
 
@@ -34,7 +34,7 @@ const Landing = () => (
 				</p>
 			</div>
 			<div className="max-w-xl">
-				<Image src={start} />
+				<Image src={start} alt="screenshot of the website" />
 			</div>
 		</div>
 		<div className="flex max-w-6xl m-auto justify-around mt-24 flex-wrap">
@@ -52,7 +52,7 @@ const Landing = () => (
 				</p>
 			</div>
 			<div className="max-w-md order-2 lg:order-1 flex">
-				<Image src={supabaseImage} />
+				<Image src={supabaseImage} alt="screenshot of the Supabase website" />
 			</div>
 		</div>
 		<MailingList />

@@ -7,7 +7,7 @@ import cardServer from 'public/landing/backend.svg';
 import cardStripe from 'public/landing/stripe.svg';
 import cardTheme from 'public/landing/theme.svg';
 
-const CardsLanding = () => (
+const CardsLanding = (): JSX.Element => (
 	<div className="mt-14">
 		<h2 className="uppercase font-bold text-4xl tracking-wide text-center">
 			We've got you covered

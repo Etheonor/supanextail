@@ -9,11 +9,11 @@ the axios.post here, line 18.
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const Contact = () => {
+const Contact = (): JSX.Element => {
 	const sendEmail = () => {
-		const name = document.getElementById('name').value;
-		const email = document.getElementById('email').value;
-		const message = document.getElementById('message').value;
+		const name = (document.getElementById('name') as HTMLInputElement).value;
+		const email = (document.getElementById('email') as HTMLInputElement).value;
+		const message = (document.getElementById('message') as HTMLInputElement).value;
 
 		if (name && email && message) {
 			axios
@@ -21,16 +21,16 @@ const Contact = () => {
 				.then((result) => {
 					if (result.data.success === true) {
 						toast.success(result.data.message);
-						document.getElementById('name').value = '';
-						document.getElementById('email').value = '';
-						document.getElementById('message').value = '';
+						(document.getElementById('name') as HTMLInputElement).value = '';
+						(document.getElementById('email') as HTMLInputElement).value = '';
+						(document.getElementById('message') as HTMLInputElement).value = '';
 					}
 				})
 				.catch((err) => {
 					console.log(err);
 				});
 		} else {
-			toast.info('Please enter at least one URL', {
+			toast.info('Please fill all the fields ', {
 				position: 'top-center',
 				autoClose: 2000,
 				hideProgressBar: true,
@@ -79,7 +79,7 @@ const Contact = () => {
 						id="message"
 						name="message"
 						placeholder="Enter your message here..."
-						rows="5"
+						rows={5}
 						className="input input-primary input-bordered resize-none w-full h-32 pt-2"
 					/>
 				</div>

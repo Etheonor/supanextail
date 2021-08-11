@@ -7,36 +7,50 @@ It also show you the current subscription plan
 
 import { useEffect, useState } from 'react';
 
+import Avatar from './Avatar';
 import Image from 'next/image';
+import PaymentModal from './PaymentModal';
 import Plan from 'public/plan.svg';
 import { PriceIds } from 'utils/priceList';
+import { supabase } from '../utils/supabaseClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { supabase } from '../utils/supabaseClient';
-import PaymentModal from './PaymentModal';
-import Avatar from './Avatar';
 
-export default function Dashboard(props) {
+type DashboardProps = {
+	profile: { username: string; website: string; avatar_url: string };
+	session: { user: { email: string } };
+	plan: string;
+};
+
+const Dashboard = ({ profile, session, plan }: DashboardProps): JSX.Element => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const [username, setUsername] = useState(props.profile.username);
-	const [website, setWebsite] = useState(props.profile.website);
-	const [avatar_url, setAvatarUrl] = useState(props.profile.avatar_url);
+	const [username, setUsername] = useState(profile.username);
+	const [website, setWebsite] = useState(profile.website);
+	const [avatar_url, setAvatarUrl] = useState(profile.avatar_url);
 	const [payment, setPayment] = useState(false);
 
 	useEffect(() => {
 		if (router.query.session_id && router.query.session_id !== 'canceled') {
 			setPayment(true);
 		}
-	}, []);
+	}, [router.query.session_id]);
 
-	async function updateProfile({ username, website, avatar_url }) {
+	async function updateProfile({
+		username,
+		website,
+		avatar_url,
+	}: {
+		username: string;
+		website: string;
+		avatar_url: string;
+	}) {
 		try {
 			setLoading(true);
 			const user = supabase.auth.user();
 
 			const updates = {
-				id: user.id,
+				id: user?.id,
 				username,
 				website,
 				avatar_url,
@@ -78,7 +92,7 @@ export default function Dashboard(props) {
 						className="input input-primary input-bordered input-sm flex-1 text-base-100"
 						id="email"
 						type="text"
-						value={props.session.user.email}
+						value={session.user.email}
 						disabled
 					/>
 				</div>
@@ -119,13 +133,15 @@ export default function Dashboard(props) {
 			</div>
 
 			<div className="max-w-xl flex flex-row flex-wrap m-auto w-full p-5 bordered border-2 border-primary shadow-lg my-5">
-				<Image src={Plan} />
+				<Image src={Plan} alt="credit card" />
 				<div className="flex flex-col m-auto">
 					<h2>Your current plan</h2>
-					<p className="">{props.plan ? PriceIds[props.plan] : 'Free tier'}</p>
+					<p className="">{plan ? PriceIds[plan] : 'Free tier'}</p>
 				</div>
 			</div>
 			<PaymentModal open={payment} setPayment={setPayment} />
 		</div>
 	);
-}
+};
+
+export default Dashboard;
