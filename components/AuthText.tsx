@@ -1,10 +1,15 @@
 import Image from 'next/image';
 import authImage from 'public/auth.png';
 
-const AuthText = () => (
+const AuthText = (): JSX.Element => (
 	<div className="lg:mt-0 max-w-lg flex flex-col text-xl">
 		<div className="mt-10 mb-3 m-auto">
-			<Image src={authImage} width={authImage.width / 1.5} height={authImage.height / 1.5} />
+			<Image
+				src={authImage}
+				width={authImage.width / 1.5}
+				height={authImage.height / 1.5}
+				alt="A rocketship"
+			/>
 		</div>
 		<h2 className="text-4xl font-title font-semibold text-center">
 			Join SupaNexTail for <span className="text-primary">free</span>!

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
-const Footer = () => {
-	const ThemeToggle = dynamic(() => import('components/UI/ThemeToggle.js'), {
+const Footer = (): JSX.Element => {
+	const ThemeToggle = dynamic(() => import('components/UI/ThemeToggle'), {
 		ssr: false,
 	});
 	return (

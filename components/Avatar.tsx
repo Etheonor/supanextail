@@ -4,16 +4,22 @@ the upload.
 You can tweak the max size, line 47
 */
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import { supabase } from 'utils/supabaseClient';
 
-const Avatar = ({ url, size, onUpload }) => {
-	const [avatarUrl, setAvatarUrl] = useState(null);
+type AvatarProps = {
+	url: string;
+	size: number;
+	onUpload: (filePath: string) => void;
+};
+
+const Avatar = ({ url, size, onUpload }: AvatarProps): JSX.Element => {
+	const [avatarUrl, setAvatarUrl] = useState('');
 	const [uploading, setUploading] = useState(false);
 
-	const customImgLoader = ({ src }) => {
+	const customImgLoader = ({ src }: { src: string }) => {
 		return `${src}`;
 	};
 
@@ -21,7 +27,7 @@ const Avatar = ({ url, size, onUpload }) => {
 		if (url) downloadImage(url);
 	}, [url]);
 
-	async function downloadImage(path) {
+	async function downloadImage(path: string) {
 		try {
 			const { data, error } = await supabase.storage.from('avatars').download(path);
 			if (error) {
@@ -34,7 +40,7 @@ const Avatar = ({ url, size, onUpload }) => {
 		}
 	}
 
-	async function uploadAvatar(event) {
+	async function uploadAvatar(event: React.ChangeEvent<HTMLInputElement>) {
 		try {
 			setUploading(true);
 

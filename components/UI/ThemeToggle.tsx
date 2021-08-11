@@ -11,8 +11,8 @@ const theme = {
 	secondary: 'dark',
 };
 
-const ThemeToggle = () => {
-	const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
+const ThemeToggle = (): JSX.Element => {
+	const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme || '');
 	const inactiveTheme = activeTheme === 'supaTheme' ? 'dark' : 'supaTheme';
 
 	useEffect(() => {
