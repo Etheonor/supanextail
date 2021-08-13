@@ -12,7 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^1.4.0",
     "@sendgrid/mail": "^7.4.4",
-    "@stripe/stripe-js": "^1.15.1",
+    "@stripe/stripe-js": "^1.17.0",
     "@supabase/grid": "1.15.0",
     "@supabase/supabase-js": "^1.21.0",
     "axios": "^0.21.1",
