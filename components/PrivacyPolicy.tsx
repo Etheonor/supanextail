@@ -1,4 +1,4 @@
-const PrivacyPolicy = () => (
+const PrivacyPolicy = (): JSX.Element => (
 	<div className="max-w-xl text-left m-auto py-10">
 		<h1 className="text-center">Privacy Policy for {process.env.NEXT_PUBLIC_TITLE}</h1>
 

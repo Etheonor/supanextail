@@ -15,9 +15,9 @@ import axios from 'axios';
 import router from 'next/router';
 import { useAuth } from 'utils/AuthContext';
 
-const Pricing = () => {
+const Pricing = (): JSX.Element => {
 	const [enabled, setEnabled] = useState(false);
-	const { user } = useAuth();
+	const { user, session } = useAuth();
 	const [customerId, setCustomerId] = useState(null);
 	const [sub, setSub] = useState(false);
 	const flat = false; // Switch between subscription system or flat prices
@@ -64,7 +64,7 @@ const Pricing = () => {
 		},
 	};
 
-	const handleSubmit = async (e, priceId) => {
+	const handleSubmit = async (e: React.SyntheticEvent<HTMLButtonElement>, priceId: string) => {
 		e.preventDefault();
 		// Create a Checkout Session. This will redirect the user to the Stripe website for the payment.
 		axios

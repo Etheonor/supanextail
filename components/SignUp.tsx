@@ -7,11 +7,17 @@ You can select your auth providers, or just keep the email/password. You can
 check the providers available here: https://supabase.io/docs/guides/auth
 */
 
+import SignUpPanel from './UI/SignUpPanel';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { supabase } from 'utils/supabaseClient';
 import { useAuth } from 'utils/AuthContext';
-import SignUpPanel from './UI/SignUpPanel';
 
-const Container = (props) => {
+type ContainerProps = {
+	children: JSX.Element;
+	supabaseClient: SupabaseClient;
+};
+
+const Container = ({ children }: ContainerProps): JSX.Element => {
 	const { user, signOut } = useAuth();
 	if (user)
 		return (
@@ -22,19 +28,14 @@ const Container = (props) => {
 				</button>
 			</div>
 		);
-	return props.children;
+	return children;
 };
 
-const AuthComponent = () => {
-	const { signUp, signIn, signOut, resetPassword } = useAuth();
+const AuthComponent = (): JSX.Element => {
+	const { signUp, signIn } = useAuth();
 	return (
 		<Container supabaseClient={supabase}>
-			<SignUpPanel
-				signUp={signUp}
-				signIn={signIn}
-				signOut={signOut}
-				resetPassword={resetPassword}
-			/>
+			<SignUpPanel signUp={signUp} signIn={signIn} />
 		</Container>
 	);
 };

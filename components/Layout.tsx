@@ -12,16 +12,29 @@ The images are in the public folder.
 
 import 'react-toastify/dist/ReactToastify.css';
 
+import Footer from './Footer';
 import Head from 'next/head';
+import Nav from './Nav';
 import { ToastContainer } from 'react-toastify';
 import { useAuth } from 'utils/AuthContext';
-import Nav from './Nav';
-import Footer from './Footer';
 
-const Layout = (props) => {
+type LayoutProps = {
+	children: JSX.Element;
+};
+
+const Layout = ({ children }: LayoutProps): JSX.Element => {
 	const { user, signOut } = useAuth();
 
-	const toastStyle = {
+	type toast = {
+		success: string;
+		error: string;
+		info: string;
+		warning: string;
+		default: string;
+		dark: string;
+	};
+
+	const toastStyle: toast = {
 		// Style your toast elements here
 		success: 'bg-accent',
 		error: 'bg-red-600',
@@ -43,7 +56,7 @@ const Layout = (props) => {
 			</Head>
 			<div className="max-w-7xl flex flex-col min-h-screen mx-auto p-5">
 				<Nav user={user} signOut={signOut} />
-				<main className="flex-1">{props.children}</main>
+				<main className="flex-1">{children}</main>
 				<ToastContainer
 					position="bottom-center"
 					toastClassName={({ type }) =>

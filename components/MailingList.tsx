@@ -9,8 +9,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
-const MailingList = () => {
-	const [mail, setMail] = useState(null);
+const MailingList = (): JSX.Element => {
+	const [mail, setMail] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [valid, setValid] = useState(true);
 
@@ -52,7 +52,7 @@ const MailingList = () => {
 			<h2 className="text-3xl md:text-4xl font-bold font-title uppercase text-center">
 				Stay Tuned
 			</h2>
-			<Image src={Mailing} />
+			<Image src={Mailing} alt="Mail" />
 			<label className="label">
 				<p className="text-center max-w-md m-auto">
 					Want to be the first to know when SupaNexTail launches and get an exclusive discount? Sign
