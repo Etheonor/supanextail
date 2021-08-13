@@ -25,24 +25,6 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps): JSX.Element => {
 	const { user, signOut } = useAuth();
 
-	type toast = {
-		success: string;
-		error: string;
-		info: string;
-		warning: string;
-		default: string;
-		dark: string;
-	};
-
-	const toastStyle: toast = {
-		// Style your toast elements here
-		success: 'bg-accent',
-		error: 'bg-red-600',
-		info: 'bg-gray-600',
-		warning: 'bg-orange-400',
-		default: 'bg-primary',
-		dark: 'bg-white-600 font-gray-300',
-	};
 	return (
 		<div className="min-h-screen w-full bg-base-100 text-base-content m-auto font-body">
 			<Head>
@@ -57,14 +39,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 			<div className="max-w-7xl flex flex-col min-h-screen mx-auto p-5">
 				<Nav user={user} signOut={signOut} />
 				<main className="flex-1">{children}</main>
-				<ToastContainer
-					position="bottom-center"
-					toastClassName={({ type }) =>
-						`${
-							toastStyle[type || 'default']
-						} flex p-5 my-5 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer `
-					}
-				/>
+				<ToastContainer position="bottom-center" />
 				<Footer />
 			</div>
 		</div>
