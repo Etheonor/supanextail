@@ -19,7 +19,7 @@ const limiter = initMiddleware(
 );
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-const stripe = new Stripe(process.env.STRIPE_SECRET, {
+const stripe = new Stripe(process.env.STRIPE_SECRET || '', {
 	apiVersion: '2020-08-27',
 });
 
