@@ -14,7 +14,7 @@
     "@headlessui/react": "^1.4.0",
     "@sendgrid/mail": "^7.4.6",
     "@stripe/stripe-js": "^1.17.1",
-    "@supabase/grid": "1.15.0",
+    "@supabase/grid": "1.16.0",
     "@supabase/supabase-js": "^1.22.3",
     "@types/node": "^16.7.1",
     "@types/react": "^17.0.19",
