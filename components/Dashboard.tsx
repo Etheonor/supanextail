@@ -12,13 +12,14 @@ import Image from 'next/image';
 import PaymentModal from './PaymentModal';
 import Plan from 'public/plan.svg';
 import { PriceIds } from 'utils/priceList';
+import { Session } from '@supabase/gotrue-js';
 import { supabase } from '../utils/supabaseClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 type DashboardProps = {
 	profile: { username: string; website: string; avatar_url: string };
-	session: { user: { email: string } };
+	session: Session;
 	plan: string;
 };
 
@@ -92,7 +93,7 @@ const Dashboard = ({ profile, session, plan }: DashboardProps): JSX.Element => {
 						className="input input-primary input-bordered input-sm flex-1 text-base-100"
 						id="email"
 						type="text"
-						value={session.user.email}
+						value={session.user?.email}
 						disabled
 					/>
 				</div>

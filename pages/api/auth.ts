@@ -3,8 +3,10 @@
  * With SupaNexTail, we use SSR with the Dashboard page (pages/dashboard.js)
  */
 
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import { supabase } from 'utils/supabaseClient';
 
-export default function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
 	supabase.auth.api.setAuthCookie(req, res);
 }

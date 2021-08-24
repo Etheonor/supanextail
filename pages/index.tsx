@@ -7,7 +7,7 @@ import Head from 'next/head';
 import Landing from 'components/Landing';
 import Layout from 'components/Layout';
 
-const Home = () => (
+const Home = (): JSX.Element => (
 	<>
 		<Head>
 			<title>{`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}</title>

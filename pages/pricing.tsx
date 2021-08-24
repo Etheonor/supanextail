@@ -4,7 +4,7 @@ import Layout from 'components/Layout';
 import { NextSeo } from 'next-seo';
 import Pricing from 'components/Pricing';
 
-const PricingPage = () => (
+const PricingPage = (): JSX.Element => (
 	<>
 		<NextSeo
 			title={`${process.env.NEXT_PUBLIC_TITLE} | Pricing`}

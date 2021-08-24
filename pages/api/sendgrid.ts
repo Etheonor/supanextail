@@ -2,19 +2,22 @@
 This is a simple contact form for SupaNexTail
 Using Sendgrid. 
 */
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 import sgMail from '@sendgrid/mail';
 
-export default async function handler(req, res) {
+const sendGrid = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
 	if (req.method === 'POST') {
-		sgMail.setApiKey(process.env.SENDGRID_SECRET);
+		sgMail.setApiKey(process.env.SENDGRID_SECRET || '');
+
 		const msg = {
-			to: process.env.SENDGRID_MAILTO, // Change to your recipient
-			from: process.env.SENDGRID_MAILFROM, // Change to your verified sender
+			to: process.env.SENDGRID_MAILTO || '', // Change to your recipient
+			from: process.env.SENDGRID_MAILFROM || '', // Change to your verified sender
 			subject: `[${process.env.NEXT_PUBLIC_TITLE}] New message from ${req.body.name}`,
 			text: req.body.message,
 			reply_to: req.body.email,
 		};
+
 		sgMail
 			.send(msg)
 			.then(() => {
@@ -24,8 +27,9 @@ export default async function handler(req, res) {
 				console.error(error);
 				res.status(500).send({
 					message: 'There was an issue with your email... please retry',
-					err,
+					error,
 				});
 			});
 	}
-}
+};
+export default sendGrid;

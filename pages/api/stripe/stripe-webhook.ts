@@ -6,9 +6,10 @@ If you want to test it locally, you'll need the stripe CLI and use this command 
 stripe listen --forward-to localhost:3000/api/stripe/stripe-webhook
 */
 
-import * as Stripe from 'stripe';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 import Cors from 'cors';
+import Stripe from 'stripe';
 import { buffer } from 'micro';
 import { createClient } from '@supabase/supabase-js';
 import initMiddleware from 'utils/init-middleware';
@@ -29,7 +30,10 @@ const cors = initMiddleware(
 
 // Init Supabase Admin
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_ADMIN_KEY);
+const supabase = createClient(
+	process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+	process.env.SUPABASE_ADMIN_KEY || ''
+);
 
 // Rate limiter : The user can only create one list every 20 seconds (avoid spam)
 
@@ -42,24 +46,24 @@ const limiter = initMiddleware(
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
 
-const stripe = new Stripe(process.env.STRIPE_SECRET);
+const stripe = new Stripe(process.env.STRIPE_SECRET || '', {
+	apiVersion: '2020-08-27',
+	maxNetworkRetries: 2,
+});
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
 	await cors(req, res);
 	await limiter(req, res);
-	stripe.setMaxNetworkRetries(2);
 
 	if (req.method === 'POST') {
 		// Retrieve the event by verifying the signature using the raw body and secret.
-		let event;
+		let event: Stripe.Event;
 		const buf = await buffer(req);
 
+		const sig = req.headers['stripe-signature'] as string;
+
 		try {
-			event = stripe.webhooks.constructEvent(
-				buf,
-				req.headers['stripe-signature'],
-				process.env.STRIPE_WEBHOOK
-			);
+			event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK || '');
 		} catch (err) {
 			console.log(err);
 			console.log(`⚠️  Webhook signature verification failed.`);
@@ -67,7 +71,14 @@ export default async function handler(req, res) {
 			return res.send(400);
 		}
 		// Extract the object from the event.
-		const dataObject = event.data.object;
+		const dataObject = event.data.object as {
+			client_reference_id: string;
+			customer: string;
+			metadata: {
+				priceId: string;
+			};
+			subscription: string;
+		};
 
 		// Handle the event
 		// Review important events for Billing webhooks
@@ -75,18 +86,16 @@ export default async function handler(req, res) {
 		// Remove comment to see the various objects sent for this sample
 		switch (event.type) {
 			case 'checkout.session.completed':
-				const { data: subscriptions, error } = await supabase
+				const { data: subscriptions } = await supabase
 					.from('subscriptions')
 					.select('*')
 					.eq('id', dataObject.client_reference_id);
-				console.log(dataObject);
 
-				if (subscriptions.length == 0) {
-					const { data, error } = await supabase
+				if (subscriptions?.length == 0) {
+					await supabase
 						.from('profiles')
 						.update({ customerId: dataObject.customer })
 						.eq('id', dataObject.client_reference_id);
-					if (error) console.log(error);
 
 					await supabase
 						.from('subscriptions')
@@ -100,8 +109,8 @@ export default async function handler(req, res) {
 							},
 						])
 						.then()
-						.catch((err) => console.log(err));
-				} else if (subscriptions.length > 0) {
+						.then(null, (err) => console.log('err: ', err)); // catch
+				} else if (subscriptions?.length && subscriptions?.length > 0) {
 					await supabase
 						.from('subscriptions')
 						.update({
@@ -112,7 +121,7 @@ export default async function handler(req, res) {
 						})
 						.eq('id', dataObject.client_reference_id)
 						.then()
-						.catch((err) => console.log(err));
+						.then(null, (err) => console.log('err: ', err)); // catch
 				}
 				break;
 			case 'customer.subscription.deleted':
@@ -121,7 +130,7 @@ export default async function handler(req, res) {
 					.update({ paid_user: false })
 					.eq('customer_id', dataObject.customer)
 					.then()
-					.catch((err) => console.log(err));
+					.then(null, (err) => console.log('err: ', err)); // catch
 				break;
 			case 'invoice.payment_failed':
 				// If the payment fails or the customer does not have a valid payment method,

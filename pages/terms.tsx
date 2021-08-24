@@ -4,7 +4,7 @@ import Layout from 'components/Layout';
 import { NextSeo } from 'next-seo';
 import Terms from 'components/Terms';
 
-const TermsPage = () => (
+const TermsPage = (): JSX.Element => (
 	<>
 		<NextSeo
 			title={`${process.env.NEXT_PUBLIC_TITLE} | Terms and conditions`}
