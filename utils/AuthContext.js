@@ -7,13 +7,17 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState();
+	const [session, setSession] = useState();
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		// Check active sessions and sets the user
 		const session = supabase.auth.session();
 
+		console.log(session);
+
 		setUser(session?.user ?? null);
+		setSession(session ?? null);
 		setLoading(false);
 
 		// Listen for changes on auth state (logged in, signed out, etc.)
@@ -29,6 +33,7 @@ export const AuthProvider = ({ children }) => {
 			if (event === 'USER_UPDATED') {
 			}
 			setUser(session?.user ?? null);
+			setSession(session ?? null);
 			setLoading(false);
 		});
 
@@ -44,6 +49,7 @@ export const AuthProvider = ({ children }) => {
 		signOut: () => supabase.auth.signOut(),
 		resetPassword: (data) => supabase.auth.api.resetPasswordForEmail(data),
 		user,
+		session,
 	};
 
 	return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
