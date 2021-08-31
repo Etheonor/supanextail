@@ -82,12 +82,14 @@ export async function getServerSideProps(context: NextPageContext) {
 	if (user) {
 		const { data: plan } = await supabaseAdmin
 			.from('subscriptions')
-			.select('plan')
+			.select('subscription')
 			.eq('id', user.id)
 			.single();
 
 		// Check the subscription plan. If it doesnt exist, return null
-		const subscription = plan?.plan ? await stripe.subscriptions.retrieve(plan.plan) : null;
+		const subscription = plan?.subscription
+			? await stripe.subscriptions.retrieve(plan.subscription)
+			: null;
 
 		const { data: profile } = await supabaseAdmin
 			.from('profiles')

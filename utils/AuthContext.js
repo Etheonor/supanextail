@@ -14,8 +14,6 @@ export const AuthProvider = ({ children }) => {
 		// Check active sessions and sets the user
 		const session = supabase.auth.session();
 
-		console.log(session);
-
 		setUser(session?.user ?? null);
 		setSession(session ?? null);
 		setLoading(false);

@@ -5,6 +5,7 @@ create table profiles (
   username text unique,
   avatar_url text,
   website text,
+  customerId text,
 
   primary key (id),
   unique(username),
