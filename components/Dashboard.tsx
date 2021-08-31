@@ -65,8 +65,10 @@ const Dashboard = ({ profile, session, plan }: DashboardProps): JSX.Element => {
 			if (error) {
 				throw error;
 			}
-		} catch (error) {
-			alert('There was an issue with the update');
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				alert(error.message);
+			}
 		} finally {
 			setLoading(false);
 			toast.success('Your profile has been updated');

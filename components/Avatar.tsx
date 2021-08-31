@@ -35,8 +35,10 @@ const Avatar = ({ url, size, onUpload }: AvatarProps): JSX.Element => {
 			}
 			const url = URL.createObjectURL(data);
 			setAvatarUrl(url);
-		} catch (error) {
-			console.log('Error downloading image: ');
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.log('Error downloading image: ', error.message);
+			}
 		}
 	}
 
@@ -67,8 +69,10 @@ const Avatar = ({ url, size, onUpload }: AvatarProps): JSX.Element => {
 			}
 
 			onUpload(filePath);
-		} catch (error) {
-			alert('There was an issue with the upload, please try again');
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				alert(error.message);
+			}
 		} finally {
 			setUploading(false);
 		}

@@ -78,13 +78,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						cancel_url: `${req.headers.origin}/pricing`,
 				  });
 			res.status(200).send({ url: session.url });
-		} catch (e) {
+		} catch (e: unknown) {
 			res.status(400);
-			return res.send({
-				error: {
-					message: e.message,
-				},
-			});
+			if (e instanceof Error) {
+				return res.send({
+					error: {
+						message: e.message,
+					},
+				});
+			}
 		}
 	}
 }
