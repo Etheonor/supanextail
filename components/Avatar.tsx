@@ -68,7 +68,7 @@ const Avatar = ({ url, size, onUpload }: AvatarProps): JSX.Element => {
 
 			onUpload(filePath);
 		} catch (error) {
-			alert(error.message);
+			alert('There was an issue with the upload, please try again');
 		} finally {
 			setUploading(false);
 		}
