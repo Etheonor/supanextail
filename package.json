@@ -11,7 +11,7 @@
     "eslint": "eslint . --fix"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.0",
+    "@headlessui/react": "^1.4.1",
     "@sendgrid/mail": "^7.4.6",
     "@stripe/stripe-js": "^1.17.1",
     "@supabase/grid": "1.16.0",
