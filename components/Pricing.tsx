@@ -9,14 +9,13 @@ https://dashboard.stripe.com/test/settings/billing/portal
 import { getSub, supabase } from 'utils/supabaseClient';
 import { useEffect, useState } from 'react';
 
-import { Prices } from 'utils/priceList';
 import { Switch } from '@headlessui/react';
 import axios from 'axios';
 import router from 'next/router';
 import { useAuth } from 'utils/AuthContext';
 
 const Pricing = (): JSX.Element => {
-	const [enabled, setEnabled] = useState(false);
+	const [yearly, setyearly] = useState(false);
 	const { user, session } = useAuth();
 	const [customerId, setCustomerId] = useState(null);
 	const [sub, setSub] = useState(false);
@@ -45,6 +44,39 @@ const Pricing = (): JSX.Element => {
 				});
 		}
 	}, [user]);
+
+	const Prices = {
+		personal: {
+			monthly: {
+				id: 'price_1J5q2yDMjD0UnVmMXzEWYDnl',
+				desc: 'Personal plan (monthly)',
+			},
+			annually: {
+				id: 'price_1J5q45DMjD0UnVmMQxXHKGAv',
+				desc: 'Personal plan (annually)',
+			},
+		},
+		team: {
+			monthly: {
+				id: 'price_1J5q3GDMjD0UnVmMlHc5Eedq',
+				desc: 'Team plan (monthly)',
+			},
+			annually: {
+				id: 'price_1J5q8zDMjD0UnVmMqsngM91X',
+				desc: 'Team plan (annually)',
+			},
+		},
+		pro: {
+			monthly: {
+				id: 'price_1J6KRuDMjD0UnVmMIItaOdT3',
+				desc: 'Pro plan (monthly)',
+			},
+			annually: {
+				id: 'price_1J5q9VDMjD0UnVmMIQtVDSZ9',
+				desc: 'Pro plan (annually)',
+			},
+		},
+	};
 
 	const pricing = {
 		monthly: {
@@ -89,12 +121,12 @@ const Pricing = (): JSX.Element => {
 			{!flat && (
 				<div className="flex justify-between max-w-xs m-auto mb-3">
 					<div>
-						<p className={`${enabled ? 'text-gray-500' : null}`}>Billed monthly</p>
+						<p className={`${yearly ? 'text-gray-500' : null}`}>Billed monthly</p>
 					</div>
 					<div>
 						<Switch
-							checked={enabled}
-							onChange={setEnabled}
+							checked={yearly}
+							onChange={setyearly}
 							className={`bg-primary relative inline-flex flex-shrink-0 h-[38px] w-[74px] 
             border-2 border-transparent rounded-full cursor-pointer transition-colors 
             ease-in-out duration-200 focus:outline-none focus-visible:ring-2  
@@ -103,13 +135,13 @@ const Pricing = (): JSX.Element => {
 							<span className="sr-only">Switch bill</span>
 							<span
 								aria-hidden="true"
-								className={`${enabled ? 'translate-x-9' : 'translate-x-0'}
+								className={`${yearly ? 'translate-x-9' : 'translate-x-0'}
             pointer-events-none inline-block h-[34px] w-[34px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200`}
 							/>
 						</Switch>
 					</div>
 					<div>
-						<p className={`${!enabled ? 'text-gray-500' : null}`}>Billed annually</p>
+						<p className={`${!yearly ? 'text-gray-500' : null}`}>Billed annually</p>
 					</div>
 				</div>
 			)}
@@ -120,7 +152,7 @@ const Pricing = (): JSX.Element => {
 						<h3 className="text-center font-bold text-4xl mb-5">
 							{flat
 								? pricing.flat.personal
-								: enabled
+								: yearly
 								? pricing.yearly.personal
 								: pricing.monthly.personal}
 						</h3>
@@ -145,7 +177,7 @@ const Pricing = (): JSX.Element => {
 										: (e) =>
 												handleSubmit(
 													e,
-													enabled ? Prices.personal.annually.id : Prices.personal.monthly.id
+													yearly ? Prices.personal.annually.id : Prices.personal.monthly.id
 												)
 									: () => {
 											router.push('/auth');
@@ -160,7 +192,7 @@ const Pricing = (): JSX.Element => {
 					<div className="w-full flex-grow">
 						<h2 className="text-center font-bold uppercase mb-4">Team</h2>
 						<h3 className="text-center font-bold text-4xl mb-5">
-							{flat ? pricing.flat.team : enabled ? pricing.yearly.team : pricing.monthly.team}
+							{flat ? pricing.flat.team : yearly ? pricing.yearly.team : pricing.monthly.team}
 						</h3>
 						<ul className="text-sm px-5 mb-8 text-left">
 							<li className="leading-tight">
@@ -190,7 +222,7 @@ const Pricing = (): JSX.Element => {
 												portal();
 										  }
 										: (e) =>
-												handleSubmit(e, enabled ? Prices.team.annually.id : Prices.team.monthly.id)
+												handleSubmit(e, yearly ? Prices.team.annually.id : Prices.team.monthly.id)
 									: () => {
 											router.push('/auth');
 									  }
@@ -204,7 +236,7 @@ const Pricing = (): JSX.Element => {
 					<div className="w-full flex-grow">
 						<h2 className="text-center font-bold uppercase mb-4">Pro</h2>
 						<h3 className="text-center font-bold text-4xl mb-5">
-							{flat ? pricing.flat.pro : enabled ? pricing.yearly.pro : pricing.monthly.pro}
+							{flat ? pricing.flat.pro : yearly ? pricing.yearly.pro : pricing.monthly.pro}
 						</h3>
 						<ul className="text-sm px-5 mb-8 text-left">
 							<li className="leading-tight">
@@ -234,7 +266,7 @@ const Pricing = (): JSX.Element => {
 												portal();
 										  }
 										: (e) =>
-												handleSubmit(e, enabled ? Prices.pro.annually.id : Prices.pro.monthly.id)
+												handleSubmit(e, yearly ? Prices.pro.annually.id : Prices.pro.monthly.id)
 									: () => {
 											router.push('/auth');
 									  }

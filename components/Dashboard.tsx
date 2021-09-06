@@ -11,7 +11,6 @@ import Avatar from './Avatar';
 import Image from 'next/image';
 import PaymentModal from './PaymentModal';
 import Plan from 'public/plan.svg';
-import { PriceIds } from 'utils/priceList';
 import { Session } from '@supabase/gotrue-js';
 import { supabase } from '../utils/supabaseClient';
 import { toast } from 'react-toastify';
@@ -20,10 +19,10 @@ import { useRouter } from 'next/router';
 type DashboardProps = {
 	profile: { username: string; website: string; avatar_url: string };
 	session: Session;
-	plan: string;
+	planName: string;
 };
 
-const Dashboard = ({ profile, session, plan }: DashboardProps): JSX.Element => {
+const Dashboard = ({ profile, session, planName }: DashboardProps): JSX.Element => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const [username, setUsername] = useState(profile.username);
@@ -139,7 +138,7 @@ const Dashboard = ({ profile, session, plan }: DashboardProps): JSX.Element => {
 				<Image src={Plan} alt="credit card" />
 				<div className="flex flex-col m-auto">
 					<h2>Your current plan</h2>
-					<p className="">{plan ? PriceIds[plan] : 'Free tier'}</p>
+					<p className="">{planName}</p>
 				</div>
 			</div>
 			<PaymentModal open={payment} setPayment={setPayment} />
