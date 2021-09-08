@@ -11,18 +11,18 @@ import { useRouter } from 'next/router';
 
 const DashboardPage = ({
 	user,
-	plan,
 	profile,
+	planName,
 }: {
 	user: {
 		id: string;
 	};
-	plan: string;
 	profile: {
 		username: string;
 		website: string;
 		avatar_url: string;
 	};
+	planName: string;
 }): JSX.Element => {
 	const [session, setSession] = useState(supabase.auth.session());
 	const router = useRouter();
@@ -56,8 +56,8 @@ const DashboardPage = ({
 							<Dashboard
 								key={user.id || undefined}
 								session={session}
-								plan={plan}
 								profile={profile}
+								planName={planName}
 							/>
 						)}
 					</>
@@ -82,10 +82,11 @@ export async function getServerSideProps(context: NextPageContext) {
 	if (user) {
 		const { data: plan } = await supabaseAdmin
 			.from('subscriptions')
-			.select('subscription')
+			.select('subscription, paid_user')
 			.eq('id', user.id)
 			.single();
 
+		console.log(plan);
 		// Check the subscription plan. If it doesnt exist, return null
 		const subscription = plan?.subscription
 			? await stripe.subscriptions.retrieve(plan.subscription)
@@ -102,6 +103,12 @@ export async function getServerSideProps(context: NextPageContext) {
 				user,
 				plan: subscription?.items.data[0].price.id ? subscription?.items.data[0].price.id : null,
 				profile,
+				// Retrieve the name of the subscription plan (Don't forget to add nickname to your prices)
+				planName: plan.paid_user
+					? subscription?.items.data[0].plan.nickname
+						? subscription?.items.data[0].plan.nickname
+						: '[DEV] Please add a description for your prices'
+					: 'Free Tier',
 			},
 		};
 	}
