@@ -1,5 +1,9 @@
 ## Welcome to SupaNexTail!
 
+## Documentation 2.0
+A new documentation is available here : https://doc.supanextail.dev/ 
+
+
 ## ![](https://lh4.googleusercontent.com/0qrns6BGMEh95de3BAE12YRRJceEACWdH09Yj6r7J5MswKG_R6zv7jcHEOUWFiWa7_2Yr6n6m0gSHg7iLa4lb-E0jEqZH6uJHJg3aNjbYO9LGWtCVV4dIi6BKKYUAMiFfvEOtefl)
 
 ### What is SupaNexTail?
