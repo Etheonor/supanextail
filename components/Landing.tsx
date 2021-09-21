@@ -7,12 +7,12 @@ import supabaseImage from 'public/landing/supabase.svg';
 
 const Landing = (): JSX.Element => (
 	<div className="mt-10 mb-20 text-base-content w-full">
-		<div className="flex max-w-6xl m-auto justify-around">
+		<div className="flex max-w-6xl m-auto justify-around flex-wrap">
 			<div className="max-w-sm mr-16 my-auto">
-				<h2 className="text-4xl font-bold font-title text-left leading-normal">
+				<h2 className="text-4xl font-bold font-title text-center lg:text-left leading-normal">
 					Build your <span className="text-primary">SaaS</span> in the blink of an eye!
 				</h2>
-				<p>
+				<p className="text-center lg:text-left">
 					SupaNexTail got your back, and takes care of the initial setup, sometimes time consuming,
 					but essential to your success.
 				</p>
