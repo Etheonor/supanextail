@@ -86,6 +86,7 @@ export async function getServerSideProps(context: NextPageContext) {
 			.eq('id', user.id)
 			.single();
 
+		console.log(plan);
 		// Check the subscription plan. If it doesnt exist, return null
 		const subscription = plan?.subscription
 			? await stripe.subscriptions.retrieve(plan.subscription)
