@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 
 test('basic test', async ({ page }) => {
 	const myURL: string = process.env.PLAYWRIGHT_TEST_BASE_URL
