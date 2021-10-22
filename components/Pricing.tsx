@@ -180,7 +180,7 @@ const Pricing = (): JSX.Element => {
 													yearly ? Prices.personal.annually.id : Prices.personal.monthly.id
 												)
 									: () => {
-											router.push('/auth');
+											router.push('/signup');
 									  }
 							}
 						>
@@ -224,7 +224,7 @@ const Pricing = (): JSX.Element => {
 										: (e) =>
 												handleSubmit(e, yearly ? Prices.team.annually.id : Prices.team.monthly.id)
 									: () => {
-											router.push('/auth');
+											router.push('/signup');
 									  }
 							}
 						>
@@ -268,7 +268,7 @@ const Pricing = (): JSX.Element => {
 										: (e) =>
 												handleSubmit(e, yearly ? Prices.pro.annually.id : Prices.pro.monthly.id)
 									: () => {
-											router.push('/auth');
+											router.push('/signup');
 									  }
 							}
 						>

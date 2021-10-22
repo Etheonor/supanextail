@@ -104,7 +104,7 @@ export async function getServerSideProps(context: NextPageContext) {
 				plan: subscription?.items.data[0].price.id ? subscription?.items.data[0].price.id : null,
 				profile,
 				// Retrieve the name of the subscription plan (Don't forget to add nickname to your prices)
-				planName: plan.paid_user
+				planName: plan?.paid_user
 					? subscription?.items.data[0].plan.nickname
 						? subscription?.items.data[0].plan.nickname
 						: '[DEV] Please add a description for your prices'

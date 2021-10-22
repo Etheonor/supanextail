@@ -20,11 +20,14 @@ const SignUpPanel = ({ signIn, signUp }: SignUpPanelProps): JSX.Element => {
 			email,
 			password,
 		}).then((result) => {
-			if (result.data) {
-				router.push('/');
-			}
+			console.log(result);
 			if (result.error) {
 				toast.error(result.error.message);
+			} else if (result.data?.confirmation_sent_at) {
+				console.log(result.data.confirmation_sent_at);
+				toast.success('A confirmation email has been sent to you, watch your mailbox!');
+			} else if (result.data) {
+				router.push('/');
 			}
 		});
 	};
