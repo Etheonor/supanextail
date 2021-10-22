@@ -24,11 +24,15 @@ const Nav = ({ user, signOut }: NavProps): JSX.Element => {
 			)}
 
 			<Link href="/pricing">
-				<a className="nav-btn">Pricing</a>
+				<a id="pricing" className="nav-btn">
+					Pricing
+				</a>
 			</Link>
 
 			<Link href="/contact">
-				<a className="nav-btn">Contact Us</a>
+				<a id="contact" className="nav-btn">
+					Contact Us
+				</a>
 			</Link>
 
 			{user ? (
@@ -39,10 +43,14 @@ const Nav = ({ user, signOut }: NavProps): JSX.Element => {
 			) : (
 				<>
 					<Link href="/login">
-						<a className="nav-btn">Login</a>
+						<a id="login" className="nav-btn">
+							Login
+						</a>
 					</Link>
 					<Link href="/signup">
-						<a className="btn btn-sm btn-primary font-body normal-case font-normal">Sign Up</a>
+						<a id="signup" className="btn btn-sm btn-primary font-body normal-case font-normal">
+							Sign Up
+						</a>
 					</Link>
 				</>
 			)}

@@ -1,8 +1,13 @@
 import { expect, test } from '@playwright/test';
 
 test('basic test', async ({ page }) => {
-	console.log(process.env.PLAYWRIGHT_TEST_BASE_URL);
-	await page.goto('https://playwright.dev/');
-	const title = page.locator('.navbar__inner .navbar__title');
-	await expect(title).toHaveText('Playwright');
+	const myURL: string = process.env.PLAYWRIGHT_TEST_BASE_URL
+		? process.env.PLAYWRIGHT_TEST_BASE_URL
+		: ('http://localhost:3000/' as string);
+
+	await page.goto(myURL);
+	// Go through all pages
+	await page.click('#login');
+	await page.click('#pricing');
+	await page.click('#signup');
 });
