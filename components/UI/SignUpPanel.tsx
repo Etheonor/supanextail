@@ -65,6 +65,7 @@ const SignUpPanel = ({ signIn, signUp }: SignUpPanelProps): JSX.Element => {
 
 				<div>
 					<button
+						id="loginBtn"
 						className="btn btn-primary w-full"
 						onClick={(event) => {
 							signup(event);

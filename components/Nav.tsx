@@ -36,7 +36,7 @@ const Nav = ({ user, signOut }: NavProps): JSX.Element => {
 			</Link>
 
 			{user ? (
-				<button className="btn btn-xs text-xs" onClick={() => signOut()}>
+				<button id="logOutBtn" className="btn btn-xs text-xs" onClick={() => signOut()}>
 					<LogOut size={12} className="mr-2" />
 					Logout
 				</button>
