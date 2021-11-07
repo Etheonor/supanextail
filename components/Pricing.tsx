@@ -9,17 +9,14 @@ https://dashboard.stripe.com/test/settings/billing/portal
 import { getSub, supabase } from 'utils/supabaseClient';
 import { useEffect, useState } from 'react';
 
-import { Switch } from '@headlessui/react';
 import axios from 'axios';
 import router from 'next/router';
 import { useAuth } from 'utils/AuthContext';
 
 const Pricing = (): JSX.Element => {
-	const [yearly, setyearly] = useState(false);
 	const { user, session } = useAuth();
 	const [customerId, setCustomerId] = useState(null);
 	const [sub, setSub] = useState(false);
-	const flat = false; // Switch between subscription system or flat prices
 
 	const portal = () => {
 		axios
@@ -45,57 +42,6 @@ const Pricing = (): JSX.Element => {
 		}
 	}, [user]);
 
-	const Prices = {
-		personal: {
-			monthly: {
-				id: 'price_1J5q2yDMjD0UnVmMXzEWYDnl',
-				desc: 'Personal plan (monthly)',
-			},
-			annually: {
-				id: 'price_1J5q45DMjD0UnVmMQxXHKGAv',
-				desc: 'Personal plan (annually)',
-			},
-		},
-		team: {
-			monthly: {
-				id: 'price_1J5q3GDMjD0UnVmMlHc5Eedq',
-				desc: 'Team plan (monthly)',
-			},
-			annually: {
-				id: 'price_1J5q8zDMjD0UnVmMqsngM91X',
-				desc: 'Team plan (annually)',
-			},
-		},
-		pro: {
-			monthly: {
-				id: 'price_1J6KRuDMjD0UnVmMIItaOdT3',
-				desc: 'Pro plan (monthly)',
-			},
-			annually: {
-				id: 'price_1J5q9VDMjD0UnVmMIQtVDSZ9',
-				desc: 'Pro plan (annually)',
-			},
-		},
-	};
-
-	const pricing = {
-		monthly: {
-			personal: '$5/mo',
-			team: '$15/mo',
-			pro: '$35/mo',
-		},
-		yearly: {
-			personal: '$50/yr',
-			team: '$150/yr',
-			pro: '$350/yr',
-		},
-		flat: {
-			personal: '€49',
-			team: '€99',
-			pro: '€149',
-		},
-	};
-
 	const handleSubmit = async (e: React.SyntheticEvent<HTMLButtonElement>, priceId: string) => {
 		e.preventDefault();
 		// Create a Checkout Session. This will redirect the user to the Stripe website for the payment.
@@ -106,174 +52,91 @@ const Pricing = (): JSX.Element => {
 				customerId,
 				userId: user.id,
 				tokenId: session.access_token,
-				pay_mode: flat ? 'payment' : 'subscription',
+				pay_mode: 'subscription',
 			})
 			.then((result) => router.push(result.data.url));
 	};
 	return (
-		<div className="w-full mx-auto px-5 py-10 mb-10">
-			<div className="text-center max-w-xl mx-auto">
-				<h1 className="text-3xl sm:text-5xl font-bold font-title mb-5">Pricing</h1>
-				<h3 className="text-lg font-light leading-8 p-3 mb-5">
-					This is an example of a pricing page. You can choose a payment method, monthly or yearly.
-				</h3>
-			</div>
-			{!flat && (
-				<div className="flex justify-between max-w-xs m-auto mb-3">
-					<div>
-						<p className={`${yearly ? 'text-gray-500' : null}`}>Billed monthly</p>
-					</div>
-					<div>
-						<Switch
-							checked={yearly}
-							onChange={setyearly}
-							className={`bg-primary relative inline-flex flex-shrink-0 h-[38px] w-[74px] 
-            border-2 border-transparent rounded-full cursor-pointer transition-colors 
-            ease-in-out duration-200 focus:outline-none focus-visible:ring-2  
-            focus-visible:ring-white focus-visible:ring-opacity-75`}
-						>
-							<span className="sr-only">Switch bill</span>
-							<span
-								aria-hidden="true"
-								className={`${yearly ? 'translate-x-9' : 'translate-x-0'}
-            pointer-events-none inline-block h-[34px] w-[34px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200`}
-							/>
-						</Switch>
-					</div>
-					<div>
-						<p className={`${!yearly ? 'text-gray-500' : null}`}>Billed annually</p>
-					</div>
-				</div>
-			)}
-			<div className="max-w-4xl mx-auto md:flex space-x-4">
-				<div className="w-full md:w-1/3 md:max-w-none px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
-					<div className="w-full flex-grow">
-						<h2 className="text-center font-bold uppercase mb-4">Personal</h2>
-						<h3 className="text-center font-bold text-4xl mb-5">
-							{flat
-								? pricing.flat.personal
-								: yearly
-								? pricing.yearly.personal
-								: pricing.monthly.personal}
-						</h3>
-						<ul className="text-sm px-5 mb-8 text-left">
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> A cool feature
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Another feature
-							</li>
+		<div>
+			<div className="container px-6 py-8 mx-auto text-base-100">
+				<h2 className="text-3xl sm:text-4xl text-center mb-5 mt-0 font-bold font-title text-base-content">
+					Pricing
+				</h2>
+				<div className="mt-16 flex flex-col items-center justify-center space-y-8 lg:-mx-4 lg:flex-row lg:items-stretch lg:space-y-0">
+					<div className="flex flex-col w-full max-w-sm p-8 space-y-8 text-center bg-base-100 rounded-lg lg:mx-4 shadow-lg text-base-content">
+						<div className="flex-shrink-0">
+							<h3 className="inline-flex items-center badge-neutral badge badge-lg bg-base-content text-base-100">
+								Casual
+							</h3>
+						</div>
+						<div className="flex-shrink-0">
+							<span className="pt-2 text-4xl font-bold uppercase">FREE</span>
+						</div>
+						<ul className="flex-1 space-y-4 text-base-content">
+							<li>Up to 10 projects</li>
+							<li>Up to 20 collaborators</li>
+							<li>10Gb of storage</li>
 						</ul>
+
+						<button className="btn btn-primary">Start for free</button>
 					</div>
-					<div className="w-full">
-						<button
-							className="btn btn-primary w-full"
-							onClick={
-								user
-									? sub
-										? () => {
-												portal();
-										  }
-										: (e) =>
-												handleSubmit(
-													e,
-													yearly ? Prices.personal.annually.id : Prices.personal.monthly.id
-												)
-									: () => {
-											router.push('/signup');
-									  }
-							}
-						>
-							{user ? (sub ? 'Upgrade' : 'Buy Now') : 'Register'}
-						</button>
-					</div>
-				</div>
-				<div className="w-full md:w-1/3 md:max-w-none px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
-					<div className="w-full flex-grow">
-						<h2 className="text-center font-bold uppercase mb-4">Team</h2>
-						<h3 className="text-center font-bold text-4xl mb-5">
-							{flat ? pricing.flat.team : yearly ? pricing.yearly.team : pricing.monthly.team}
-						</h3>
-						<ul className="text-sm px-5 mb-8 text-left">
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> All basic features
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Dolor sit amet
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Consectetur
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Adipisicing
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Elit repellat
-							</li>
+
+					<div className="flex flex-col w-full max-w-sm p-8 space-y-8 text-center bg-base-100 rounded-lg lg:mx-4 shadow-lg text-base-content">
+						<div className="flex-shrink-0">
+							<h3 className="inline-flex items-center badge-neutral badge badge-lg bg-base-content text-base-100">
+								Professional
+							</h3>
+						</div>
+						<div className="flex-shrink-0">
+							<span className="pt-2 text-4xl font-bold uppercase">$4.90</span>
+							<span>/month</span>
+						</div>
+						<ul className="flex-1 space-y-4 text-base-content">
+							<li>Up to 30 projects</li>
+							<li>Up to 25 collaborators</li>
+							<li>100Gb of storage</li>
+							<li>Real-time collaborations</li>
 						</ul>
+						{user ? (
+							<button
+								className="btn btn-primary"
+								onClick={(e) => {
+									handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
+								}}
+							>
+								Subscribe
+							</button>
+						) : (
+							<button className="btn btn-primary" onClick={() => router.push('/login')}>
+								Log in
+							</button>
+						)}
 					</div>
-					<div className="w-full">
-						<button
-							className="btn btn-primary w-full"
-							onClick={
-								user
-									? sub
-										? () => {
-												portal();
-										  }
-										: (e) =>
-												handleSubmit(e, yearly ? Prices.team.annually.id : Prices.team.monthly.id)
-									: () => {
-											router.push('/signup');
-									  }
-							}
-						>
-							{user ? (sub ? 'Upgrade' : 'Buy Now') : 'Register'}
-						</button>
-					</div>
-				</div>
-				<div className="w-full md:w-1/3 md:max-w-none px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
-					<div className="w-full flex-grow">
-						<h2 className="text-center font-bold uppercase mb-4">Pro</h2>
-						<h3 className="text-center font-bold text-4xl mb-5">
-							{flat ? pricing.flat.pro : yearly ? pricing.yearly.pro : pricing.monthly.pro}
-						</h3>
-						<ul className="text-sm px-5 mb-8 text-left">
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Lorem ipsum
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Dolor sit amet
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Consectetur
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Adipisicing
-							</li>
-							<li className="leading-tight">
-								<i className="mdi mdi-check-bold text-lg" /> Much more...
-							</li>
+
+					<div className="flex flex-col w-full max-w-sm p-8 space-y-8 text-center bg-base-100 rounded-lg lg:mx-4 shadow-lg text-base-content">
+						<div className="flex-shrink-0">
+							<h3 className="inline-flex items-center badge-neutral badge badge-lg bg-base-content text-base-100">
+								Business
+							</h3>
+						</div>
+						<div className="flex-shrink-0">
+							<span className="pt-2 text-4xl font-bold uppercase">$24.90</span>
+							<span>/month</span>
+						</div>
+						<ul className="flex-1 space-y-4 text-base-content">
+							<li>Up to 60 projects</li>
+							<li>Up to 200 collaborators</li>
+							<li>1Tb of storage</li>
+							<li>Real-time collaborations</li>
 						</ul>
-					</div>
-					<div className="w-full">
-						<button
-							className="btn btn-primary w-full"
-							onClick={
-								user
-									? sub
-										? () => {
-												portal();
-										  }
-										: (e) =>
-												handleSubmit(e, yearly ? Prices.pro.annually.id : Prices.pro.monthly.id)
-									: () => {
-											router.push('/signup');
-									  }
-							}
-						>
-							{user ? (sub ? 'Upgrade' : 'Buy Now') : 'Register'}
-						</button>
+
+						{user ? (
+							<button className="btn btn-primary">Subscribe</button>
+						) : (
+							<button className="btn btn-primary" onClick={() => router.push('/login')}>
+								Log in
+							</button>
+						)}
 					</div>
 				</div>
 			</div>
