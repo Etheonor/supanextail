@@ -18,16 +18,6 @@ const Pricing = (): JSX.Element => {
 	const [customerId, setCustomerId] = useState(null);
 	const [sub, setSub] = useState(false);
 
-	const portal = () => {
-		axios
-			.post('/api/stripe/customer-portal', {
-				customerId,
-			})
-			.then((result) => {
-				router.push(result.data.url);
-			});
-	};
-
 	useEffect(() => {
 		if (user) {
 			getSub().then((result) => setSub(result));
@@ -45,16 +35,25 @@ const Pricing = (): JSX.Element => {
 	const handleSubmit = async (e: React.SyntheticEvent<HTMLButtonElement>, priceId: string) => {
 		e.preventDefault();
 		// Create a Checkout Session. This will redirect the user to the Stripe website for the payment.
-		axios
-			.post('/api/stripe/create-checkout-session', {
-				priceId,
-				email: user.email,
-				customerId,
-				userId: user.id,
-				tokenId: session.access_token,
-				pay_mode: 'subscription',
-			})
-			.then((result) => router.push(result.data.url));
+		if (sub) {
+			axios
+				.post('/api/stripe/customer-portal', {
+					customerId,
+				})
+				.then((result) => {
+					router.push(result.data.url);
+				});
+		} else
+			axios
+				.post('/api/stripe/create-checkout-session', {
+					priceId,
+					email: user.email,
+					customerId,
+					userId: user.id,
+					tokenId: session.access_token,
+					pay_mode: 'subscription',
+				})
+				.then((result) => router.push(result.data.url));
 	};
 	return (
 		<div>
@@ -104,7 +103,7 @@ const Pricing = (): JSX.Element => {
 									handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
 								}}
 							>
-								Subscribe
+								{sub ? 'Handle subscription' : 'Subscribe'}
 							</button>
 						) : (
 							<button className="btn btn-primary" onClick={() => router.push('/login')}>
@@ -131,7 +130,14 @@ const Pricing = (): JSX.Element => {
 						</ul>
 
 						{user ? (
-							<button className="btn btn-primary">Subscribe</button>
+							<button
+								className="btn btn-primary"
+								onClick={(e) => {
+									handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
+								}}
+							>
+								{sub ? 'Handle subscription' : 'Subscribe'}
+							</button>
 						) : (
 							<button className="btn btn-primary" onClick={() => router.push('/login')}>
 								Log in
