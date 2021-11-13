@@ -15,7 +15,7 @@ import { useAuth } from 'utils/AuthContext';
 
 const Pricing = (): JSX.Element => {
 	const { user, session } = useAuth();
-	const [customerId, setCustomerId] = useState(null);
+	const [customerId, setCustomerId] = useState<null | string>(null);
 	const [sub, setSub] = useState(false);
 
 	useEffect(() => {
