@@ -25,9 +25,9 @@ type DashboardProps = {
 const Dashboard = ({ profile, session, planName }: DashboardProps): JSX.Element => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const [username, setUsername] = useState(profile.username);
-	const [website, setWebsite] = useState(profile.website);
-	const [avatar_url, setAvatarUrl] = useState(profile.avatar_url);
+	const [username, setUsername] = useState(profile?.username || '');
+	const [website, setWebsite] = useState(profile?.website || '');
+	const [avatar_url, setAvatarUrl] = useState(profile?.avatar_url || '');
 	const [payment, setPayment] = useState(false);
 
 	useEffect(() => {
