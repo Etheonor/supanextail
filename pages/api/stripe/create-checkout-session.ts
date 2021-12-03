@@ -38,7 +38,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						payment_method_types: ['card'],
 						client_reference_id: req.body.userId,
 						metadata: {
-							token: req.body.tokenId,
 							priceId: req.body.priceId,
 						},
 						customer: req.body.customerId,
@@ -61,7 +60,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						customer_email: req.body.email,
 						client_reference_id: req.body.userId,
 						metadata: {
-							token: req.body.tokenId,
 							priceId: req.body.priceId,
 						},
 						line_items: [
