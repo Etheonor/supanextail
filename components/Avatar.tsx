@@ -33,8 +33,10 @@ const Avatar = ({ url, size, onUpload }: AvatarProps): JSX.Element => {
 			if (error) {
 				throw error;
 			}
-			const url = URL.createObjectURL(data);
-			setAvatarUrl(url);
+			if (data) {
+				const url = URL.createObjectURL(data);
+				setAvatarUrl(url);
+			}
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				console.log('Error downloading image: ', error.message);
