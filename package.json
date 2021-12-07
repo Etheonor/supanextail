@@ -53,9 +53,24 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sonarjs": "^0.11.0",
+    "eslint-plugin-unicorn": "^39.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
     "postcss": "^8.3.11",
     "prettier": "^2.5.1",
     "tailwindcss": "^2.2.19"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint '*/**/*.{js,jsx,ts,tsx}' --fix"
+    ]
   }
 }

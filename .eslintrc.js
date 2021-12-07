@@ -17,6 +17,7 @@ module.exports = {
         node: true,
         es6: true,
       },
+      plugins: ['simple-import-sort'],
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -25,6 +26,9 @@ module.exports = {
         'plugin:jsx-a11y/recommended',
         'prettier/@typescript-eslint',
         'plugin:prettier/recommended',
+        'plugin:sonarjs/recommended',
+        'plugin:unicorn/recommended',
+        'plugin:security/recommended',
       ],
       rules: {
         'react/prop-types': 'off',
