@@ -1,8 +1,8 @@
-## Welcome to SupaNexTail!
+## Welcome to SupaNexTail
 
 ## Documentation 2.0
-A new documentation is available here : https://doc.supanextail.dev/ 
 
+A new documentation is available here : <https://doc.supanextail.dev/>
 
 ## ![](https://lh4.googleusercontent.com/0qrns6BGMEh95de3BAE12YRRJceEACWdH09Yj6r7J5MswKG_R6zv7jcHEOUWFiWa7_2Yr6n6m0gSHg7iLa4lb-E0jEqZH6uJHJg3aNjbYO9LGWtCVV4dIi6BKKYUAMiFfvEOtefl)
 
@@ -18,37 +18,37 @@ Simply follow the installation process. You need to have some knowledge with Rea
 
 #### SupaNexTail project
 
-You'll need to fork this repository. I suggest to keep your repository sync with SupaNexTail, in order to get all future updates. 
+You'll need to fork this repository. I suggest to keep your repository sync with SupaNexTail, in order to get all future updates.
 
-To do that, you'll have extended information on this page: https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/syncing-a-fork
+To do that, you'll have extended information on this page: <https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/syncing-a-fork>
 
 #### Supabase
 
 You need to create a Supabase project and make a SQL Query with the « SetupSupabaseSQL.sql » (You can copy the content and create a query in the Supabase dashboard)
 
-1.  Go to https://supabase.io/
-2.  Create an account and go to your dashboard
+1. Go to <https://supabase.io/>
+2. Create an account and go to your dashboard
 
 ![](https://lh5.googleusercontent.com/8Ry_yqGbMp7-8obVn_62kE4pcyNf5u0FkWe_-Mhec1bHMoGJtCG18HUH2j8DwOyuplOpKoCgoMSOtFvTA3G4kkpDAITo_xI-RgkHo5Brh2aSgcqJjs21ZDsqXD9GxQORw4tn3sPH)
 
-3.  When your project is created, go to the SQL tab and create a new query
+3. When your project is created, go to the SQL tab and create a new query
 
 ![](https://lh6.googleusercontent.com/kg7pBNhb9P49vYOMMVhsD4JiMxXSqRSLFnU_BEDTUH19CYUVEPRmaxg5WC3Ef_M2e5Y23DhV6__h9xFKn2GgXkltWBV4su-h8s8qdsP1GaAGkL1Q7cjqQ-TN57VfnGLD1HZOiCDp)
 
-4.  Paste the content of setupSupabaseSQL.sql and run the query
-5.  Your Supabase account is ready! Don’t forget to retrieve your env variables in settings -> API
+4. Paste the content of setupSupabaseSQL.sql and run the query
+5. Your Supabase account is ready! Don’t forget to retrieve your env variables in settings -> API
 
 ![](https://lh3.googleusercontent.com/FVmq_BSn4TB6ISx8B7WLa8biEm8kvcexqqzBMLmBtZt30NDz58Q7MV5umD0G_VccZ8LYmE_33z46Z-eLcR4Smg_mnKsU0ybC__tV__Jaet6T_YSJAcebbijvvyFUDLpBOTRty4pV)
 
 #### Stripe
 
-1.  Create a Stripe account and a new project
-2.  Create Products (as many as you want). For example SupaNexTail have 6 prices, 3 monthly plans and 3 annually plans.
+1. Create a Stripe account and a new project
+2. Create Products (as many as you want). For example SupaNexTail have 6 prices, 3 monthly plans and 3 annually plans.
 
 ![](https://lh3.googleusercontent.com/G_MYkYXRoGJb2VhWf9GIP6J5Iis0F2gg1OMdHa6BY-3Rb3VUVGg-fUUOZX6wG1AjFLu-AvgOEml6MkivEZ_8WWaBSrp3OW8lDp7c00o1-TFAa-Z0vCcuL4YTUQcTCuVYQkBbA_Wx)
 
-3.  You’ll need to retrieve the price ID from each product on Stripe and paste them on utils/priceListjs. Of course you can handle the prices differently if you want. You’ll have to update the Pricing component too if you have a different amount of price ids.
-4.  Don’t forget to retrieve the variables from Stripe
+3. You’ll need to retrieve the price ID from each product on Stripe and paste them on utils/priceListjs. Of course you can handle the prices differently if you want. You’ll have to update the Pricing component too if you have a different amount of price ids.
+4. Don’t forget to retrieve the variables from Stripe
 
 ![](https://lh4.googleusercontent.com/ASiVfOBvKvD_vnKL7rOiVFlyiG6kR_95e6kQHyv7H3grlNt5PRGBhv_pmszrZeJmdF5sWRq41IV4QdwzcoMW0esb9l5pR_aVCCym5I5ksipGhmSCVVaB4gGNa17GUfFD-0DL7HuP) 5. You also need to configure the webhook section. Two events are needed
 
@@ -67,11 +67,11 @@ If you want to use the mailing list system, you’ll need to do a little bit mor
 
 The backend is ready to use. You just have to add your SENDGRID_MAILING_ID env variables (more explanation about it in the article).
 
-#### Misc.
+#### Misc
 
 - Supabase variables are mandatory, you can skip sendgrid as it’s just for the contact form. Stripe variables are needed if you want the subscription system.
 - Don’t forget to do an `npm install` locally
-- You can launch the website locally with `npm run dev `
+- You can launch the website locally with `npm run dev`
 - If you want to setup the website with Vercel, you can install the Vercel CLI and simply enter the command `vercel`
 
 Notes:

@@ -7,28 +7,28 @@ import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
 
 const theme = {
-	primary: 'supaTheme',
-	secondary: 'dark',
+  primary: 'supaTheme',
+  secondary: 'dark',
 };
 
 const ThemeToggle = (): JSX.Element => {
-	const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme || '');
-	const inactiveTheme = activeTheme === 'supaTheme' ? 'dark' : 'supaTheme';
+  const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme || '');
+  const inactiveTheme = activeTheme === 'supaTheme' ? 'dark' : 'supaTheme';
 
-	useEffect(() => {
-		document.body.dataset.theme = activeTheme;
-		window.localStorage.setItem('theme', activeTheme);
-	}, [activeTheme]);
+  useEffect(() => {
+    document.body.dataset.theme = activeTheme;
+    window.localStorage.setItem('theme', activeTheme);
+  }, [activeTheme]);
 
-	return (
-		<button className="flex ml-3" onClick={() => setActiveTheme(inactiveTheme)}>
-			{activeTheme === theme.secondary ? (
-				<HiOutlineSun className="m-auto text-xl hover:text-accent" />
-			) : (
-				<HiOutlineMoon className="m-auto text-xl hover:text-accent" />
-			)}
-		</button>
-	);
+  return (
+    <button className="flex ml-3" onClick={() => setActiveTheme(inactiveTheme)}>
+      {activeTheme === theme.secondary ? (
+        <HiOutlineSun className="m-auto text-xl hover:text-accent" />
+      ) : (
+        <HiOutlineMoon className="m-auto text-xl hover:text-accent" />
+      )}
+    </button>
+  );
 };
 
 export default ThemeToggle;

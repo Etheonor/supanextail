@@ -10,23 +10,26 @@ You can setup basic rules for your headers/text here
 
 @layer base {
   h1 {
-    @apply text-5xl mb-5 font-bold font-title;
+    @apply mb-5 text-5xl font-bold font-title;
   }
+
   h2 {
-    @apply text-2xl mt-2 mb-3 font-title;
+    @apply mt-2 mb-3 text-2xl font-title;
   }
+
   p {
-    @apply text-left mb-5 font-body text-sm text-base-200 leading-loose;
+    @apply mb-5 text-sm leading-loose text-left font-body text-base-200;
   }
+
   ul {
-    @apply list-disc ml-10 mb-3 font-body text-sm text-base-200 leading-loose;
+    @apply mb-3 ml-10 text-sm leading-loose list-disc font-body text-base-200;
   }
 }
 
 .nav-btn {
   position: relative;
   text-decoration: none;
-  @apply text-base-200 my-auto;
+  @apply my-auto text-base-200;
 }
 
 .nav-btn::before {

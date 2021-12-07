@@ -1,4 +1,4 @@
-name: SupaNexTail-CI
+name: Real-Estate-Buddy-CI
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
 on: [deployment_status]
 jobs:

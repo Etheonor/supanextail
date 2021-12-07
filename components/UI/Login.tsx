@@ -39,7 +39,7 @@ const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
 	};
 
 	return (
-		<div className="p-10 bg-base-100 md:flex-1 rounded-md text-base-content shadow-md max-w-sm font-body">
+		<div className="max-w-sm p-10 rounded-md shadow-md bg-base-100 md:flex-1 text-base-content font-body">
 			{!forgot && (
 				<>
 					<h3 className="my-4 text-2xl font-semibold font-title">Account Login</h3>
@@ -86,7 +86,7 @@ const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
 
 						<div>
 							<button
-								className="btn btn-primary w-full"
+								className="w-full btn btn-primary"
 								onClick={(event) => {
 									login(event);
 								}}
@@ -102,7 +102,7 @@ const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
 							</span>
 							<div className="flex flex-col space-y-4">
 								<button
-									className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-base-200 rounded-md group hover:bg-base-300 focus:outline-none "
+									className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border rounded-md border-base-200 group hover:bg-base-300 focus:outline-none "
 									onClick={(event) => {
 										event.preventDefault();
 										signIn({ provider: 'google' });
@@ -140,7 +140,7 @@ const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
 
 						<div>
 							<button
-								className="btn btn-primary w-full btn-sm"
+								className="w-full btn btn-primary btn-sm"
 								onClick={(event) => {
 									event.preventDefault();
 									resetPasswordLogin();

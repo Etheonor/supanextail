@@ -31,7 +31,7 @@ const DashboardPage = ({
 		if (!user) {
 			router.push('/');
 		}
-	}, [user]);
+	}, [router, user]);
 
 	useEffect(() => {
 		setSession(supabase.auth.session());
@@ -86,7 +86,7 @@ export async function getServerSideProps(context: NextPageContext) {
 			.eq('id', user.id)
 			.single();
 
-		// Check the subscription plan. If it doesnt exist, return null
+		// Check the subscription plan. If it doesn't exist, return null
 		const subscription = plan?.subscription
 			? await stripe.subscriptions.retrieve(plan.subscription)
 			: null;

@@ -19,31 +19,31 @@ import { ToastContainer } from 'react-toastify';
 import { useAuth } from 'utils/AuthContext';
 
 type LayoutProps = {
-	children: JSX.Element;
+  children: JSX.Element;
 };
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
-	const { user, signOut } = useAuth();
+  const { user, signOut } = useAuth();
 
-	return (
-		<div className="min-h-screen w-full bg-base-100 text-base-content m-auto font-body">
-			<Head>
-				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-				<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-				<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-				<link rel="manifest" href="/site.webmanifest" />
-				<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-				<meta name="msapplication-TileColor" content="#da532c" />
-				<meta name="theme-color" content="#ffffff" />
-			</Head>
-			<div className="max-w-7xl flex flex-col min-h-screen mx-auto p-5">
-				<Nav user={user} signOut={signOut} />
-				<main className="flex-1">{children}</main>
-				<ToastContainer position="bottom-center" />
-				<Footer />
-			</div>
-		</div>
-	);
+  return (
+    <div className="w-full min-h-screen m-auto bg-base-100 text-base-content font-body">
+      <Head>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+      </Head>
+      <div className="flex flex-col min-h-screen p-5 mx-auto max-w-7xl">
+        <Nav user={user} signOut={signOut} />
+        <main className="flex-1">{children}</main>
+        <ToastContainer position="bottom-center" />
+        <Footer />
+      </div>
+    </div>
+  );
 };
 
 export default Layout;
