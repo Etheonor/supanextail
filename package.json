@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "eslint": "eslint . --fix",
-    "test": "playwright test"
+    "test": "playwright test",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
