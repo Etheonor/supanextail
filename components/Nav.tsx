@@ -2,18 +2,18 @@
 This is your Nav component. It contain a responsive navbar 
 */
 
-import { LogOut, Menu } from 'react-feather';
+import { LogOut, Menu } from 'react-feather'
 
-import Image from 'next/image';
-import Link from 'next/link';
-import Logo from 'public/logo.svg';
+import Image from 'next/image'
+import Link from 'next/link'
+import Logo from 'public/logo.svg'
 
-type NavProps = {
-  user: Record<string, unknown>;
-  signOut: () => void;
-};
+type NavProperties = {
+  user: Record<string, unknown>
+  signOut: () => void
+}
 
-const Nav = ({ user, signOut }: NavProps): JSX.Element => {
+const Nav = ({ user, signOut }: NavProperties): JSX.Element => {
   // Modify you menu directly here
   const NavMenu = (
     <>
@@ -36,7 +36,11 @@ const Nav = ({ user, signOut }: NavProps): JSX.Element => {
       </Link>
 
       {user ? (
-        <button id="logOutBtn" className="text-xs btn btn-xs" onClick={() => signOut()}>
+        <button
+          id="logOutBtn"
+          className="text-xs btn btn-xs"
+          onClick={() => signOut()}
+        >
           <LogOut size={12} className="mr-2" />
           Logout
         </button>
@@ -48,14 +52,17 @@ const Nav = ({ user, signOut }: NavProps): JSX.Element => {
             </a>
           </Link>
           <Link href="/signup">
-            <a id="signup" className="font-normal normal-case btn btn-sm btn-primary font-body">
+            <a
+              id="signup"
+              className="font-normal normal-case btn btn-sm btn-primary font-body"
+            >
               Sign Up
             </a>
           </Link>
         </>
       )}
     </>
-  );
+  )
 
   return (
     <nav className="w-full mb-2 navbar">
@@ -73,11 +80,13 @@ const Nav = ({ user, signOut }: NavProps): JSX.Element => {
           <div tabIndex={0} className="m-1 cursor-pointer">
             <Menu />
           </div>
-          <div className="w-24 mt-3 space-y-3 text-center menu dropdown-content">{NavMenu}</div>
+          <div className="w-24 mt-3 space-y-3 text-center menu dropdown-content">
+            {NavMenu}
+          </div>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

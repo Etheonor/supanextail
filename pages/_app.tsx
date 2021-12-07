@@ -1,8 +1,8 @@
-import './global.css';
+import './global.css'
 
-import { AppProps } from 'next/app';
-import { AuthProvider } from 'utils/AuthContext';
-import { DefaultSeo } from 'next-seo';
+import { AppProps } from 'next/app'
+import { AuthProvider } from 'utils/AuthContext'
+import { DefaultSeo } from 'next-seo'
 
 /* 
 Next-seo is integrated by default, if you want more information and how to
@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <Component {...pageProps} />
       </AuthProvider>
     </>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

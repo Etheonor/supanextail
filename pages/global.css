@@ -1,5 +1,5 @@
-@import "tailwindcss/tailwind.css";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;600;700;800&display=swap");
+@import 'tailwindcss/tailwind.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,7 +33,7 @@ You can setup basic rules for your headers/text here
 }
 
 .nav-btn::before {
-  content: "";
+  content: '';
   position: absolute;
   display: block;
   width: 100%;
@@ -50,5 +50,5 @@ You can setup basic rules for your headers/text here
 }
 
 .btn {
-  @apply font-normal
+  @apply font-normal;
 }

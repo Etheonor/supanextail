@@ -3,10 +3,13 @@
  * With Real Estate Buddy, we use SSR with the Dashboard page (pages/dashboard.js)
  */
 
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { supabase } from 'utils/supabaseClient';
+import { supabase } from 'utils/supabaseClient'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  supabase.auth.api.setAuthCookie(req, res);
+export default async function handler(
+  request: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
+  supabase.auth.api.setAuthCookie(request, res)
 }

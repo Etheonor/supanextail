@@ -10,27 +10,41 @@ You also have the head component containing all the favicon for different platfo
 The images are in the public folder.
 */
 
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 
-import Footer from './Footer';
-import Head from 'next/head';
-import Nav from './Nav';
-import { ToastContainer } from 'react-toastify';
-import { useAuth } from 'utils/AuthContext';
+import Footer from './Footer'
+import Head from 'next/head'
+import Nav from './Nav'
+import { ToastContainer } from 'react-toastify'
+import { useAuth } from 'utils/AuthContext'
 
-type LayoutProps = {
-  children: JSX.Element;
-};
+type LayoutProperties = {
+  children: JSX.Element
+}
 
-const Layout = ({ children }: LayoutProps): JSX.Element => {
-  const { user, signOut } = useAuth();
+const Layout = ({ children }: LayoutProperties): JSX.Element => {
+  const { user, signOut } = useAuth()
 
   return (
     <div className="w-full min-h-screen m-auto bg-base-100 text-base-content font-body">
       <Head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
@@ -43,7 +57,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
         <Footer />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

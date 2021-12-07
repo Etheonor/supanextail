@@ -7,18 +7,18 @@ You can select your auth providers, or just keep the email/password. You can
 check the providers available here: https://supabase.io/docs/guides/auth
 */
 
-import SignUpPanel from './UI/SignUpPanel';
-import { SupabaseClient } from '@supabase/supabase-js';
-import { supabase } from 'utils/supabaseClient';
-import { useAuth } from 'utils/AuthContext';
+import SignUpPanel from './UI/SignUpPanel'
+import { SupabaseClient } from '@supabase/supabase-js'
+import { supabase } from 'utils/supabaseClient'
+import { useAuth } from 'utils/AuthContext'
 
-type ContainerProps = {
-  children: JSX.Element;
-  supabaseClient: SupabaseClient;
-};
+type ContainerProperties = {
+  children: JSX.Element
+  supabaseClient: SupabaseClient
+}
 
-const Container = ({ children }: ContainerProps): JSX.Element => {
-  const { user, signOut } = useAuth();
+const Container = ({ children }: ContainerProperties): JSX.Element => {
+  const { user, signOut } = useAuth()
   if (user)
     return (
       <div className="order-first w-80 md:w-96 lg:order-last">
@@ -27,17 +27,17 @@ const Container = ({ children }: ContainerProps): JSX.Element => {
           Sign out
         </button>
       </div>
-    );
-  return children;
-};
+    )
+  return children
+}
 
 const AuthComponent = (): JSX.Element => {
-  const { signUp, signIn } = useAuth();
+  const { signUp, signIn } = useAuth()
   return (
     <Container supabaseClient={supabase}>
       <SignUpPanel signUp={signUp} signIn={signIn} />
     </Container>
-  );
-};
+  )
+}
 
-export default AuthComponent;
+export default AuthComponent

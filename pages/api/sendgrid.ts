@@ -2,34 +2,39 @@
 This is a simple contact form for Real Estate Buddy
 Using Sendgrid. 
 */
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-import sgMail from '@sendgrid/mail';
+import sgMail from '@sendgrid/mail'
 
-const sendGrid = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  if (req.method === 'POST') {
-    sgMail.setApiKey(process.env.SENDGRID_SECRET || '');
+const sendGrid = async (
+  request: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (request.method === 'POST') {
+    sgMail.setApiKey(process.env.SENDGRID_SECRET || '')
 
-    const msg = {
+    const message = {
       to: process.env.SENDGRID_MAILTO || '', // Change to your recipient
       from: process.env.SENDGRID_MAILFROM || '', // Change to your verified sender
-      subject: `[${process.env.NEXT_PUBLIC_TITLE}] New message from ${req.body.name}`,
-      text: req.body.message,
-      reply_to: req.body.email,
-    };
+      subject: `[${process.env.NEXT_PUBLIC_TITLE}] New message from ${request.body.name}`,
+      text: request.body.message,
+      reply_to: request.body.email,
+    }
 
     sgMail
-      .send(msg)
+      .send(message)
       .then(() => {
-        res.status(200).send({ message: 'Your email has been sent', success: true });
+        res
+          .status(200)
+          .send({ message: 'Your email has been sent', success: true })
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error)
         res.status(500).send({
           message: 'There was an issue with your email... please retry',
           error,
-        });
-      });
+        })
+      })
   }
-};
-export default sendGrid;
+}
+export default sendGrid

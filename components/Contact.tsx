@@ -7,29 +7,30 @@ If you want to change the email provider, don't hesitate to create a new api rou
 the axios.post here, line 18.
 */
 
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Contact = (): JSX.Element => {
   const sendEmail = () => {
-    const name = (document.getElementById('name') as HTMLInputElement).value;
-    const email = (document.getElementById('email') as HTMLInputElement).value;
-    const message = (document.getElementById('message') as HTMLInputElement).value;
+    const name = (document.querySelector('#name') as HTMLInputElement).value
+    const email = (document.querySelector('#email') as HTMLInputElement).value
+    const message = (document.querySelector('#message') as HTMLInputElement)
+      .value
 
     if (name && email && message) {
       axios
         .post('/api/sendgrid', { email, name, message })
         .then((result) => {
           if (result.data.success === true) {
-            toast.success(result.data.message);
-            (document.getElementById('name') as HTMLInputElement).value = '';
-            (document.getElementById('email') as HTMLInputElement).value = '';
-            (document.getElementById('message') as HTMLInputElement).value = '';
+            toast.success(result.data.message)
+            ;(document.querySelector('#name') as HTMLInputElement).value = ''
+            ;(document.querySelector('#email') as HTMLInputElement).value = ''
+            ;(document.querySelector('#message') as HTMLInputElement).value = ''
           }
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((error) => {
+          console.log(error)
+        })
     } else {
       toast.info('Please fill all the fields ', {
         position: 'top-center',
@@ -39,9 +40,9 @@ const Contact = (): JSX.Element => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      });
+      })
     }
-  };
+  }
   return (
     <div className="max-w-xl px-5 py-10 m-auto">
       <div>
@@ -51,8 +52,8 @@ const Contact = (): JSX.Element => {
           </h2>
         </div>
         <p className="m-auto text-center">
-          Do you have a question about Real Estate Buddy? A cool feature you'd like us to integrate?
-          A bug to report? Don't hesitate!
+          Do you have a question about Real Estate Buddy? A cool feature you'd
+          like us to integrate? A bug to report? Don't hesitate!
         </p>
       </div>
       <form className="grid grid-cols-1 gap-4 p-5 m-auto mt-5 md:grid-cols-2">
@@ -88,15 +89,15 @@ const Contact = (): JSX.Element => {
           type="button"
           className="btn btn-primary btn-sm"
           onClick={(e) => {
-            e.preventDefault();
-            sendEmail();
+            e.preventDefault()
+            sendEmail()
           }}
         >
           Submit{' '}
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact

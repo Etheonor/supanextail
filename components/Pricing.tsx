@@ -6,34 +6,37 @@ Dont forget to create your customer portal on Stripe
 https://dashboard.stripe.com/test/settings/billing/portal 
 */
 
-import { getSub, supabase } from 'utils/supabaseClient';
-import { useEffect, useState } from 'react';
+import { getSub, supabase } from 'utils/supabaseClient'
+import { useEffect, useState } from 'react'
 
-import axios from 'axios';
-import router from 'next/router';
-import { useAuth } from 'utils/AuthContext';
+import axios from 'axios'
+import router from 'next/router'
+import { useAuth } from 'utils/AuthContext'
 
 const Pricing = (): JSX.Element => {
-  const { user, session } = useAuth();
-  const [customerId, setCustomerId] = useState<null | string>(null);
-  const [sub, setSub] = useState(false);
+  const { user, session } = useAuth()
+  const [customerId, setCustomerId] = useState<null | string>(null)
+  const [sub, setSub] = useState(false)
 
   useEffect(() => {
     if (user) {
-      getSub().then((result) => setSub(result));
+      getSub().then((result) => setSub(result))
       supabase
         .from('subscriptions')
         .select(`customer_id`)
         .eq('id', user.id)
         .single()
         .then((result) => {
-          setCustomerId(result.data?.customer_id);
-        });
+          setCustomerId(result.data?.customer_id)
+        })
     }
-  }, [user]);
+  }, [user])
 
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLButtonElement>, priceId: string) => {
-    e.preventDefault();
+  const handleSubmit = async (
+    e: React.SyntheticEvent<HTMLButtonElement>,
+    priceId: string
+  ) => {
+    e.preventDefault()
     // Create a Checkout Session. This will redirect the user to the Stripe website for the payment.
     if (sub) {
       axios
@@ -41,8 +44,8 @@ const Pricing = (): JSX.Element => {
           customerId,
         })
         .then((result) => {
-          router.push(result.data.url);
-        });
+          router.push(result.data.url)
+        })
     } else
       axios
         .post('/api/stripe/create-checkout-session', {
@@ -53,8 +56,8 @@ const Pricing = (): JSX.Element => {
           tokenId: session.access_token,
           pay_mode: 'subscription',
         })
-        .then((result) => router.push(result.data.url));
-  };
+        .then((result) => router.push(result.data.url))
+  }
   return (
     <div>
       <div className="container px-6 py-8 mx-auto text-base-100">
@@ -100,13 +103,16 @@ const Pricing = (): JSX.Element => {
               <button
                 className="btn btn-primary"
                 onClick={(e) => {
-                  handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
+                  handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn')
                 }}
               >
                 {sub ? 'Handle subscription' : 'Subscribe'}
               </button>
             ) : (
-              <button className="btn btn-primary" onClick={() => router.push('/login')}>
+              <button
+                className="btn btn-primary"
+                onClick={() => router.push('/login')}
+              >
                 Log in
               </button>
             )}
@@ -133,13 +139,16 @@ const Pricing = (): JSX.Element => {
               <button
                 className="btn btn-primary"
                 onClick={(e) => {
-                  handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
+                  handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn')
                 }}
               >
                 {sub ? 'Handle subscription' : 'Subscribe'}
               </button>
             ) : (
-              <button className="btn btn-primary" onClick={() => router.push('/login')}>
+              <button
+                className="btn btn-primary"
+                onClick={() => router.push('/login')}
+              >
                 Log in
               </button>
             )}
@@ -147,7 +156,7 @@ const Pricing = (): JSX.Element => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Pricing;
+export default Pricing

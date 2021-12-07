@@ -1,11 +1,11 @@
-import CardLanding from 'components/UI/CardLanding';
-import cardAuth from 'public/landing/auth.svg';
-import cardFee from 'public/landing/lifetime.svg';
-import cardPage from 'public/landing/page.svg';
-import cardResponsive from 'public/landing/responsive.svg';
-import cardServer from 'public/landing/backend.svg';
-import cardStripe from 'public/landing/stripe.svg';
-import cardTheme from 'public/landing/theme.svg';
+import CardLanding from 'components/UI/CardLanding'
+import cardAuth from 'public/landing/auth.svg'
+import cardFee from 'public/landing/lifetime.svg'
+import cardPage from 'public/landing/page.svg'
+import cardResponsive from 'public/landing/responsive.svg'
+import cardServer from 'public/landing/backend.svg'
+import cardStripe from 'public/landing/stripe.svg'
+import cardTheme from 'public/landing/theme.svg'
 
 const CardsLanding = (): JSX.Element => (
   <div className="mt-14">
@@ -13,8 +13,9 @@ const CardsLanding = (): JSX.Element => (
       We've got you covered
     </h2>
     <p className="max-w-md m-auto text-center">
-      Don’t waste your time and reinvent the wheel, we have provided you with a maximum of features
-      so that you only have one goal, to make your SaaS a reality.
+      Don’t waste your time and reinvent the wheel, we have provided you with a
+      maximum of features so that you only have one goal, to make your SaaS a
+      reality.
     </p>
     <div className="flex flex-wrap justify-center mt-10">
       <CardLanding
@@ -27,7 +28,11 @@ const CardsLanding = (): JSX.Element => (
         text="Integrated backend already setup with Next.js API Routes"
         title="Backend"
       />
-      <CardLanding image={cardAuth} text="Auth and user management with Supabase" title="Auth" />
+      <CardLanding
+        image={cardAuth}
+        text="Auth and user management with Supabase"
+        title="Auth"
+      />
       <CardLanding
         image={cardResponsive}
         text="Mobile ready, fully responsive and customizable with Tailwind CSS"
@@ -50,6 +55,6 @@ const CardsLanding = (): JSX.Element => (
       />
     </div>
   </div>
-);
+)
 
-export default CardsLanding;
+export default CardsLanding

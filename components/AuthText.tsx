@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import authImage from 'public/auth.png';
+import Image from 'next/image'
+import authImage from 'public/auth.png'
 
 const AuthText = (): JSX.Element => (
   <div className="flex flex-col max-w-lg text-xl lg:mt-0">
@@ -15,10 +15,10 @@ const AuthText = (): JSX.Element => (
       Join Real Estate Buddy for <span className="text-primary">free</span>!
     </h2>
     <p className="mt-8 mb-5 leading-9">
-      Create your website in a few minutes with our boilerplate. You can use the login system, this
-      will allow you to discover the sample dashboard page.
+      Create your website in a few minutes with our boilerplate. You can use the
+      login system, this will allow you to discover the sample dashboard page.
     </p>
   </div>
-);
+)
 
-export default AuthText;
+export default AuthText

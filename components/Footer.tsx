@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
 
 const Footer = (): JSX.Element => {
   const ThemeToggle = dynamic(() => import('components/UI/ThemeToggle'), {
     ssr: false,
-  });
+  })
   return (
     <footer className="flex w-full">
       <nav className="mr-auto ">
@@ -22,7 +22,7 @@ const Footer = (): JSX.Element => {
         <ThemeToggle />
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

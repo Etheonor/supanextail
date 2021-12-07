@@ -4,13 +4,13 @@ You have 2 components, the "AuthComponent" that handle the logic,
 and the "AuthText" that will show the description on the left of the screen
 */
 
-import Layout from 'components/Layout';
-import Login from 'components/UI/Login';
-import { NextSeo } from 'next-seo';
-import { useAuth } from 'utils/AuthContext';
+import Layout from 'components/Layout'
+import Login from 'components/UI/Login'
+import { NextSeo } from 'next-seo'
+import { useAuth } from 'utils/AuthContext'
 
 const LoginPage = (): JSX.Element => {
-  const { signIn, resetPassword } = useAuth();
+  const { signIn, resetPassword } = useAuth()
   return (
     <>
       <NextSeo
@@ -24,7 +24,7 @@ const LoginPage = (): JSX.Element => {
         </div>
       </Layout>
     </>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

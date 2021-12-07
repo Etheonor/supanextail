@@ -1,15 +1,18 @@
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react'
 
-import { Fragment } from 'react';
+import { Fragment } from 'react'
 
-type PaymentModalProps = {
-  open: boolean;
-  setPayment: (arg0: boolean) => void;
-};
+type PaymentModalProperties = {
+  open: boolean
+  setPayment: (argument0: boolean) => void
+}
 
-const PaymentModal = ({ open, setPayment }: PaymentModalProps): JSX.Element => {
+const PaymentModal = ({
+  open,
+  setPayment,
+}: PaymentModalProperties): JSX.Element => {
   function closeModal() {
-    setPayment(false);
+    setPayment(false)
   }
 
   return (
@@ -34,7 +37,10 @@ const PaymentModal = ({ open, setPayment }: PaymentModalProps): JSX.Element => {
             </Transition.Child>
 
             {/* This element is to trick the browser into centering the modal contents. */}
-            <span className="inline-block h-screen align-middle" aria-hidden="true">
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
               &#8203;
             </span>
             <Transition.Child
@@ -47,15 +53,25 @@ const PaymentModal = ({ open, setPayment }: PaymentModalProps): JSX.Element => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-lg p-8 my-8 overflow-hidden text-left align-middle transition-all transform border-2 shadow-xl rounded-2xl bg-base-100 text-base-content border-accent-focus">
-                <Dialog.Title as="h3" className="mb-5 text-2xl font-bold leading-6 text-center">
+                <Dialog.Title
+                  as="h3"
+                  className="mb-5 text-2xl font-bold leading-6 text-center"
+                >
                   Payment successful 🎉
                 </Dialog.Title>
                 <div className="mt-2">
-                  <p>Your payment has been successfully submitted. Thank you for your support!</p>
+                  <p>
+                    Your payment has been successfully submitted. Thank you for
+                    your support!
+                  </p>
                 </div>
 
                 <div className="mt-4">
-                  <button type="button" className="flex m-auto btn btn-accent" onClick={closeModal}>
+                  <button
+                    type="button"
+                    className="flex m-auto btn btn-accent"
+                    onClick={closeModal}
+                  >
                     Got it, thanks!
                   </button>
                 </div>
@@ -65,7 +81,7 @@ const PaymentModal = ({ open, setPayment }: PaymentModalProps): JSX.Element => {
         </Dialog>
       </Transition>
     </>
-  );
-};
+  )
+}
 
-export default PaymentModal;
+export default PaymentModal

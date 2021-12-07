@@ -1,5 +1,5 @@
 {
-  "name": "Real Estate Buddy",
+  "name": "real-estate-buddy",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,14 @@
     "start": "next start",
     "eslint": "eslint . --fix",
     "test": "playwright test",
-    "precommit": "lint-staged"
+    "check-types": "tsc --pretty --noEmit",
+    "check-format": "prettier --check .",
+    "lint-fix": "eslint . --fix",
+    "check-lint": "eslint . --ext ts --ext tsx --ext js",
+    "format": "prettier --write .",
+    "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
@@ -58,7 +65,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-sonarjs": "^0.11.0",
     "eslint-plugin-unicorn": "^39.0.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "lint-staged": "^12.1.2",
     "postcss": "^8.3.11",
     "prettier": "^2.5.1",

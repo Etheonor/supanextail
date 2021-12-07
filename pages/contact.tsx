@@ -1,6 +1,6 @@
-import Contact from 'components/Contact';
-import Layout from 'components/Layout';
-import { NextSeo } from 'next-seo';
+import Contact from 'components/Contact'
+import Layout from 'components/Layout'
+import { NextSeo } from 'next-seo'
 
 const ContactPage = (): JSX.Element => (
   <>
@@ -13,5 +13,5 @@ const ContactPage = (): JSX.Element => (
       <Contact />
     </Layout>
   </>
-);
-export default ContactPage;
+)
+export default ContactPage

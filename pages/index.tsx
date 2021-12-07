@@ -3,9 +3,9 @@ Don't forget to modify the Head component with your website informations
 You can also update the content on the Landing.js component
 */
 
-import Head from 'next/head';
-import Landing from 'components/Landing';
-import Layout from 'components/Layout';
+import Head from 'next/head'
+import Landing from 'components/Landing'
+import Layout from 'components/Layout'
 
 const Home = (): JSX.Element => (
   <>
@@ -18,22 +18,37 @@ const Home = (): JSX.Element => (
 
       <meta property="og:url" content="https://Real Estate Buddy.dev/" />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`} />
+      <meta
+        property="og:title"
+        content={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+      />
       <meta
         property="og:description"
         content="Real Estate Buddy is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS"
       />
-      <meta property="og:image" content="https://Real Estate Buddy.dev/ogimage.png" />
+      <meta
+        property="og:image"
+        content="https://Real Estate Buddy.dev/ogimage.png"
+      />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="Real Estate Buddy.dev" />
-      <meta property="twitter:url" content="https://Real Estate Buddy.dev/ogimage.png" />
-      <meta name="twitter:title" content={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`} />
+      <meta
+        property="twitter:url"
+        content="https://Real Estate Buddy.dev/ogimage.png"
+      />
+      <meta
+        name="twitter:title"
+        content={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+      />
       <meta
         name="twitter:description"
         content="Real Estate Buddy is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS"
       />
-      <meta name="twitter:image" content="https://Real Estate Buddy.dev/ogimage.png" />
+      <meta
+        name="twitter:image"
+        content="https://Real Estate Buddy.dev/ogimage.png"
+      />
       <meta charSet="UTF-8" />
     </Head>
 
@@ -41,5 +56,5 @@ const Home = (): JSX.Element => (
       <Landing />
     </Layout>
   </>
-);
-export default Home;
+)
+export default Home

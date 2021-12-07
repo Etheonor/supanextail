@@ -5,49 +5,53 @@ function with your new elements.
 It also show you the current subscription plan
 */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-import Avatar from './Avatar';
-import Image from 'next/image';
-import PaymentModal from './PaymentModal';
-import Plan from 'public/plan.svg';
-import { Session } from '@supabase/gotrue-js';
-import { supabase } from '../utils/supabaseClient';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
+import Avatar from './Avatar'
+import Image from 'next/image'
+import PaymentModal from './PaymentModal'
+import Plan from 'public/plan.svg'
+import { Session } from '@supabase/gotrue-js'
+import { supabase } from '../utils/supabaseClient'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
-type DashboardProps = {
-  profile: { username: string; website: string; avatar_url: string };
-  session: Session;
-  planName: string;
-};
+type DashboardProperties = {
+  profile: { username: string; website: string; avatar_url: string }
+  session: Session
+  planName: string
+}
 
-const Dashboard = ({ profile, session, planName }: DashboardProps): JSX.Element => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState(profile?.username || '');
-  const [website, setWebsite] = useState(profile?.website || '');
-  const [avatar_url, setAvatarUrl] = useState(profile?.avatar_url || '');
-  const [payment, setPayment] = useState(false);
+const Dashboard = ({
+  profile,
+  session,
+  planName,
+}: DashboardProperties): JSX.Element => {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [username, setUsername] = useState(profile?.username || '')
+  const [website, setWebsite] = useState(profile?.website || '')
+  const [avatar_url, setAvatarUrl] = useState(profile?.avatar_url || '')
+  const [payment, setPayment] = useState(false)
 
   useEffect(() => {
     if (router.query.session_id && router.query.session_id !== 'canceled') {
-      setPayment(true);
+      setPayment(true)
     }
-  }, [router.query.session_id]);
+  }, [router.query.session_id])
 
   async function updateProfile({
     username,
     website,
     avatar_url,
   }: {
-    username: string;
-    website: string;
-    avatar_url: string;
+    username: string
+    website: string
+    avatar_url: string
   }) {
     try {
-      setLoading(true);
-      const user = supabase.auth.user();
+      setLoading(true)
+      const user = supabase.auth.user()
 
       const updates = {
         id: user?.id,
@@ -55,35 +59,37 @@ const Dashboard = ({ profile, session, planName }: DashboardProps): JSX.Element 
         website,
         avatar_url,
         updated_at: new Date(),
-      };
+      }
 
       const { error } = await supabase.from('profiles').upsert(updates, {
         returning: 'minimal', // Don't return the value after inserting
-      });
+      })
 
       if (error) {
-        throw error;
+        throw error
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
-        alert(error.message);
+        alert(error.message)
       }
     } finally {
-      setLoading(false);
-      toast.success('Your profile has been updated');
+      setLoading(false)
+      toast.success('Your profile has been updated')
     }
   }
 
   return (
     <div className="flex flex-col w-full max-w-xl px-5 py-10 m-auto text-left">
       <div className="flex flex-col justify-center w-full max-w-sm p-5 m-auto">
-        <h1 className="mb-10 text-4xl font-bold text-center md:text-5xl font-title">Dashboard</h1>
+        <h1 className="mb-10 text-4xl font-bold text-center md:text-5xl font-title">
+          Dashboard
+        </h1>
         <Avatar
           url={avatar_url}
           size={150}
           onUpload={(url) => {
-            setAvatarUrl(url);
-            updateProfile({ username, website, avatar_url: url });
+            setAvatarUrl(url)
+            updateProfile({ username, website, avatar_url: url })
           }}
         />
         <div className="flex flex-col mb-5">
@@ -143,7 +149,7 @@ const Dashboard = ({ profile, session, planName }: DashboardProps): JSX.Element 
       </div>
       <PaymentModal open={payment} setPayment={setPayment} />
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

@@ -5,13 +5,13 @@ import Document, {
   Html,
   Main,
   NextScript,
-} from 'next/document';
+} from 'next/document'
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
-    const initialProps = await Document.getInitialProps(ctx);
-
-    return initialProps;
+  static async getInitialProps(
+    context: DocumentContext
+  ): Promise<DocumentInitialProps> {
+    return await Document.getInitialProps(context)
   }
 
   render(): JSX.Element {
@@ -26,7 +26,7 @@ class MyDocument extends Document {
                 : 'supaTheme'
     }
     document.body.dataset.theme = getUserPreference();
-  `;
+  `
     return (
       <Html>
         <Head />
@@ -36,8 +36,8 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-export default MyDocument;
+export default MyDocument

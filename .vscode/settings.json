@@ -1,7 +1,5 @@
 {
-  "cSpell.words": [
-    "Supabase"
-  ],
+  "cSpell.words": ["Supabase"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },

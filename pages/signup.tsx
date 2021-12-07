@@ -4,10 +4,10 @@ You have 2 components, the "AuthComponent" that handle the logic,
 and the "AuthText" that will show the description on the left of the screen
 */
 
-import AuthComponent from 'components/SignUp';
-import AuthText from 'components/AuthText';
-import Layout from 'components/Layout';
-import { NextSeo } from 'next-seo';
+import AuthComponent from 'components/SignUp'
+import AuthText from 'components/AuthText'
+import Layout from 'components/Layout'
+import { NextSeo } from 'next-seo'
 
 const SignUpPage = (): JSX.Element => (
   <>
@@ -23,6 +23,6 @@ const SignUpPage = (): JSX.Element => (
       </div>
     </Layout>
   </>
-);
+)
 
-export default SignUpPage;
+export default SignUpPage
