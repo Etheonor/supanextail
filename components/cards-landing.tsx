@@ -1,4 +1,4 @@
-import CardLanding from 'components/UI/CardLanding'
+import CardLanding from 'components/UI/card-landing'
 import cardAuth from 'public/landing/auth.svg'
 import cardFee from 'public/landing/lifetime.svg'
 import cardPage from 'public/landing/page.svg'
@@ -10,7 +10,7 @@ import cardTheme from 'public/landing/theme.svg'
 const CardsLanding = (): JSX.Element => (
   <div className="mt-14">
     <h2 className="text-4xl font-bold tracking-wide text-center uppercase">
-      We've got you covered
+      We&apos;ve got you covered
     </h2>
     <p className="max-w-md m-auto text-center">
       Don’t waste your time and reinvent the wheel, we have provided you with a

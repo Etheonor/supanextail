@@ -4,9 +4,9 @@ You have 2 components, the "AuthComponent" that handle the logic,
 and the "AuthText" that will show the description on the left of the screen
 */
 
-import AuthComponent from 'components/SignUp'
-import AuthText from 'components/AuthText'
-import Layout from 'components/Layout'
+import AuthComponent from 'components/sign-up'
+import AuthText from 'components/auth-text'
+import Layout from 'components/layout'
 import { NextSeo } from 'next-seo'
 
 const SignUpPage = (): JSX.Element => (

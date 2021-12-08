@@ -4,8 +4,8 @@ You have 2 components, the "AuthComponent" that handle the logic,
 and the "AuthText" that will show the description on the left of the screen
 */
 
-import Layout from 'components/Layout'
-import Login from 'components/UI/Login'
+import Layout from 'components/layout'
+import Login from 'components/UI/login'
 import { NextSeo } from 'next-seo'
 import { useAuth } from 'utils/AuthContext'
 

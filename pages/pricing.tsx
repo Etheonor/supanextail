@@ -1,8 +1,8 @@
 // To modify the content of the pricing page, check the Pricing.js component
 
-import Layout from 'components/Layout'
+import Layout from 'components/layout'
 import { NextSeo } from 'next-seo'
-import Pricing from 'components/Pricing'
+import Pricing from 'components/pricing'
 
 const PricingPage = (): JSX.Element => (
   <>

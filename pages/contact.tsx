@@ -1,5 +1,5 @@
-import Contact from 'components/Contact'
-import Layout from 'components/Layout'
+import Contact from 'components/contact'
+import Layout from 'components/layout'
 import { NextSeo } from 'next-seo'
 
 const ContactPage = (): JSX.Element => (

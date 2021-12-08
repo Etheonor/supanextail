@@ -11,7 +11,7 @@ const PaymentModal = ({
   open,
   setPayment,
 }: PaymentModalProperties): JSX.Element => {
-  function closeModal() {
+  function closeModal(): void {
     setPayment(false)
   }
 

@@ -1,8 +1,8 @@
 // To modify the terms & conditions, check the Terms.js component
 
-import Layout from 'components/Layout'
+import Layout from 'components/layout'
 import { NextSeo } from 'next-seo'
-import Terms from 'components/Terms'
+import Terms from 'components/terms'
 
 const TermsPage = (): JSX.Element => (
   <>

@@ -4,11 +4,27 @@ import { toast } from 'react-toastify'
 import { useState } from 'react'
 
 type SignUpPanelProperties = {
-  signIn: ({}) => Promise<{
+  signIn: ({
+    email,
+    password,
+    provider,
+  }: {
+    email?: string
+    password?: string
+    provider?: string
+  }) => Promise<{
     data: Record<string, unknown>
     error: { message: string }
   }>
-  signUp: ({}) => Promise<{
+  signUp: ({
+    email,
+    password,
+    provider,
+  }: {
+    email?: string
+    password?: string
+    provider?: string
+  }) => Promise<{
     data: Record<string, unknown>
     error: { message: string }
   }>
@@ -21,8 +37,8 @@ const SignUpPanel = ({
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const signup = (e: React.SyntheticEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+  const signup = (event: React.SyntheticEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
 
     // Handle the login. Go to the homepage if success or display an error.
     signUp({
@@ -56,7 +72,6 @@ const SignUpPanel = ({
           <input
             type="email"
             id="email"
-            autoFocus
             className="input input-primary input-bordered input-sm"
             value={email}
             onChange={(event) => {

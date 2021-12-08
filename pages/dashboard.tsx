@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/dashboard'
 import Head from 'next/head'
-import Layout from 'components/Layout'
+import Layout from 'components/layout'
 import type { NextPageContext } from 'next'
 import Stripe from 'stripe'
 import { createClient } from '@supabase/supabase-js'
-import { supabase } from '../utils/supabaseClient'
+import { supabase } from '../utils/supabase-client'
 import { useRouter } from 'next/router'
 
 const DashboardPage = ({

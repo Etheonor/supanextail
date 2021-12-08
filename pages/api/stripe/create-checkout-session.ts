@@ -25,25 +25,25 @@ const stripe = new Stripe(process.env.STRIPE_SECRET || '', {
 
 export default async function handler(
   request: NextApiRequest,
-  res: NextApiResponse
+  response: NextApiResponse
 ): Promise<void> {
-  await cors(request, res)
-  await limiter(request, res)
+  await cors(request, response)
+  await limiter(request, response)
   if (request.method === 'POST') {
-    const { priceId } = request.body
+    const { priceId, customerId, pay_mode, userId, email } = request.body
 
     // See https://stripe.com/docs/api/checkout/sessions/create
     // for additional parameters to pass.
     try {
-      const session = request.body.customerId
+      const session = customerId
         ? await stripe.checkout.sessions.create({
-            mode: request.body.pay_mode,
+            mode: pay_mode,
             payment_method_types: ['card'],
-            client_reference_id: request.body.userId,
+            client_reference_id: userId,
             metadata: {
-              priceId: request.body.priceId,
+              priceId: priceId,
             },
-            customer: request.body.customerId,
+            customer: customerId,
             line_items: [
               {
                 price: priceId,
@@ -60,10 +60,10 @@ export default async function handler(
         : await stripe.checkout.sessions.create({
             mode: 'subscription',
             payment_method_types: ['card'],
-            customer_email: request.body.email,
-            client_reference_id: request.body.userId,
+            customer_email: email,
+            client_reference_id: userId,
             metadata: {
-              priceId: request.body.priceId,
+              priceId: priceId,
             },
             line_items: [
               {
@@ -78,11 +78,11 @@ export default async function handler(
             success_url: `${request.headers.origin}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${request.headers.origin}/pricing`,
           })
-      res.status(200).send({ url: session.url })
+      response.status(200).send({ url: session.url })
     } catch (error: unknown) {
-      res.status(400)
+      response.status(400)
       if (error instanceof Error) {
-        return res.send({
+        return response.send({
           error: {
             message: error.message,
           },

@@ -26,10 +26,10 @@ const limiter = initMiddleware(
 
 export default async function handler(
   request: NextApiRequest,
-  res: NextApiResponse
+  response: NextApiResponse
 ): Promise<void> {
-  await cors(request, res)
-  await limiter(request, res)
+  await cors(request, response)
+  await limiter(request, response)
   if (request.method === 'PUT') {
     axios
       .put(
@@ -47,13 +47,13 @@ export default async function handler(
       )
       .then((result) => {
         console.log(result)
-        res.status(200).send({
+        response.status(200).send({
           message:
             'Your email has been succesfully added to the mailing list. Welcome 👋',
         })
       })
       .catch((error) => {
-        res.status(500).send({
+        response.status(500).send({
           message:
             'Oups, there was a problem with your subscription, please try again or contact us',
           error: error,

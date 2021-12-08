@@ -4,8 +4,8 @@ You can also update the content on the Landing.js component
 */
 
 import Head from 'next/head'
-import Landing from 'components/Landing'
-import Layout from 'components/Layout'
+import Landing from 'components/landing'
+import Layout from 'components/layout'
 
 const Home = (): JSX.Element => (
   <>

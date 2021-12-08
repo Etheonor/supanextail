@@ -7,9 +7,9 @@ You can select your auth providers, or just keep the email/password. You can
 check the providers available here: https://supabase.io/docs/guides/auth
 */
 
-import SignUpPanel from './UI/SignUpPanel'
+import SignUpPanel from './UI/sign-up-panel'
 import { SupabaseClient } from '@supabase/supabase-js'
-import { supabase } from 'utils/supabaseClient'
+import { supabase } from 'utils/supabase-client'
 import { useAuth } from 'utils/AuthContext'
 
 type ContainerProperties = {
