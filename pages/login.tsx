@@ -10,21 +10,21 @@ import { NextSeo } from 'next-seo';
 import { useAuth } from 'utils/AuthContext';
 
 const LoginPage = (): JSX.Element => {
-	const { signIn, resetPassword } = useAuth();
-	return (
-		<>
-			<NextSeo
-				title={`${process.env.NEXT_PUBLIC_TITLE} | Auth`}
-				description={`This is the auth page for ${process.env.NEXT_PUBLIC_TITLE}`}
-			/>
+  const { signIn, resetPassword } = useAuth();
+  return (
+    <>
+      <NextSeo
+        title={`${process.env.NEXT_PUBLIC_TITLE} | Auth`}
+        description={`This is the auth page for ${process.env.NEXT_PUBLIC_TITLE}`}
+      />
 
-			<Layout>
-				<div className="flex flex-wrap justify-evenly w-full mt-20">
-					<Login signIn={signIn} resetPassword={resetPassword} />
-				</div>
-			</Layout>
-		</>
-	);
+      <Layout>
+        <div className="flex flex-wrap w-full mt-20 justify-evenly">
+          <Login signIn={signIn} resetPassword={resetPassword} />
+        </div>
+      </Layout>
+    </>
+  );
 };
 
 export default LoginPage;

@@ -10,92 +10,92 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Contact = (): JSX.Element => {
-	const sendEmail = () => {
-		const name = (document.getElementById('name') as HTMLInputElement).value;
-		const email = (document.getElementById('email') as HTMLInputElement).value;
-		const message = (document.getElementById('message') as HTMLInputElement).value;
+  const sendEmail = () => {
+    const name = (document.getElementById('name') as HTMLInputElement).value;
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const message = (document.getElementById('message') as HTMLInputElement)
+      .value;
 
-		if (name && email && message) {
-			axios
-				.post('/api/sendgrid', { email, name, message })
-				.then((result) => {
-					if (result.data.success === true) {
-						toast.success(result.data.message);
-						(document.getElementById('name') as HTMLInputElement).value = '';
-						(document.getElementById('email') as HTMLInputElement).value = '';
-						(document.getElementById('message') as HTMLInputElement).value = '';
-					}
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		} else {
-			toast.info('Please fill all the fields ', {
-				position: 'top-center',
-				autoClose: 2000,
-				hideProgressBar: true,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
-		}
-	};
-	return (
-		<div className="max-w-xl m-auto px-5 py-10">
-			<div>
-				<div className="flex justify-center">
-					<h2 className="text-3xl sm:text-4xl text-center mb-5 mt-0 font-bold font-title">
-						Contact
-					</h2>
-				</div>
-				<p className="m-auto text-center">
-					Do you have a question about SupaNexTail? A cool feature you'd like us to integrate? A bug
-					to report? Don't hesitate!
-				</p>
-			</div>
-			<form className="m-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 p-5">
-				<div className="flex flex-col max-w-xs">
-					<p className="font-light mb-4 text-left">Your Name</p>
-					<input
-						id="name"
-						name="name"
-						placeholder="Enter your name"
-						className="input input-primary input-bordered"
-					/>
-				</div>
-				<div className="flex flex-col max-w-xs mb-3">
-					<p className="font-light mb-4 text-left">Your email</p>
-					<input
-						id="email"
-						name="email"
-						placeholder="Enter your email adress"
-						className="input input-primary input-bordered"
-					/>
-				</div>
-				<div className="flex flex-col col-span-full w-fulll">
-					<p className="font-light mb-4 text-left">Message</p>
-					<textarea
-						id="message"
-						name="message"
-						placeholder="Enter your message here..."
-						rows={5}
-						className="input input-primary input-bordered resize-none w-full h-32 pt-2"
-					/>
-				</div>
-				<button
-					type="button"
-					className="btn btn-primary btn-sm"
-					onClick={(e) => {
-						e.preventDefault();
-						sendEmail();
-					}}
-				>
-					Submit{' '}
-				</button>
-			</form>
-		</div>
-	);
+    if (name && email && message) {
+      axios
+        .post('/api/sendgrid', { email, name, message })
+        .then((result) => {
+          if (result.data.success === true) {
+            toast.success(result.data.message);
+            (document.getElementById('name') as HTMLInputElement).value = '';
+            (document.getElementById('email') as HTMLInputElement).value = '';
+            (document.getElementById('message') as HTMLInputElement).value = '';
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      toast.info('Please fill all the fields ', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+  return (
+    <div className="max-w-xl px-5 py-10 m-auto">
+      <div>
+        <div className="flex justify-center">
+          <h2 className="mt-0 mb-5 text-3xl font-bold text-center sm:text-4xl font-title">
+            Contact
+          </h2>
+        </div>
+        <p className="m-auto text-center">
+          Do you have a question about SupaNexTail? A cool feature you'd like us
+          to integrate? A bug to report? Don't hesitate!
+        </p>
+      </div>
+      <form className="grid grid-cols-1 gap-4 p-5 m-auto mt-5 md:grid-cols-2">
+        <div className="flex flex-col max-w-xs">
+          <p className="mb-4 font-light text-left">Your Name</p>
+          <input
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            className="input input-primary input-bordered"
+          />
+        </div>
+        <div className="flex flex-col max-w-xs mb-3">
+          <p className="mb-4 font-light text-left">Your email</p>
+          <input
+            id="email"
+            name="email"
+            placeholder="Enter your email adress"
+            className="input input-primary input-bordered"
+          />
+        </div>
+        <div className="flex flex-col col-span-full w-fulll">
+          <p className="mb-4 font-light text-left">Message</p>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Enter your message here..."
+            rows={5}
+            className="w-full h-32 pt-2 resize-none input input-primary input-bordered"
+          />
+        </div>
+        <button
+          type="button"
+          className="btn btn-primary btn-sm"
+          onClick={(e) => {
+            e.preventDefault();
+            sendEmail();
+          }}>
+          Submit{' '}
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default Contact;

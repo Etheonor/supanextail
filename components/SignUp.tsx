@@ -13,31 +13,31 @@ import { supabase } from 'utils/supabaseClient';
 import { useAuth } from 'utils/AuthContext';
 
 type ContainerProps = {
-	children: JSX.Element;
-	supabaseClient: SupabaseClient;
+  children: JSX.Element;
+  supabaseClient: SupabaseClient;
 };
 
 const Container = ({ children }: ContainerProps): JSX.Element => {
-	const { user, signOut } = useAuth();
-	if (user)
-		return (
-			<div className="w-80 md:w-96 order-first lg:order-last">
-				<p>Hello {user.email}! 👋 You are already logged in</p>
-				<button className="btn btn-primary" onClick={() => signOut()}>
-					Sign out
-				</button>
-			</div>
-		);
-	return children;
+  const { user, signOut } = useAuth();
+  if (user)
+    return (
+      <div className="order-first w-80 md:w-96 lg:order-last">
+        <p>Hello {user.email}! 👋 You are already logged in</p>
+        <button className="btn btn-primary" onClick={() => signOut()}>
+          Sign out
+        </button>
+      </div>
+    );
+  return children;
 };
 
 const AuthComponent = (): JSX.Element => {
-	const { signUp, signIn } = useAuth();
-	return (
-		<Container supabaseClient={supabase}>
-			<SignUpPanel signUp={signUp} signIn={signIn} />
-		</Container>
-	);
+  const { signUp, signIn } = useAuth();
+  return (
+    <Container supabaseClient={supabase}>
+      <SignUpPanel signUp={signUp} signIn={signIn} />
+    </Container>
+  );
 };
 
 export default AuthComponent;

@@ -10,19 +10,19 @@ import Layout from 'components/Layout';
 import { NextSeo } from 'next-seo';
 
 const SignUpPage = (): JSX.Element => (
-	<>
-		<NextSeo
-			title={`${process.env.NEXT_PUBLIC_TITLE} | Auth`}
-			description={`This is the auth page for ${process.env.NEXT_PUBLIC_TITLE}`}
-		/>
+  <>
+    <NextSeo
+      title={`${process.env.NEXT_PUBLIC_TITLE} | Auth`}
+      description={`This is the auth page for ${process.env.NEXT_PUBLIC_TITLE}`}
+    />
 
-		<Layout>
-			<div className="flex flex-wrap justify-evenly w-full mt-20">
-				<AuthText />
-				<AuthComponent />
-			</div>
-		</Layout>
-	</>
+    <Layout>
+      <div className="flex flex-wrap w-full mt-20 justify-evenly">
+        <AuthText />
+        <AuthComponent />
+      </div>
+    </Layout>
+  </>
 );
 
 export default SignUpPage;
