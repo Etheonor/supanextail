@@ -7,11 +7,11 @@ export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');
 
 // Check if a user has a paid plan
 export const getSub = async () => {
-	const { data: subscriptions } = await supabase
-		.from('subscriptions')
-		.select('paid_user, plan')
-		.single();
-	if (subscriptions) {
-		return subscriptions;
-	}
+  const { data: subscriptions } = await supabase
+    .from('subscriptions')
+    .select('paid_user, plan')
+    .single();
+  if (subscriptions) {
+    return subscriptions;
+  }
 };

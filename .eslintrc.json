@@ -8,8 +8,7 @@
     "extends": [
         "next",
         "next/core-web-vitals",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -30,9 +29,18 @@
         "prettier/prettier": [
             "error",
             {
-                "endOfLine": "auto"
+                "semi": true,
+                "trailingComma": "es5",
+                "singleQuote": true,
+                "tabWidth": 2,
+                "useTabs": false,
+                "endOfLine": "auto",
+                "printWidth": 80,
+                "bracketSameLine": true,
+                "bracketSpacing": true
             }
         ],
+        "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": [
             2,
@@ -43,6 +51,15 @@
                     ".ts",
                     ".tsx"
                 ]
+            }
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+            "warn",
+            {
+                "allowExpressions": true,
+                "allowTypedFunctionExpressions": true,
+                "allowHigherOrderFunctions": true,
+                "allowConciseArrowFunctionExpressionsStartingWithVoid": true
             }
         ]
     },
