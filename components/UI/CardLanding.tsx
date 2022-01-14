@@ -4,13 +4,17 @@ This card is used on the landing page
 
 import Image from 'next/image';
 
-type CardLandingProps = {
+type CardLandingProperties = {
   image: string;
   title: string;
   text: string;
 };
 
-const CardLanding = ({ image, title, text }: CardLandingProps): JSX.Element => {
+const CardLanding = ({
+  image,
+  title,
+  text,
+}: CardLandingProperties): JSX.Element => {
   return (
     <div className="flex h-48 p-5 mb-5 w-80 sm:ml-5 bg-base-100">
       <div>

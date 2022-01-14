@@ -8,12 +8,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Logo from 'public/logo.svg';
 
-type NavProps = {
+type NavProperties = {
   user: Record<string, unknown>;
   signOut: () => void;
 };
 
-const Nav = ({ user, signOut }: NavProps): JSX.Element => {
+const Nav = ({ user, signOut }: NavProperties): JSX.Element => {
   // Modify you menu directly here
   const NavMenu = (
     <>

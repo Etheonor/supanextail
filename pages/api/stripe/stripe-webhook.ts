@@ -39,7 +39,7 @@ const supabase = createClient(
 
 const limiter = initMiddleware(
   rateLimit({
-    windowMs: 30000, // 30sec
+    windowMs: 30_000, // 30sec
     max: 150, // Max 150 request per 30 sec
   })
 );
@@ -52,18 +52,18 @@ const stripe = new Stripe(process.env.STRIPE_SECRET || '', {
 });
 
 export default async function handler(
-  req: NextApiRequest,
+  request: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
-  await cors(req, res);
-  await limiter(req, res);
+  await cors(request, res);
+  await limiter(request, res);
 
-  if (req.method === 'POST') {
+  if (request.method === 'POST') {
     // Retrieve the event by verifying the signature using the raw body and secret.
     let event: Stripe.Event;
-    const buf = await buffer(req);
+    const buf = await buffer(request);
 
-    const sig = req.headers['stripe-signature'] as string;
+    const sig = request.headers['stripe-signature'] as string;
 
     try {
       event = stripe.webhooks.constructEvent(
@@ -71,8 +71,8 @@ export default async function handler(
         sig,
         process.env.STRIPE_WEBHOOK || ''
       );
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
       console.log(`⚠️  Webhook signature verification failed.`);
       console.log(
         `⚠️  Check the env file and enter the correct webhook secret.`
@@ -118,7 +118,7 @@ export default async function handler(
               },
             ])
             .then()
-            .then(null, (err) => console.log('err: ', err)); // catch
+            .then(null, (error) => console.log('err:', error)); // catch
         } else if (subscriptions?.length && subscriptions?.length > 0) {
           await supabase
             .from('subscriptions')
@@ -130,7 +130,7 @@ export default async function handler(
             })
             .eq('id', dataObject.client_reference_id)
             .then()
-            .then(null, (err) => console.log('err: ', err)); // catch
+            .then(null, (error) => console.log('err:', error)); // catch
         }
         break;
       case 'customer.subscription.deleted':
@@ -139,7 +139,7 @@ export default async function handler(
           .update({ paid_user: false })
           .eq('customer_id', dataObject.customer)
           .then()
-          .then(null, (err) => console.log('err: ', err)); // catch
+          .then(null, (error) => console.log('err:', error)); // catch
         break;
       case 'invoice.payment_failed':
         // If the payment fails or the customer does not have a valid payment method,

@@ -9,25 +9,25 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { supabase } from 'utils/supabaseClient';
 
-type AvatarProps = {
+type AvatarProperties = {
   url: string;
   size: number;
   onUpload: (filePath: string) => void;
 };
 
-const Avatar = ({ url, size, onUpload }: AvatarProps): JSX.Element => {
+const customImgLoader = ({ src }: { src: string }): string => {
+  return `${src}`;
+};
+
+const Avatar = ({ url, size, onUpload }: AvatarProperties): JSX.Element => {
   const [avatarUrl, setAvatarUrl] = useState('');
   const [uploading, setUploading] = useState(false);
 
-  const customImgLoader = ({ src }: { src: string }) => {
-    return `${src}`;
-  };
-
   useEffect(() => {
-    if (url) downloadImage(url);
+    if (url) void downloadImage(url);
   }, [url]);
 
-  async function downloadImage(path: string) {
+  async function downloadImage(path: string): Promise<void> {
     try {
       const { data, error } = await supabase.storage
         .from('avatars')
@@ -41,12 +41,14 @@ const Avatar = ({ url, size, onUpload }: AvatarProps): JSX.Element => {
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.log('Error downloading image: ', error.message);
+        console.log('Error downloading image:', error.message);
       }
     }
   }
 
-  async function uploadAvatar(event: React.ChangeEvent<HTMLInputElement>) {
+  async function uploadAvatar(
+    event: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> {
     try {
       setUploading(true);
 
@@ -55,11 +57,11 @@ const Avatar = ({ url, size, onUpload }: AvatarProps): JSX.Element => {
       }
 
       const file = event.target.files[0];
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
+      const fileExtension = file.name.split('.').pop();
+      const fileName = fileExtension ? `${Math.random()}.${fileExtension}` : '';
       const filePath = `${fileName}`;
 
-      if (event.target.files[0].size > 150000) {
+      if (event.target.files[0].size > 150_000) {
         alert('File is too big!');
         event.target.value = '';
         setUploading(false);

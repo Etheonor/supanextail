@@ -8,22 +8,22 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
 
 const sendGrid = async (
-  req: NextApiRequest,
+  request: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-  if (req.method === 'POST') {
+  if (request.method === 'POST') {
     sgMail.setApiKey(process.env.SENDGRID_SECRET || '');
 
-    const msg = {
+    const message = {
       to: process.env.SENDGRID_MAILTO || '', // Change to your recipient
       from: process.env.SENDGRID_MAILFROM || '', // Change to your verified sender
-      subject: `[${process.env.NEXT_PUBLIC_TITLE}] New message from ${req.body.name}`,
-      text: req.body.message,
-      reply_to: req.body.email,
+      subject: `[${process.env.NEXT_PUBLIC_TITLE}] New message from ${request.body.name}`,
+      text: request.body.message,
+      reply_to: request.body.email,
     };
 
     sgMail
-      .send(msg)
+      .send(message)
       .then(() => {
         res
           .status(200)

@@ -4,10 +4,10 @@ import { supabase } from 'utils/supabaseClient';
 
 // Example of how to verify and get user data server-side.
 const getUser = async (
-  req: NextApiRequest,
+  request: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-  const token = req.headers.token;
+  const token = request.headers.token;
 
   if (typeof token !== 'string') {
     return res.status(401).json({ error: 'Missing auth token.' });

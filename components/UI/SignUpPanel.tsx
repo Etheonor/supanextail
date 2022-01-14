@@ -3,7 +3,7 @@ import router from 'next/router';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
-type SignUpPanelProps = {
+type SignUpPanelProperties = {
   signIn: ({}) => Promise<{
     data: Record<string, unknown>;
     error: { message: string };
@@ -14,19 +14,23 @@ type SignUpPanelProps = {
   }>;
 };
 
-const SignUpPanel = ({ signIn, signUp }: SignUpPanelProps): JSX.Element => {
+const SignUpPanel = ({
+  signIn,
+  signUp,
+}: SignUpPanelProperties): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const signup = (e: React.SyntheticEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const signup = async (
+    event: React.SyntheticEvent<HTMLButtonElement>
+  ): Promise<void> => {
+    event.preventDefault();
 
     // Handle the login. Go to the homepage if success or display an error.
-    signUp({
+    await signUp({
       email,
       password,
     }).then((result) => {
-      console.log(result);
       if (result.error) {
         toast.error(result.error.message);
       } else if (result.data?.confirmation_sent_at) {
@@ -35,7 +39,7 @@ const SignUpPanel = ({ signIn, signUp }: SignUpPanelProps): JSX.Element => {
           'A confirmation email has been sent to you, watch your mailbox!'
         );
       } else if (result.data) {
-        router.push('/');
+        void router.push('/');
       }
     });
   };
@@ -78,7 +82,7 @@ const SignUpPanel = ({ signIn, signUp }: SignUpPanelProps): JSX.Element => {
             id="loginBtn"
             className="w-full btn btn-primary"
             onClick={(event) => {
-              signup(event);
+              void signup(event);
             }}>
             Sign Up
           </button>
@@ -94,7 +98,7 @@ const SignUpPanel = ({ signIn, signUp }: SignUpPanelProps): JSX.Element => {
               className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border rounded-md focus:outline-none border-base-200 group hover:bg-base-300"
               onClick={(event) => {
                 event.preventDefault();
-                signIn({ provider: 'google' });
+                void signIn({ provider: 'google' });
               }}>
               <div className="text-base-content">
                 <IoLogoGoogle />

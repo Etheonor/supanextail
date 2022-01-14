@@ -2,12 +2,15 @@ import { Dialog, Transition } from '@headlessui/react';
 
 import { Fragment } from 'react';
 
-type PaymentModalProps = {
+type PaymentModalProperties = {
   open: boolean;
-  setPayment: (arg0: boolean) => void;
+  setPayment: (argument0: boolean) => void;
 };
 
-const PaymentModal = ({ open, setPayment }: PaymentModalProps): JSX.Element => {
+const PaymentModal = ({
+  open,
+  setPayment,
+}: PaymentModalProperties): JSX.Element => {
   function closeModal() {
     setPayment(false);
   }

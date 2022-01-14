@@ -12,12 +12,12 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { supabase } from 'utils/supabaseClient';
 import { useAuth } from 'utils/AuthContext';
 
-type ContainerProps = {
+type ContainerProperties = {
   children: JSX.Element;
   supabaseClient: SupabaseClient;
 };
 
-const Container = ({ children }: ContainerProps): JSX.Element => {
+const Container = ({ children }: ContainerProperties): JSX.Element => {
   const { user, signOut } = useAuth();
   if (user)
     return (

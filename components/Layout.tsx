@@ -18,11 +18,11 @@ import Nav from './Nav';
 import { ToastContainer } from 'react-toastify';
 import { useAuth } from 'utils/AuthContext';
 
-type LayoutProps = {
+type LayoutProperties = {
   children: JSX.Element;
 };
 
-const Layout = ({ children }: LayoutProps): JSX.Element => {
+const Layout = ({ children }: LayoutProperties): JSX.Element => {
   const { user, signOut } = useAuth();
 
   return (

@@ -13,7 +13,7 @@ const cors = initMiddleware(
 
 const limiter = initMiddleware(
   rateLimit({
-    windowMs: 30000, // 30sec
+    windowMs: 30_000, // 30sec
     max: 4, // Max 4 request per 30 sec
   })
 );
@@ -24,26 +24,26 @@ const stripe = new Stripe(process.env.STRIPE_SECRET || '', {
 });
 
 export default async function handler(
-  req: NextApiRequest,
+  request: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
-  await cors(req, res);
-  await limiter(req, res);
-  if (req.method === 'POST') {
-    const { priceId } = req.body;
+  await cors(request, res);
+  await limiter(request, res);
+  if (request.method === 'POST') {
+    const { priceId } = request.body;
 
     // See https://stripe.com/docs/api/checkout/sessions/create
     // for additional parameters to pass.
     try {
-      const session = req.body.customerId
+      const session = request.body.customerId
         ? await stripe.checkout.sessions.create({
-            mode: req.body.pay_mode,
+            mode: request.body.pay_mode,
             payment_method_types: ['card'],
-            client_reference_id: req.body.userId,
+            client_reference_id: request.body.userId,
             metadata: {
-              priceId: req.body.priceId,
+              priceId: request.body.priceId,
             },
-            customer: req.body.customerId,
+            customer: request.body.customerId,
             line_items: [
               {
                 price: priceId,
@@ -54,16 +54,16 @@ export default async function handler(
             // {CHECKOUT_SESSION_ID} is a string literal; do not change it!
             // the actual Session ID is returned in the query parameter when your customer
             // is redirected to the success page.
-            success_url: `${req.headers.origin}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.origin}/pricing`,
+            success_url: `${request.headers.origin}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${request.headers.origin}/pricing`,
           })
         : await stripe.checkout.sessions.create({
             mode: 'subscription',
             payment_method_types: ['card'],
-            customer_email: req.body.email,
-            client_reference_id: req.body.userId,
+            customer_email: request.body.email,
+            client_reference_id: request.body.userId,
             metadata: {
-              priceId: req.body.priceId,
+              priceId: request.body.priceId,
             },
             line_items: [
               {
@@ -75,16 +75,16 @@ export default async function handler(
             // {CHECKOUT_SESSION_ID} is a string literal; do not change it!
             // the actual Session ID is returned in the query parameter when your customer
             // is redirected to the success page.
-            success_url: `${req.headers.origin}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.origin}/pricing`,
+            success_url: `${request.headers.origin}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${request.headers.origin}/pricing`,
           });
       res.status(200).send({ url: session.url });
-    } catch (e: unknown) {
+    } catch (error: unknown) {
       res.status(400);
-      if (e instanceof Error) {
+      if (error instanceof Error) {
         return res.send({
           error: {
-            message: e.message,
+            message: error.message,
           },
         });
       }
