@@ -1,13 +1,20 @@
+import { ApiError, Session, UserCredentials } from '@supabase/gotrue-js';
+
 import { IoLogoGoogle } from 'react-icons/io';
 import router from 'next/router';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
 type LoginProperties = {
-  resetPassword: (email: string) => Promise<{ error: { message: string } }>;
-  signIn: ({}) => Promise<{
-    data: Record<string, unknown>;
-    error: { message: string };
+  resetPassword: (data: string) => Promise<{
+    data: {} | null;
+    error: ApiError | null;
+  }>;
+
+  signIn: (data: UserCredentials) => Promise<{
+    user: Session['user'] | null;
+    session: Session | null;
+    error: ApiError | null;
   }>;
 };
 
@@ -17,13 +24,11 @@ const Login = ({ resetPassword, signIn }: LoginProperties): JSX.Element => {
   const [forgot, setForgot] = useState(false);
 
   const resetPasswordLogin = async (): Promise<void> => {
-    await resetPassword(email).then(
-      (result: { error: { message: string } }) => {
-        if (result.error) {
-          toast.error(result.error.message);
-        } else toast.success('Check your email to reset your password!');
-      }
-    );
+    await resetPassword(email).then((result: { error: ApiError | null }) => {
+      if (result.error) {
+        toast.error(result.error.message);
+      } else toast.success('Check your email to reset your password!');
+    });
   };
 
   const login = async (
@@ -35,19 +40,14 @@ const Login = ({ resetPassword, signIn }: LoginProperties): JSX.Element => {
     await signIn({
       email,
       password,
-    }).then(
-      (result: {
-        data: Record<string, unknown>;
-        error: { message: string };
-      }) => {
-        if (result.data) {
-          void router.push('/');
-        }
-        if (result.error) {
-          toast.error(result.error.message);
-        }
+    }).then((result) => {
+      if (result) {
+        void router.push('/');
       }
-    );
+      if (result.error) {
+        toast.error(result.error.message);
+      }
+    });
   };
 
   return (

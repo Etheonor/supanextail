@@ -2,8 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import Cors from 'cors';
 import axios from 'axios';
-import initMiddleware from 'utils/init-middleware';
+import initMiddleware from 'utils/initMiddleware';
 import rateLimit from 'express-rate-limit';
+
+interface Request extends NextApiRequest {
+  body: {
+    mail: string;
+  };
+}
 
 export const config = {
   api: {
@@ -25,11 +31,11 @@ const limiter = initMiddleware(
 );
 
 export default async function handler(
-  request: NextApiRequest,
-  res: NextApiResponse
+  request: Request,
+  response: NextApiResponse
 ): Promise<void> {
-  await cors(request, res);
-  await limiter(request, res);
+  await cors(request, response);
+  await limiter(request, response);
   if (request.method === 'PUT') {
     axios
       .put(
@@ -41,22 +47,22 @@ export default async function handler(
         {
           headers: {
             'content-type': 'application/json',
-            Authorization: `Bearer ${process.env.SENDGRID_SECRET}`,
+            Authorization: `Bearer ${process.env.SENDGRID_SECRET || ''}`,
           },
         }
       )
       .then((result) => {
         console.log(result);
-        res.status(200).send({
+        response.status(200).send({
           message:
             'Your email has been succesfully added to the mailing list. Welcome 👋',
         });
       })
       .catch((error) => {
-        res.status(500).send({
+        response.status(500).send({
           message:
             'Oups, there was a problem with your subscription, please try again or contact us',
-          error: error,
+          error: error as string,
         });
       });
   }

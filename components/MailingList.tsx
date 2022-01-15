@@ -38,7 +38,9 @@ const MailingList = (): JSX.Element => {
       })
       .then((result) => {
         if (result.status === 200) {
-          toast.success(result.data.message);
+          toast.success(
+            'Your email has been succesfully added to the mailing list. Welcome 👋'
+          );
           setLoading(false);
         }
       })

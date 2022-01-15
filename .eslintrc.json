@@ -18,6 +18,14 @@
         ]
     },
     "parser": "@typescript-eslint/parser",
+    "ignorePatterns": [
+        "node_modules/*",
+        ".next/*",
+        ".out/*",
+        "!.prettierrc.js",
+        "types/*",
+        "next-env.d.ts"
+    ],
     "plugins": [
         "@typescript-eslint",
         "cypress",
@@ -64,6 +72,7 @@
                 "allowConciseArrowFunctionExpressionsStartingWithVoid": true
             }
         ],
+        "unicorn/no-null": "off",
         "unicorn/filename-case": [
             "error",
             {

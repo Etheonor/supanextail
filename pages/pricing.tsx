@@ -7,7 +7,9 @@ import Pricing from 'components/Pricing';
 const PricingPage = (): JSX.Element => (
   <>
     <NextSeo
-      title={`${process.env.NEXT_PUBLIC_TITLE} | Pricing`}
+      title={`${
+        process.env.NEXT_PUBLIC_TITLE ? process.env.NEXT_PUBLIC_TITLE : ''
+      } | Pricing`}
       description="SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS"
     />
     <Layout>

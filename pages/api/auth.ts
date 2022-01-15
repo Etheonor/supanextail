@@ -7,9 +7,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabase } from 'utils/supabaseClient';
 
-export default async function handler(
+export default function handler(
   request: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> {
-  supabase.auth.api.setAuthCookie(request, res);
+  response: NextApiResponse
+): void {
+  supabase.auth.api.setAuthCookie(request, response);
 }

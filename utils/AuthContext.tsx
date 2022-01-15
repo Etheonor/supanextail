@@ -1,3 +1,4 @@
+import { ApiError, Session, UserCredentials } from '@supabase/gotrue-js';
 import {
   ReactNode,
   createContext,
@@ -5,16 +6,29 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { Session, UserCredentials } from '@supabase/gotrue-js';
 
 import { supabase } from 'utils/supabaseClient';
 
 type authContextType = {
-  user: UserCredentials | undefined;
-  session: Session | undefined;
-  login: () => void;
-  logout: () => void;
+  user: Session['user'] | undefined;
+  session: Session | null;
   signOut: () => void;
+  signUp:
+    | ((data: UserCredentials) => Promise<{
+        user: Session['user'] | null;
+        session: Session | null;
+        error: ApiError | null;
+      }>)
+    | (() => void);
+  resetPassword: (data: string) => Promise<{
+    data: {} | null;
+    error: ApiError | null;
+  }>;
+  signIn: (data: UserCredentials) => Promise<{
+    user: Session['user'] | null;
+    session: Session | null;
+    error: ApiError | null;
+  }>;
 };
 
 type Properties = {
@@ -23,14 +37,19 @@ type Properties = {
 
 const authContextDefaultValues: authContextType = {
   user: undefined,
-  session: undefined,
-  login: () => {},
-  logout: () => {},
+  session: null,
   signOut: () => {},
+  signUp: () => {},
+  signIn: () => {
+    return Promise.resolve({ user: null, session: null, error: null });
+  },
+  resetPassword: () => {
+    return Promise.resolve({ data: null, error: null });
+  },
 };
 
 // create a context for authentication
-const AuthContext = createContext<authContextType>(authContextDefaultValues);
+const AuthContext = createContext(authContextDefaultValues);
 
 export const AuthProvider = ({ children }: Properties): JSX.Element => {
   const [user, setUser] = useState(supabase.auth.session()?.user);

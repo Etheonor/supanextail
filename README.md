@@ -1,8 +1,8 @@
 ## Welcome to SupaNexTail!
 
 ## Documentation 2.0
-A new documentation is available here : https://doc.supanextail.dev/ 
 
+A new documentation is available here : https://doc.supanextail.dev/
 
 ## ![](https://lh4.googleusercontent.com/0qrns6BGMEh95de3BAE12YRRJceEACWdH09Yj6r7J5MswKG_R6zv7jcHEOUWFiWa7_2Yr6n6m0gSHg7iLa4lb-E0jEqZH6uJHJg3aNjbYO9LGWtCVV4dIi6BKKYUAMiFfvEOtefl)
 
@@ -18,7 +18,7 @@ Simply follow the installation process. You need to have some knowledge with Rea
 
 #### SupaNexTail project
 
-You'll need to fork this repository. I suggest to keep your repository sync with SupaNexTail, in order to get all future updates. 
+You'll need to fork this repository. I suggest to keep your repository sync with SupaNexTail, in order to get all future updates.
 
 To do that, you'll have extended information on this page: https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/syncing-a-fork
 
@@ -79,7 +79,7 @@ Notes:
 If you want to use Stripe, be sure to set up your webhooks in the dashboard. If you want to test it locally, install Stripe CLI and use this command line:
 
 ```
-stripe listen --forward-to localhost:3000/api/stripe/stripe-webhook
+stripe listen --forward-to localhost:3000/api/stripe/webhook
 ```
 
 The two event needed are:

@@ -66,9 +66,15 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "utils/AuthContext.tsx"
+    "utils/AuthContext.tsx",
+    "**/*.js",
+    "*.js",
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    ".next",
+    "out",
+    "types/*",
   ]
 }

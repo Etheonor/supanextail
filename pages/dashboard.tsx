@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-nested-ternary */
 import { useEffect, useState } from 'react';
 
 import Dashboard from '../components/Dashboard';
@@ -6,6 +7,7 @@ import Layout from 'components/Layout';
 import type { NextPageContext } from 'next';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+import { definitions } from 'types/database/index';
 import { supabase } from '../utils/supabaseClient';
 import { useRouter } from 'next/router';
 
@@ -29,7 +31,7 @@ const DashboardPage = ({
   useEffect(() => {
     // If a user is not logged in, return to the homepage
     if (!user) {
-      router.push('/');
+      void router.push('/');
     }
   }, [router, user]);
 
@@ -66,7 +68,10 @@ const DashboardPage = ({
     </div>
   );
 };
-export async function getServerSideProps(context: NextPageContext) {
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export async function getServerSideProps(
+  context: NextPageContext
+): Promise<any> {
   const supabaseAdmin = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
     process.env.SUPABASE_ADMIN_KEY || ''
@@ -81,7 +86,7 @@ export async function getServerSideProps(context: NextPageContext) {
   // If the user exist, you will retrieve the user profile and if he/she's a paid user
   if (user) {
     const { data: plan } = await supabaseAdmin
-      .from('subscriptions')
+      .from<definitions['subscriptions']>('subscriptions')
       .select('subscription, paid_user')
       .eq('id', user.id)
       .single();
@@ -92,7 +97,7 @@ export async function getServerSideProps(context: NextPageContext) {
       : null;
 
     const { data: profile } = await supabaseAdmin
-      .from('profiles')
+      .from<definitions['profiles']>('profiles')
       .select(`username, website, avatar_url`)
       .eq('id', user.id)
       .single();

@@ -10,19 +10,20 @@ import { getSub, supabase } from 'utils/supabaseClient';
 import { useEffect, useState } from 'react';
 
 import axios from 'axios';
+import { definitions } from 'types/database/index';
 import router from 'next/router';
 import { useAuth } from 'utils/AuthContext';
 
 const Pricing = (): JSX.Element => {
   const { user, session } = useAuth();
-  const [customerId, setCustomerId] = useState<null | string>(null);
-  const [sub, setSub] = useState(false);
+  const [customerId, setCustomerId] = useState<undefined | string>();
+  const [sub, setSub] = useState<definitions['subscriptions'] | undefined>();
 
   useEffect(() => {
     if (user) {
-      getSub().then((result) => setSub(result));
-      supabase
-        .from('subscriptions')
+      void getSub().then((result) => setSub(result));
+      void supabase
+        .from<definitions['subscriptions']>('subscriptions')
         .select(`customer_id`)
         .eq('id', user.id)
         .single()
@@ -32,31 +33,37 @@ const Pricing = (): JSX.Element => {
     }
   }, [user]);
 
+  interface Test {
+    url: string;
+  }
+
   const handleSubmit = async (
-    e: React.SyntheticEvent<HTMLButtonElement>,
+    event: React.SyntheticEvent<HTMLButtonElement>,
     priceId: string
-  ) => {
-    e.preventDefault();
+  ): Promise<void> => {
+    event.preventDefault();
     // Create a Checkout Session. This will redirect the user to the Stripe website for the payment.
-    if (sub) {
-      axios
-        .post('/api/stripe/customer-portal', {
-          customerId,
-        })
-        .then((result) => {
-          router.push(result.data.url);
-        });
-    } else
-      axios
-        .post('/api/stripe/create-checkout-session', {
+    if (user && session) {
+      if (sub) {
+        const stripeInfo = await axios.post<Test>(
+          '/api/stripe/customerPortal',
+          {
+            customerId,
+          }
+        );
+        void router.push(stripeInfo.data.url);
+      } else {
+        const stripeInfo = await axios.post<Test>('/api/stripe/checkout', {
           priceId,
           email: user.email,
           customerId,
           userId: user.id,
           tokenId: session.access_token,
           pay_mode: 'subscription',
-        })
-        .then((result) => router.push(result.data.url));
+        });
+        void router.push(stripeInfo.data.url);
+      }
+    }
   };
   return (
     <div>
@@ -102,8 +109,8 @@ const Pricing = (): JSX.Element => {
             {user ? (
               <button
                 className="btn btn-primary"
-                onClick={(e) => {
-                  handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
+                onClick={(event) => {
+                  void handleSubmit(event, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
                 }}>
                 {sub ? 'Handle subscription' : 'Subscribe'}
               </button>
@@ -136,8 +143,8 @@ const Pricing = (): JSX.Element => {
             {user ? (
               <button
                 className="btn btn-primary"
-                onClick={(e) => {
-                  handleSubmit(e, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
+                onClick={(event) => {
+                  void handleSubmit(event, 'price_1JtHhaDMjD0UnVmM5uCyyrWn');
                 }}>
                 {sub ? 'Handle subscription' : 'Subscribe'}
               </button>
