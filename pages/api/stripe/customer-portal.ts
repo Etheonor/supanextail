@@ -28,10 +28,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET || '', {
 
 export default async function handler(
   request: NextApiRequest,
-  res: NextApiResponse
+  response: NextApiResponse
 ): Promise<void> {
-  await cors(request, res);
-  await limiter(request, res);
+  await cors(request, response);
+  await limiter(request, response);
   if (request.method === 'POST') {
     const returnUrl = `${request.headers.origin}/dashboard`; // Stripe will return to the dashboard, you can change it
 

@@ -5,14 +5,16 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { Session, UserCredentials } from '@supabase/gotrue-js';
 
-import { UserCredentials } from '@supabase/gotrue-js';
 import { supabase } from 'utils/supabaseClient';
 
 type authContextType = {
-  user: boolean;
+  user: UserCredentials | undefined;
+  session: Session | undefined;
   login: () => void;
   logout: () => void;
+  signOut: () => void;
 };
 
 type Properties = {
@@ -20,9 +22,11 @@ type Properties = {
 };
 
 const authContextDefaultValues: authContextType = {
-  user: false,
+  user: undefined,
+  session: undefined,
   login: () => {},
   logout: () => {},
+  signOut: () => {},
 };
 
 // create a context for authentication
@@ -82,4 +86,4 @@ export const AuthProvider = ({ children }: Properties): JSX.Element => {
 };
 
 // export the useAuth hook
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = (): authContextType => useContext(AuthContext);

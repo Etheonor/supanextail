@@ -113,7 +113,7 @@ const Dashboard = ({
             id="username"
             type="text"
             value={username || ''}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(event) => setUsername(event.target.value)}
           />
         </div>
         <div className="flex flex-col mb-5">
@@ -140,7 +140,7 @@ const Dashboard = ({
       </div>
 
       <div className="flex flex-row flex-wrap w-full max-w-xl p-5 m-auto my-5 border-2 shadow-lg bordered border-primary">
-        <Image src={Plan} alt="credit card" />
+        <Image src={Plan as string} alt="credit card" />
         <div className="flex flex-col m-auto">
           <h2>Your current plan</h2>
           <p className="">{planName}</p>

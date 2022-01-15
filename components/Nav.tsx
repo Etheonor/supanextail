@@ -7,9 +7,10 @@ import { LogOut, Menu } from 'react-feather';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from 'public/logo.svg';
+import { UserCredentials } from '@supabase/gotrue-js';
 
 type NavProperties = {
-  user: Record<string, unknown>;
+  user: UserCredentials | undefined;
   signOut: () => void;
 };
 
@@ -66,7 +67,7 @@ const Nav = ({ user, signOut }: NavProperties): JSX.Element => {
     <nav className="w-full mb-2 navbar">
       <Link href="/">
         <a>
-          <Image src={Logo} alt="SupaNexTail Logo" />
+          <Image src={Logo as string} alt="SupaNexTail Logo" />
         </a>
       </Link>
 

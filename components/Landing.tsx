@@ -20,7 +20,7 @@ const Landing = (): JSX.Element => (
       </div>
       <div className="max-w-xl">
         <Image
-          src={landTop}
+          src={landTop as string}
           height={417}
           width={583}
           alt="Construction of a website"
@@ -40,7 +40,7 @@ const Landing = (): JSX.Element => (
         </p>
       </div>
       <div className="max-w-xl">
-        <Image src={start} alt="screenshot of the website" />
+        <Image src={start as string} alt="screenshot of the website" />
       </div>
     </div>
     <div className="flex flex-wrap justify-around max-w-6xl m-auto mt-24">
@@ -60,7 +60,10 @@ const Landing = (): JSX.Element => (
         </p>
       </div>
       <div className="flex order-2 max-w-md lg:order-1">
-        <Image src={supabaseImage} alt="screenshot of the Supabase website" />
+        <Image
+          src={supabaseImage as string}
+          alt="screenshot of the Supabase website"
+        />
       </div>
     </div>
     <MailingList />
