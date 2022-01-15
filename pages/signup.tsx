@@ -12,8 +12,12 @@ import { NextSeo } from 'next-seo';
 const SignUpPage = (): JSX.Element => (
   <>
     <NextSeo
-      title={`${process.env.NEXT_PUBLIC_TITLE} | Auth`}
-      description={`This is the auth page for ${process.env.NEXT_PUBLIC_TITLE}`}
+      title={`${
+        process.env.NEXT_PUBLIC_TITLE ? process.env.NEXT_PUBLIC_TITLE : ''
+      } | Auth`}
+      description={`This is the auth page for ${
+        process.env.NEXT_PUBLIC_TITLE ? process.env.NEXT_PUBLIC_TITLE : ''
+      }`}
     />
 
     <Layout>

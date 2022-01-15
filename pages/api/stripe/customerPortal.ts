@@ -5,8 +5,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import Cors from 'cors';
 import Stripe from 'stripe';
-import initMiddleware from 'utils/init-middleware';
+import initMiddleware from 'utils/initMiddleware';
 import rateLimit from 'express-rate-limit';
+
+interface Request extends NextApiRequest {
+  body: {
+    customerId: string;
+  };
+}
 
 const cors = initMiddleware(
   Cors({
@@ -16,7 +22,7 @@ const cors = initMiddleware(
 
 const limiter = initMiddleware(
   rateLimit({
-    windowMs: 30000, // 30sec
+    windowMs: 30_000, // 30sec
     max: 150, // Max 4 request per 30 sec
   })
 );
@@ -27,18 +33,20 @@ const stripe = new Stripe(process.env.STRIPE_SECRET || '', {
 });
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  request: Request,
+  response: NextApiResponse
 ): Promise<void> {
-  await cors(req, res);
-  await limiter(req, res);
-  if (req.method === 'POST') {
-    const returnUrl = `${req.headers.origin}/dashboard`; // Stripe will return to the dashboard, you can change it
+  await cors(request, response);
+  await limiter(request, response);
+  if (request.method === 'POST') {
+    const returnUrl = `${
+      request.headers.origin ? request.headers.origin : '/'
+    }/dashboard`; // Stripe will return to the dashboard, you can change it
 
     const portalsession = await stripe.billingPortal.sessions.create({
-      customer: req.body.customerId,
+      customer: request.body.customerId,
       return_url: returnUrl,
     });
-    res.status(200).send({ url: portalsession.url });
+    response.status(200).send({ url: portalsession.url });
   }
 }

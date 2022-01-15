@@ -1,49 +1,53 @@
+import { ApiError, Session, UserCredentials } from '@supabase/gotrue-js';
+
 import { IoLogoGoogle } from 'react-icons/io';
 import router from 'next/router';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
-type LoginProps = {
-  resetPassword: (email: string) => Promise<{ error: { message: string } }>;
-  signIn: ({}) => Promise<{
-    data: Record<string, unknown>;
-    error: { message: string };
+type LoginProperties = {
+  resetPassword: (data: string) => Promise<{
+    data: {} | null;
+    error: ApiError | null;
+  }>;
+
+  signIn: (data: UserCredentials) => Promise<{
+    user: Session['user'] | null;
+    session: Session | null;
+    error: ApiError | null;
   }>;
 };
 
-const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
+const Login = ({ resetPassword, signIn }: LoginProperties): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [forgot, setForgot] = useState(false);
 
-  const resetPasswordLogin = () => {
-    resetPassword(email).then((result: { error: { message: string } }) => {
+  const resetPasswordLogin = async (): Promise<void> => {
+    await resetPassword(email).then((result: { error: ApiError | null }) => {
       if (result.error) {
         toast.error(result.error.message);
       } else toast.success('Check your email to reset your password!');
     });
   };
 
-  const login = (e: React.SyntheticEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const login = async (
+    event: React.SyntheticEvent<HTMLButtonElement>
+  ): Promise<void> => {
+    event.preventDefault();
 
     // Handle the login. Go to the homepage if success or display an error.
-    signIn({
+    await signIn({
       email,
       password,
-    }).then(
-      (result: {
-        data: Record<string, unknown>;
-        error: { message: string };
-      }) => {
-        if (result.data) {
-          router.push('/');
-        }
-        if (result.error) {
-          toast.error(result.error.message);
-        }
+    }).then((result) => {
+      if (result) {
+        void router.push('/');
       }
-    );
+      if (result.error) {
+        toast.error(result.error.message);
+      }
+    });
   };
 
   return (
@@ -97,7 +101,7 @@ const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
               <button
                 className="w-full btn btn-primary"
                 onClick={(event) => {
-                  login(event);
+                  void login(event);
                 }}>
                 Log in
               </button>
@@ -113,7 +117,7 @@ const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
                   className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border rounded-md focus:outline-none border-base-200 group hover:bg-base-300"
                   onClick={(event) => {
                     event.preventDefault();
-                    signIn({ provider: 'google' });
+                    void signIn({ provider: 'google' });
                   }}>
                   <div className="text-base-content">
                     <IoLogoGoogle />
@@ -154,7 +158,7 @@ const Login = ({ resetPassword, signIn }: LoginProps): JSX.Element => {
                 className="w-full btn btn-primary btn-sm"
                 onClick={(event) => {
                   event.preventDefault();
-                  resetPasswordLogin();
+                  void resetPasswordLogin();
                 }}>
                 Recover my password
               </button>

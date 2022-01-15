@@ -14,8 +14,10 @@ const LoginPage = (): JSX.Element => {
   return (
     <>
       <NextSeo
-        title={`${process.env.NEXT_PUBLIC_TITLE} | Auth`}
-        description={`This is the auth page for ${process.env.NEXT_PUBLIC_TITLE}`}
+        title={`${process.env.NEXT_PUBLIC_TITLE || ''} | Auth`}
+        description={`This is the auth page for ${
+          process.env.NEXT_PUBLIC_TITLE || ''
+        }`}
       />
 
       <Layout>

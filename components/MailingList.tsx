@@ -14,10 +14,10 @@ const MailingList = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [valid, setValid] = useState(true);
 
-  const validateEmail = () => {
+  const validateEmail = (): void => {
     // Regex patern for email validation
     const regex =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      /^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Za-z\-]+\.)+[A-Za-z]{2,}))$/;
 
     if (regex.test(mail)) {
       // this is a valid email address
@@ -30,7 +30,7 @@ const MailingList = (): JSX.Element => {
     }
   };
 
-  const subscribe = () => {
+  const subscribe = (): void => {
     setLoading(true);
     axios
       .put('api/mailingList', {
@@ -38,12 +38,14 @@ const MailingList = (): JSX.Element => {
       })
       .then((result) => {
         if (result.status === 200) {
-          toast.success(result.data.message);
+          toast.success(
+            'Your email has been succesfully added to the mailing list. Welcome 👋'
+          );
           setLoading(false);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
         setLoading(false);
       });
   };
@@ -52,7 +54,7 @@ const MailingList = (): JSX.Element => {
       <h2 className="text-3xl font-bold text-center uppercase md:text-4xl font-title">
         Stay Tuned
       </h2>
-      <Image src={Mailing} alt="Mail" />
+      <Image src={Mailing as string} alt="Mail" />
       <label className="label">
         <p className="max-w-md m-auto text-center">
           Want to be the first to know when SupaNexTail launches and get an
@@ -61,13 +63,13 @@ const MailingList = (): JSX.Element => {
       </label>
       <div className="m-auto mt-5">
         <input
-          onChange={(e) => {
-            setMail(e.target.value);
+          onChange={(event) => {
+            setMail(event.target.value);
           }}
           type="email"
           placeholder="Your email"
           className={`input input-primary input-bordered ${
-            valid ? null : 'input-error'
+            valid ? '' : 'input-error'
           }`}
         />
         <button

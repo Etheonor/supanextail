@@ -7,7 +7,9 @@ import PrivacyPolicy from 'components/PrivacyPolicy';
 const PrivacyPage = (): JSX.Element => (
   <>
     <NextSeo
-      title={`${process.env.NEXT_PUBLIC_TITLE} | Privacy Policy`}
+      title={`${
+        process.env.NEXT_PUBLIC_TITLE ? process.env.NEXT_PUBLIC_TITLE : ''
+      } | Privacy Policy`}
       description="SupaNexTail is a boilerplate for your website, based on Next.js, Supabase, and TailwindCSS"
     />
     <Layout>

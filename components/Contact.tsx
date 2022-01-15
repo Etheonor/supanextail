@@ -9,39 +9,47 @@ the axios.post here, line 18.
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const Contact = (): JSX.Element => {
-  const sendEmail = () => {
-    const name = (document.getElementById('name') as HTMLInputElement).value;
-    const email = (document.getElementById('email') as HTMLInputElement).value;
-    const message = (document.getElementById('message') as HTMLInputElement)
-      .value;
+const sendEmail = (): void => {
+  const name = (document.querySelector('#name') as HTMLInputElement).value;
+  const email = (document.querySelector('#email') as HTMLInputElement).value;
+  const message = (document.querySelector('#message') as HTMLInputElement)
+    .value;
 
-    if (name && email && message) {
-      axios
-        .post('/api/sendgrid', { email, name, message })
-        .then((result) => {
+  if (name && email && message) {
+    axios
+      .post('/api/sendgrid', { email, name, message })
+      .then(
+        (result: {
+          data: {
+            success: boolean;
+            message: string;
+          };
+        }) => {
           if (result.data.success === true) {
             toast.success(result.data.message);
-            (document.getElementById('name') as HTMLInputElement).value = '';
-            (document.getElementById('email') as HTMLInputElement).value = '';
-            (document.getElementById('message') as HTMLInputElement).value = '';
+            (document.querySelector('#name') as HTMLInputElement).value = '';
+            (document.querySelector('#email') as HTMLInputElement).value = '';
+            (document.querySelector('#message') as HTMLInputElement).value = '';
           }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      toast.info('Please fill all the fields ', {
-        position: 'top-center',
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+        }
+      )
+      .catch((error) => {
+        console.log(error);
       });
-    }
-  };
+  } else {
+    toast.info('Please fill all the fields ', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+};
+
+const Contact = (): JSX.Element => {
   return (
     <div className="max-w-xl px-5 py-10 m-auto">
       <div>
@@ -87,8 +95,8 @@ const Contact = (): JSX.Element => {
         <button
           type="button"
           className="btn btn-primary btn-sm"
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={(event) => {
+            event.preventDefault();
             sendEmail();
           }}>
           Submit{' '}

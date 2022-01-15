@@ -3,7 +3,7 @@ SupaNexTail use only 2 webhooks. Stripe have a lot more,
 you can check it here https://stripe.com/docs/webhooks
 BE SURE TO SETUP YOUR WEBHOOKS IN YOUR DASHBOARD!
 If you want to test it locally, you'll need the stripe CLI and use this command line:
-stripe listen --forward-to localhost:3000/api/stripe/stripe-webhook
+stripe listen --forward-to localhost:3000/api/stripe/webhook
 */
 
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -12,7 +12,7 @@ import Cors from 'cors';
 import Stripe from 'stripe';
 import { buffer } from 'micro';
 import { createClient } from '@supabase/supabase-js';
-import initMiddleware from 'utils/init-middleware';
+import initMiddleware from 'utils/initMiddleware';
 import rateLimit from 'express-rate-limit';
 
 export const config = {
@@ -39,7 +39,7 @@ const supabase = createClient(
 
 const limiter = initMiddleware(
   rateLimit({
-    windowMs: 30000, // 30sec
+    windowMs: 30_000, // 30sec
     max: 150, // Max 150 request per 30 sec
   })
 );
@@ -52,18 +52,18 @@ const stripe = new Stripe(process.env.STRIPE_SECRET || '', {
 });
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  request: NextApiRequest,
+  response: NextApiResponse
 ): Promise<void> {
-  await cors(req, res);
-  await limiter(req, res);
+  await cors(request, response);
+  await limiter(request, response);
 
-  if (req.method === 'POST') {
+  if (request.method === 'POST') {
     // Retrieve the event by verifying the signature using the raw body and secret.
     let event: Stripe.Event;
-    const buf = await buffer(req);
+    const buf = await buffer(request);
 
-    const sig = req.headers['stripe-signature'] as string;
+    const sig = request.headers['stripe-signature'] as string;
 
     try {
       event = stripe.webhooks.constructEvent(
@@ -71,13 +71,13 @@ export default async function handler(
         sig,
         process.env.STRIPE_WEBHOOK || ''
       );
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
       console.log(`⚠️  Webhook signature verification failed.`);
       console.log(
         `⚠️  Check the env file and enter the correct webhook secret.`
       );
-      return res.send(400);
+      return response.send(400);
     }
     // Extract the object from the event.
     const dataObject = event.data.object as {
@@ -118,7 +118,7 @@ export default async function handler(
               },
             ])
             .then()
-            .then(null, (err) => console.log('err: ', err)); // catch
+            .then(undefined, (error) => console.log('err:', error)); // catch
         } else if (subscriptions?.length && subscriptions?.length > 0) {
           await supabase
             .from('subscriptions')
@@ -130,7 +130,7 @@ export default async function handler(
             })
             .eq('id', dataObject.client_reference_id)
             .then()
-            .then(null, (err) => console.log('err: ', err)); // catch
+            .then(undefined, (error) => console.log('err:', error)); // catch
         }
         break;
       case 'customer.subscription.deleted':
@@ -139,7 +139,7 @@ export default async function handler(
           .update({ paid_user: false })
           .eq('customer_id', dataObject.customer)
           .then()
-          .then(null, (err) => console.log('err: ', err)); // catch
+          .then(undefined, (error) => console.log('err:', error)); // catch
         break;
       case 'invoice.payment_failed':
         // If the payment fails or the customer does not have a valid payment method,
@@ -157,6 +157,6 @@ export default async function handler(
       default:
       // Unexpected event type
     }
-    res.send(200);
+    response.send(200);
   }
 }

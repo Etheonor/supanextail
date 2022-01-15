@@ -8,20 +8,30 @@
     "extends": [
         "next",
         "next/core-web-vitals",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:sonarjs/recommended",
+        "plugin:unicorn/recommended"
     ],
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
+        "project": [
+            "./tsconfig.json"
+        ]
     },
+    "parser": "@typescript-eslint/parser",
+    "ignorePatterns": [
+        "node_modules/*",
+        ".next/*",
+        ".out/*",
+        "!.prettierrc.js",
+        "types/*",
+        "next-env.d.ts"
+    ],
     "plugins": [
         "@typescript-eslint",
         "cypress",
         "simple-import-sort",
-        "prettier"
+        "prettier",
+        "sonarjs"
     ],
     "rules": {
         "no-console": "off",
@@ -60,6 +70,16 @@
                 "allowTypedFunctionExpressions": true,
                 "allowHigherOrderFunctions": true,
                 "allowConciseArrowFunctionExpressionsStartingWithVoid": true
+            }
+        ],
+        "unicorn/no-null": "off",
+        "unicorn/filename-case": [
+            "error",
+            {
+                "cases": {
+                    "camelCase": true,
+                    "pascalCase": true
+                }
             }
         ]
     },

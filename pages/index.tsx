@@ -10,7 +10,9 @@ import Layout from 'components/Layout';
 const Home = (): JSX.Element => (
   <>
     <Head>
-      <title>{`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}</title>
+      <title>{`Welcome to ${
+        process.env.NEXT_PUBLIC_TITLE ? process.env.NEXT_PUBLIC_TITLE : ''
+      } 👋`}</title>
       <meta
         name="description"
         content="SupaNexTail is a boilerplate for your SaaS, based on Next.js, Supabase, and TailwindCSS"
@@ -20,7 +22,9 @@ const Home = (): JSX.Element => (
       <meta property="og:type" content="website" />
       <meta
         property="og:title"
-        content={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+        content={`Welcome to ${
+          process.env.NEXT_PUBLIC_TITLE ? process.env.NEXT_PUBLIC_TITLE : ''
+        } 👋`}
       />
       <meta
         property="og:description"
@@ -36,7 +40,9 @@ const Home = (): JSX.Element => (
       />
       <meta
         name="twitter:title"
-        content={`Welcome to ${process.env.NEXT_PUBLIC_TITLE} 👋`}
+        content={`Welcome to ${
+          process.env.NEXT_PUBLIC_TITLE ? process.env.NEXT_PUBLIC_TITLE : ''
+        } 👋`}
       />
       <meta
         name="twitter:description"

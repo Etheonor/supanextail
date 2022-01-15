@@ -19,37 +19,37 @@ const CardsLanding = (): JSX.Element => (
     </p>
     <div className="flex flex-wrap justify-center mt-10">
       <CardLanding
-        image={cardPage}
+        image={cardPage as string}
         text="7 pages fully designed and easily customizable"
         title="Templates"
       />
       <CardLanding
-        image={cardServer}
+        image={cardServer as string}
         text="Integrated backend already setup with Next.js API Routes"
         title="Backend"
       />
       <CardLanding
-        image={cardAuth}
+        image={cardAuth as string}
         text="Auth and user management with Supabase"
         title="Auth"
       />
       <CardLanding
-        image={cardResponsive}
+        image={cardResponsive as string}
         text="Mobile ready, fully responsive and customizable with Tailwind CSS"
         title="Responsive"
       />
       <CardLanding
-        image={cardTheme}
+        image={cardTheme as string}
         text="Custom themes available and easily switch to dark mode"
         title="Themes"
       />
       <CardLanding
-        image={cardStripe}
+        image={cardStripe as string}
         text="Stripe integration. Fully functional subscription system"
         title="Payment"
       />
       <CardLanding
-        image={cardFee}
+        image={cardFee as string}
         text="One-time fee. No subscription, you’ll have access to all the updates"
         title="Lifetime access"
       />

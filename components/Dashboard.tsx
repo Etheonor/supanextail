@@ -16,7 +16,7 @@ import { supabase } from '../utils/supabaseClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
-type DashboardProps = {
+type DashboardProperties = {
   profile: { username: string; website: string; avatar_url: string };
   session: Session;
   planName: string;
@@ -26,7 +26,7 @@ const Dashboard = ({
   profile,
   session,
   planName,
-}: DashboardProps): JSX.Element => {
+}: DashboardProperties): JSX.Element => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState(profile?.username || '');
@@ -48,7 +48,7 @@ const Dashboard = ({
     username: string;
     website: string;
     avatar_url: string;
-  }) {
+  }): Promise<void> {
     try {
       setLoading(true);
       const user = supabase.auth.user();
@@ -89,7 +89,7 @@ const Dashboard = ({
           size={150}
           onUpload={(url) => {
             setAvatarUrl(url);
-            updateProfile({ username, website, avatar_url: url });
+            void updateProfile({ username, website, avatar_url: url });
           }}
         />
         <div className="flex flex-col mb-5">
@@ -113,7 +113,7 @@ const Dashboard = ({
             id="username"
             type="text"
             value={username || ''}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(event) => setUsername(event.target.value)}
           />
         </div>
         <div className="flex flex-col mb-5">
@@ -125,7 +125,7 @@ const Dashboard = ({
             id="website"
             type="website"
             value={website || ''}
-            onChange={(e) => setWebsite(e.target.value)}
+            onChange={(event) => setWebsite(event.target.value)}
           />
         </div>
 
@@ -140,7 +140,7 @@ const Dashboard = ({
       </div>
 
       <div className="flex flex-row flex-wrap w-full max-w-xl p-5 m-auto my-5 border-2 shadow-lg bordered border-primary">
-        <Image src={Plan} alt="credit card" />
+        <Image src={Plan as string} alt="credit card" />
         <div className="flex flex-col m-auto">
           <h2>Your current plan</h2>
           <p className="">{planName}</p>
