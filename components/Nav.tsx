@@ -7,10 +7,10 @@ import { LogOut, Menu } from 'react-feather';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from 'public/logo.svg';
-import { UserCredentials } from '@supabase/gotrue-js';
+import { User } from '@supabase/gotrue-js';
 
 type NavProperties = {
-  user: UserCredentials | undefined;
+  user: User | null | undefined;
   signOut: () => void;
 };
 

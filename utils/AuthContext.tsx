@@ -13,13 +13,11 @@ type authContextType = {
   user: Session['user'] | undefined;
   session: Session | null;
   signOut: () => void;
-  signUp:
-    | ((data: UserCredentials) => Promise<{
-        user: Session['user'] | null;
-        session: Session | null;
-        error: ApiError | null;
-      }>)
-    | (() => void);
+  signUp: (data: UserCredentials) => Promise<{
+    user: Session['user'] | null;
+    session: Session | null;
+    error: ApiError | null;
+  }>;
   resetPassword: (data: string) => Promise<{
     data: {} | null;
     error: ApiError | null;
@@ -39,7 +37,9 @@ const authContextDefaultValues: authContextType = {
   user: undefined,
   session: null,
   signOut: () => {},
-  signUp: () => {},
+  signUp: () => {
+    return Promise.resolve({ user: null, session: null, error: null });
+  },
   signIn: () => {
     return Promise.resolve({ user: null, session: null, error: null });
   },

@@ -1,16 +1,21 @@
+import { ApiError, Session, UserCredentials } from '@supabase/gotrue-js';
+
 import { IoLogoGoogle } from 'react-icons/io';
 import router from 'next/router';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
 type SignUpPanelProperties = {
-  signIn: ({}) => Promise<{
-    data: Record<string, unknown>;
-    error: { message: string };
+  signUp: (data: UserCredentials) => Promise<{
+    user: Session['user'] | null;
+    session: Session | null;
+    error: ApiError | null;
   }>;
-  signUp: ({}) => Promise<{
-    data: Record<string, unknown>;
-    error: { message: string };
+
+  signIn: (data: UserCredentials) => Promise<{
+    user: Session['user'] | null;
+    session: Session | null;
+    error: ApiError | null;
   }>;
 };
 
@@ -31,14 +36,14 @@ const SignUpPanel = ({
       email,
       password,
     }).then((result) => {
+      console.log(result);
       if (result.error) {
         toast.error(result.error.message);
-      } else if (result.data?.confirmation_sent_at) {
-        console.log(result.data.confirmation_sent_at);
+      } else if (result.user?.confirmation_sent_at) {
         toast.success(
           'A confirmation email has been sent to you, watch your mailbox!'
         );
-      } else if (result.data) {
+      } else if (result.user) {
         void router.push('/');
       }
     });
