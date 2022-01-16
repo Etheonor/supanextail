@@ -21,7 +21,7 @@ const MailingList = (): JSX.Element => {
 
     if (regex.test(mail)) {
       // this is a valid email address
-      subscribe();
+      void subscribe();
       setValid(true);
     } else {
       // invalid email.
@@ -30,24 +30,21 @@ const MailingList = (): JSX.Element => {
     }
   };
 
-  const subscribe = (): void => {
+  const subscribe = async (): Promise<void> => {
     setLoading(true);
-    axios
-      .put('api/mailingList', {
-        mail,
-      })
-      .then((result) => {
-        if (result.status === 200) {
-          toast.success(
-            'Your email has been succesfully added to the mailing list. Welcome 👋'
-          );
-          setLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+
+    const data = await axios.put('api/mailingList', {
+      mail,
+    });
+
+    if (data.status === 200) {
+      toast.success('You have been added to our mailing list. Welcome 👋');
+      setLoading(false);
+      setMail('');
+    } else {
+      toast.error('Something went wrong');
+      setLoading(false);
+    }
   };
   return (
     <div className="flex flex-col m-auto my-10 mt-24">
