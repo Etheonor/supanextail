@@ -24,11 +24,15 @@ const Login = ({ resetPassword, signIn }: LoginProperties): JSX.Element => {
   const [forgot, setForgot] = useState(false);
 
   const resetPasswordLogin = async (): Promise<void> => {
-    await resetPassword(email).then((result: { error: ApiError | null }) => {
-      if (result.error) {
-        toast.error(result.error.message);
-      } else toast.success('Check your email to reset your password!');
-    });
+    const result = await resetPassword(email);
+
+    if (result.error) {
+      toast.error(result.error.message);
+    } else if (result.data) {
+      toast.success(
+        'A password reset email has been sent to you, watch your mailbox!'
+      );
+    }
   };
 
   const login = async (
@@ -37,17 +41,16 @@ const Login = ({ resetPassword, signIn }: LoginProperties): JSX.Element => {
     event.preventDefault();
 
     // Handle the login. Go to the homepage if success or display an error.
-    await signIn({
+    const result = await signIn({
       email,
       password,
-    }).then((result) => {
-      if (result) {
-        void router.push('/');
-      }
-      if (result.error) {
-        toast.error(result.error.message);
-      }
     });
+
+    if (result.error) {
+      toast.error(result.error.message);
+    } else if (result.user) {
+      void router.push('/');
+    }
   };
 
   return (

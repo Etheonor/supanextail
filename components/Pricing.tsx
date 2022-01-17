@@ -21,15 +21,20 @@ const Pricing = (): JSX.Element => {
 
   useEffect(() => {
     if (user) {
-      void getSub().then((result) => setSub(result));
-      void supabase
-        .from<definitions['subscriptions']>('subscriptions')
-        .select(`customer_id`)
-        .eq('id', user.id)
-        .single()
-        .then((result) => {
-          setCustomerId(result.data?.customer_id);
-        });
+      const subFunction = async (): Promise<void> => {
+        const sub = await getSub();
+        if (sub) {
+          setSub(sub);
+        }
+        const subSupa = await supabase
+          .from<definitions['subscriptions']>('subscriptions')
+          .select(`customer_id`)
+          .eq('id', user.id)
+          .single();
+
+        setCustomerId(subSupa.data?.customer_id);
+      };
+      void subFunction();
     }
   }, [user]);
 

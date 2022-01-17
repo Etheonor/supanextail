@@ -3,9 +3,10 @@ This is the form component to register an email adress to your mailing list.
 This is just the frontend, and the email will be send to our backend API (/api/mailingList)
 */
 
+import axios, { AxiosError } from 'axios';
+
 import Image from 'next/image';
 import Mailing from 'public/landing/mailing.svg';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
@@ -14,6 +15,12 @@ const MailingList = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [valid, setValid] = useState(true);
 
+  interface ErrorAxios {
+    data: {
+      error: string;
+      success: boolean;
+    };
+  }
   const validateEmail = (): void => {
     // Regex patern for email validation
     const regex =
@@ -21,7 +28,7 @@ const MailingList = (): JSX.Element => {
 
     if (regex.test(mail)) {
       // this is a valid email address
-      subscribe();
+      void subscribe();
       setValid(true);
     } else {
       // invalid email.
@@ -30,24 +37,28 @@ const MailingList = (): JSX.Element => {
     }
   };
 
-  const subscribe = (): void => {
+  const subscribe = async (): Promise<void> => {
     setLoading(true);
-    axios
-      .put('api/mailingList', {
+
+    try {
+      const data = await axios.put('api/mailingList', {
         mail,
-      })
-      .then((result) => {
-        if (result.status === 200) {
-          toast.success(
-            'Your email has been succesfully added to the mailing list. Welcome 👋'
-          );
-          setLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
       });
+
+      if (data.status === 200) {
+        toast.success('You have been added to our mailing list. Welcome 👋');
+        setLoading(false);
+        setMail('');
+      }
+    } catch (error: unknown) {
+      const errorChecked = error as AxiosError;
+      const errorMessage = errorChecked.response as ErrorAxios;
+
+      if (errorMessage.data.error) {
+        toast.error(errorMessage.data.error);
+        setLoading(false);
+      }
+    }
   };
   return (
     <div className="flex flex-col m-auto my-10 mt-24">

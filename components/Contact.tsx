@@ -6,36 +6,46 @@ If you want to change the email provider, don't hesitate to create a new api rou
 the axios.post here, line 18.
 */
 
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
 import { toast } from 'react-toastify';
 
-const sendEmail = (): void => {
+const sendEmail = async (): Promise<void> => {
   const name = (document.querySelector('#name') as HTMLInputElement).value;
   const email = (document.querySelector('#email') as HTMLInputElement).value;
   const message = (document.querySelector('#message') as HTMLInputElement)
     .value;
 
+  interface EmailData {
+    success: boolean;
+    message: string;
+  }
+
+  interface ErrorAxios {
+    data: {
+      error: string;
+      success: boolean;
+    };
+  }
+
   if (name && email && message) {
-    axios
-      .post('/api/sendgrid', { email, name, message })
-      .then(
-        (result: {
-          data: {
-            success: boolean;
-            message: string;
-          };
-        }) => {
-          if (result.data.success === true) {
-            toast.success(result.data.message);
-            (document.querySelector('#name') as HTMLInputElement).value = '';
-            (document.querySelector('#email') as HTMLInputElement).value = '';
-            (document.querySelector('#message') as HTMLInputElement).value = '';
-          }
-        }
-      )
-      .catch((error) => {
-        console.log(error);
+    try {
+      const mail = await axios.post<EmailData>('/api/sendgrid', {
+        email,
+        name,
+        message,
       });
+      if (mail.data.success === true) {
+        toast.success(mail.data.message);
+        (document.querySelector('#name') as HTMLInputElement).value = '';
+        (document.querySelector('#email') as HTMLInputElement).value = '';
+        (document.querySelector('#message') as HTMLInputElement).value = '';
+      }
+    } catch (error: unknown) {
+      const errorChecked = error as AxiosError;
+      const errorMessage = errorChecked.response as ErrorAxios;
+      toast.error(errorMessage.data.error);
+    }
   } else {
     toast.info('Please fill all the fields ', {
       position: 'top-center',
@@ -97,7 +107,7 @@ const Contact = (): JSX.Element => {
           className="btn btn-primary btn-sm"
           onClick={(event) => {
             event.preventDefault();
-            sendEmail();
+            void sendEmail();
           }}>
           Submit{' '}
         </button>

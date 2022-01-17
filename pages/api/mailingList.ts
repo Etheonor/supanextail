@@ -37,33 +37,30 @@ export default async function handler(
   await cors(request, response);
   await limiter(request, response);
   if (request.method === 'PUT') {
-    axios
-      .put(
-        'https://api.sendgrid.com/v3/marketing/contacts',
-        {
-          contacts: [{ email: `${request.body.mail}` }],
-          list_ids: [process.env.SENDGRID_MAILING_ID],
+    const result = await axios.put(
+      'https://api.sendgrid.com/v3/marketing/contacts',
+      {
+        contacts: [{ email: `${request.body.mail}` }],
+        list_ids: [process.env.SENDGRID_MAILING_ID],
+      },
+      {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: `Bearer ${process.env.SENDGRID_SECRET || ''}`,
         },
-        {
-          headers: {
-            'content-type': 'application/json',
-            Authorization: `Bearer ${process.env.SENDGRID_SECRET || ''}`,
-          },
-        }
-      )
-      .then((result) => {
-        console.log(result);
-        response.status(200).send({
-          message:
-            'Your email has been succesfully added to the mailing list. Welcome 👋',
-        });
-      })
-      .catch((error) => {
-        response.status(500).send({
-          message:
-            'Oups, there was a problem with your subscription, please try again or contact us',
-          error: error as string,
-        });
+      }
+    );
+
+    if (result.status === 200) {
+      response.status(200).json({
+        message:
+          'Your email has been succesfully added to the mailing list. Welcome 👋',
       });
+    } else {
+      response.status(500).json({
+        error:
+          'Oups, there was a problem with your subscription, please try again or contact us',
+      });
+    }
   }
 }
