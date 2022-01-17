@@ -6,7 +6,8 @@ If you want to change the email provider, don't hesitate to create a new api rou
 the axios.post here, line 18.
 */
 
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
 import { toast } from 'react-toastify';
 
 const sendEmail = async (): Promise<void> => {
@@ -18,6 +19,13 @@ const sendEmail = async (): Promise<void> => {
   interface EmailData {
     success: boolean;
     message: string;
+  }
+
+  interface ErrorAxios {
+    data: {
+      error: string;
+      success: boolean;
+    };
   }
 
   if (name && email && message) {
@@ -33,8 +41,10 @@ const sendEmail = async (): Promise<void> => {
         (document.querySelector('#email') as HTMLInputElement).value = '';
         (document.querySelector('#message') as HTMLInputElement).value = '';
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      const errorChecked = error as AxiosError;
+      const errorMessage = errorChecked.response as ErrorAxios;
+      toast.error(errorMessage.data.error);
     }
   } else {
     toast.info('Please fill all the fields ', {

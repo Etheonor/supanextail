@@ -32,21 +32,20 @@ const SignUpPanel = ({
     event.preventDefault();
 
     // Handle the login. Go to the homepage if success or display an error.
-    await signUp({
+    const result = await signUp({
       email,
       password,
-    }).then((result) => {
-      console.log(result);
-      if (result.error) {
-        toast.error(result.error.message);
-      } else if (result.user?.confirmation_sent_at) {
-        toast.success(
-          'A confirmation email has been sent to you, watch your mailbox!'
-        );
-      } else if (result.user) {
-        void router.push('/');
-      }
     });
+
+    if (result.error) {
+      toast.error(result.error.message);
+    } else if (result.user?.confirmation_sent_at) {
+      toast.success(
+        'A confirmation email has been sent to you, watch your mailbox!'
+      );
+    } else if (result.user) {
+      void router.push('/');
+    }
   };
 
   return (

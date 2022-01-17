@@ -3,9 +3,11 @@ This is the form component to register an email adress to your mailing list.
 This is just the frontend, and the email will be send to our backend API (/api/mailingList)
 */
 
+import axios, { AxiosError } from 'axios';
+
 import Image from 'next/image';
 import Mailing from 'public/landing/mailing.svg';
-import axios from 'axios';
+import { Toast } from 'react-toastify/dist/types';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
@@ -14,6 +16,12 @@ const MailingList = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [valid, setValid] = useState(true);
 
+  interface ErrorAxios {
+    data: {
+      error: string;
+      success: boolean;
+    };
+  }
   const validateEmail = (): void => {
     // Regex patern for email validation
     const regex =
@@ -33,17 +41,24 @@ const MailingList = (): JSX.Element => {
   const subscribe = async (): Promise<void> => {
     setLoading(true);
 
-    const data = await axios.put('api/mailingList', {
-      mail,
-    });
+    try {
+      const data = await axios.put('api/mailingList', {
+        mail,
+      });
 
-    if (data.status === 200) {
-      toast.success('You have been added to our mailing list. Welcome 👋');
-      setLoading(false);
-      setMail('');
-    } else {
-      toast.error('Something went wrong');
-      setLoading(false);
+      if (data.status === 200) {
+        toast.success('You have been added to our mailing list. Welcome 👋');
+        setLoading(false);
+        setMail('');
+      }
+    } catch (error: unknown) {
+      const errorChecked = error as AxiosError;
+      const errorMessage = errorChecked.response as ErrorAxios;
+
+      if (errorMessage.data.error) {
+        toast.error(errorMessage.data.error);
+        setLoading(false);
+      }
     }
   };
   return (

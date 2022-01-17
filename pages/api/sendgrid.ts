@@ -15,7 +15,10 @@ interface Request extends NextApiRequest {
   };
 }
 
-const sendGrid = (request: Request, response: NextApiResponse): void => {
+const sendGrid = async (
+  request: Request,
+  response: NextApiResponse
+): Promise<void> => {
   if (request.method === 'POST') {
     sgMail.setApiKey(process.env.SENDGRID_SECRET || '');
 
@@ -29,20 +32,25 @@ const sendGrid = (request: Request, response: NextApiResponse): void => {
       reply_to: request.body.email,
     };
 
-    sgMail
-      .send(message)
-      .then(() => {
-        response
-          .status(200)
-          .send({ message: 'Your email has been sent', success: true });
-      })
-      .catch((error: string) => {
-        console.error(error);
-        response.status(500).send({
-          message: 'There was an issue with your email... please retry',
-          error,
+    try {
+      const result = await sgMail.send(message);
+      console.log(result);
+      if (result) {
+        response.status(200).json({
+          message:
+            'Your message has been succesfully sent. Thank you for your feedback.',
+          success: true,
         });
-      });
+      }
+    } catch (error: unknown) {
+      if (error) {
+        response.status(500).json({
+          error:
+            'Oups, there was a problem with your email, please try again or contact us',
+          success: false,
+        });
+      }
+    }
   }
 };
 export default sendGrid;
