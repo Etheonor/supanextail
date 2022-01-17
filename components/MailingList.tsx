@@ -7,7 +7,6 @@ import axios, { AxiosError } from 'axios';
 
 import Image from 'next/image';
 import Mailing from 'public/landing/mailing.svg';
-import { Toast } from 'react-toastify/dist/types';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
