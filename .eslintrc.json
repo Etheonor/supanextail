@@ -78,7 +78,8 @@
             {
                 "cases": {
                     "camelCase": true,
-                    "pascalCase": true
+                    "pascalCase": true,
+                    "kebabCase": true
                 }
             }
         ]
