@@ -1,54 +1,42 @@
-import { getAllPosts, getPostBySlug } from 'lib/api';
+import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
+import { getAllPosts, getPostData } from 'lib/api';
 
 import Container from 'components/blog/container';
-import ErrorPage from 'next/error';
 import Head from 'next/head';
 import Header from 'components/blog/header';
 import Layout from 'components/Layout';
 import PostBody from 'components/blog/post-body';
 import PostHeader from 'components/blog/post-header';
-import PostTitle from 'components/blog/post-title';
 import PostType from 'types/post';
-import markdownToHtml from 'lib/markdownToHtml';
-import { useRouter } from 'next/router';
 
-type Props = {
-  post: PostType;
-  morePosts: PostType[];
+type Properties = {
   preview?: boolean;
+  code: string;
+  frontmatter: PostType;
 };
 
-const Post = ({ post, morePosts, preview }: Props) => {
-  const router = useRouter();
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
-  }
+const Post = ({ code, frontmatter }: Properties): JSX.Element => {
   return (
-    <Layout preview={preview}>
+    <Layout>
       <Container>
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article className="mb-32">
-              <Head>
-                <title>
-                  {post.title} | Next.js Blog Example with{' '}
-                  {process.env.NEXT_PUBLIC_TITLE}
-                </title>
-                <meta property="og:image" content={post.ogImage.url} />
-              </Head>
-              <Header />
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                author={post.author}
-              />
-              <PostBody content={post.content} />
-            </article>
-          </>
-        )}
+        <>
+          <article className="mb-32">
+            <Head>
+              <title>
+                {frontmatter.title} | {process.env.NEXT_PUBLIC_TITLE}
+              </title>
+              <meta property="og:image" content={frontmatter.ogImage.url} />
+            </Head>
+            <Header />
+            <PostHeader
+              title={frontmatter.title}
+              coverImage={frontmatter.coverImage}
+              date={frontmatter.date}
+              author={frontmatter.author}
+            />
+            <PostBody code={code} />
+          </article>
+        </>
       </Container>
     </Layout>
   );
@@ -56,35 +44,34 @@ const Post = ({ post, morePosts, preview }: Props) => {
 
 export default Post;
 
-type Params = {
+type Parameters_ = {
   params: {
     slug: string;
   };
 };
 
-export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'author',
-    'content',
-    'ogImage',
-    'coverImage',
-  ]);
-  const content = await markdownToHtml(post.content || '');
+type StaticResult = {
+  slug: string;
+  frontmatter: {
+    [key: string]: any;
+  };
+  code: string;
+};
 
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export async function getStaticProps({
+  params,
+}: Parameters_): Promise<GetStaticPropsResult<StaticResult>> {
+  //const content = await markdownToHtml(post.content || '');
+  const postData = await getPostData(params.slug);
   return {
     props: {
-      post: {
-        ...post,
-        content,
-      },
+      ...postData,
     },
   };
 }
 
-export async function getStaticPaths() {
+export function getStaticPaths(): GetStaticPathsResult {
   const posts = getAllPosts(['slug']);
 
   return {

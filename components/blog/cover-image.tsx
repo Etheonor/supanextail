@@ -15,12 +15,13 @@ const CoverImage = ({ title, src, slug }: Properties): JSX.Element => {
       layout="fill"
       objectFit="contain"
       objectPosition={'center top'}
+      quality={100}
     />
   );
   return (
-    <div className="sm:mx-0 flex justify-center relative max-w-2xl h-48">
+    <div className="sm:mx-0 flex justify-center relative max-w-full h-48">
       {slug ? (
-        <Link as={`/posts/${slug}`} href="/posts/[slug]">
+        <Link as={`/blog/${slug}`} href="/blog/[slug]">
           <a aria-label={title}>{image}</a>
         </Link>
       ) : (

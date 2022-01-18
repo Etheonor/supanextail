@@ -1,11 +1,16 @@
+import React from 'react';
+import { getMDXComponent } from 'mdx-bundler/client';
+import { useMemo } from 'react';
+
 type Properties = {
-  content: string;
+  code: string;
 };
 
-const PostBody = ({ content }: Properties): JSX.Element => {
+const PostBody = ({ code }: Properties): JSX.Element => {
+  const BlogPost = useMemo(() => getMDXComponent(code), [code]);
   return (
     <div className="max-w-2xl mx-auto">
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <BlogPost />
     </div>
   );
 };
