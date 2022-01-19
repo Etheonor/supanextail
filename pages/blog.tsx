@@ -6,7 +6,7 @@ import Layout from 'components/Layout';
 import MoreStories from 'components/blog/more-stories';
 import Post from '../types/post';
 import SectionSeparator from 'components/blog/section-separator';
-import { getAllPosts } from '../lib/api';
+import { getAllPosts } from '../lib/blogApi';
 
 type Properties = {
   allPosts: Post[];

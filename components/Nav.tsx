@@ -25,7 +25,7 @@ const Nav = ({ user, signOut }: NavProperties): JSX.Element => {
       )}
 
       <Link href="/blog">
-        <a id="pricing" className="nav-btn">
+        <a id="blog" className="nav-btn">
           Blog
         </a>
       </Link>

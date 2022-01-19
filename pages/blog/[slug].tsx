@@ -1,5 +1,5 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
-import { getAllPosts, getPostData } from 'lib/api';
+import { getAllPosts, getPostData } from 'lib/blogApi';
 
 import Container from 'components/blog/container';
 import Head from 'next/head';

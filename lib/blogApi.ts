@@ -1,3 +1,5 @@
+// This is a set of functions for the Blog system.
+
 import { bundleMDX } from 'mdx-bundler';
 import fs from 'node:fs';
 import { join } from 'node:path';
