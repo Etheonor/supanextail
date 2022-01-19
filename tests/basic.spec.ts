@@ -9,5 +9,6 @@ test('basic test', async ({ page }) => {
   // Go through all pages
   await page.click('#login');
   await page.click('#pricing');
+  await page.click('#blog');
   await page.click('#signup');
 });

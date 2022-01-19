@@ -24,6 +24,12 @@ const Nav = ({ user, signOut }: NavProperties): JSX.Element => {
         </Link>
       )}
 
+      <Link href="/blog">
+        <a id="blog" className="nav-btn">
+          Blog
+        </a>
+      </Link>
+
       <Link href="/pricing">
         <a id="pricing" className="nav-btn">
           Pricing
