@@ -1,10 +1,12 @@
 import CardLanding from 'components/UI/CardLanding';
 import cardAuth from 'public/landing/auth.svg';
+import cardBlog from 'public/landing/blog.svg';
 import cardFee from 'public/landing/lifetime.svg';
 import cardPage from 'public/landing/page.svg';
 import cardResponsive from 'public/landing/responsive.svg';
 import cardServer from 'public/landing/backend.svg';
 import cardStripe from 'public/landing/stripe.svg';
+import cardTS from 'public/landing/TS.svg';
 import cardTheme from 'public/landing/theme.svg';
 
 const CardsLanding = (): JSX.Element => (
@@ -34,6 +36,11 @@ const CardsLanding = (): JSX.Element => (
         title="Auth"
       />
       <CardLanding
+        image={cardBlog as string}
+        text="An easy to use blog system with MDX support"
+        title="Blog"
+      />
+      <CardLanding
         image={cardResponsive as string}
         text="Mobile ready, fully responsive and customizable with Tailwind CSS"
         title="Responsive"
@@ -42,6 +49,11 @@ const CardsLanding = (): JSX.Element => (
         image={cardTheme as string}
         text="Custom themes available and easily switch to dark mode"
         title="Themes"
+      />
+      <CardLanding
+        image={cardTS as string}
+        text="The entire code base is in Typescript, with ESLint and Prettier already configured."
+        title="Typescript"
       />
       <CardLanding
         image={cardStripe as string}
