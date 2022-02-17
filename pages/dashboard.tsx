@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-nested-ternary */
 import { useEffect, useState } from 'react';
 
 import Dashboard from '../components/Dashboard';
@@ -68,7 +67,7 @@ const DashboardPage = ({
     </div>
   );
 };
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 export async function getServerSideProps(
   context: NextPageContext
 ): Promise<any> {
@@ -113,7 +112,7 @@ export async function getServerSideProps(
         planName: plan?.paid_user
           ? subscription?.items.data[0].plan.nickname
             ? subscription?.items.data[0].plan.nickname
-            : '[DEV] Please add a description for your prices'
+            : '[DEV] Please add a description for your prices (Edit your pricing in the Stripe dashboard)'
           : 'Free Tier',
       },
     };

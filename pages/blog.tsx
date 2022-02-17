@@ -51,7 +51,6 @@ type Parameters_ = {
   allPosts: Items[];
 };
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export const getStaticProps = (): GetStaticPropsResult<Parameters_> => {
   const allPosts = getAllPosts([
     'title',

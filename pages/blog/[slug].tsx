@@ -58,11 +58,9 @@ type StaticResult = {
   code: string;
 };
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export async function getStaticProps({
   params,
 }: Parameters_): Promise<GetStaticPropsResult<StaticResult>> {
-  //const content = await markdownToHtml(post.content || '');
   const postData = await getPostData(params.slug);
   return {
     props: {
