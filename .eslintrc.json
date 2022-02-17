@@ -9,10 +9,11 @@
         "next",
         "next/core-web-vitals",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "plugin:sonarjs/recommended",
-        "plugin:unicorn/recommended"
+        "plugin:sonarjs/recommended"
     ],
     "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
         "project": [
             "./tsconfig.json"
         ]
@@ -70,17 +71,6 @@
                 "allowTypedFunctionExpressions": true,
                 "allowHigherOrderFunctions": true,
                 "allowConciseArrowFunctionExpressionsStartingWithVoid": true
-            }
-        ],
-        "unicorn/no-null": "off",
-        "unicorn/filename-case": [
-            "error",
-            {
-                "cases": {
-                    "camelCase": true,
-                    "pascalCase": true,
-                    "kebabCase": true
-                }
             }
         ]
     },
